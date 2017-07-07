@@ -1,0 +1,98 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> Nhóm quản trị: <strong><?php echo $groupInfo['group_admin_name'];?></strong></h3>
+            </div>
+            <div class="box-content">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-8" style="overflow: scroll; height: 500px; float: left; width: 50%">
+                        <table id="dataTable" class="table table-bordered table-condensed table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" class="checkbox-all-privilege" /></th>
+                                <th>Quyền</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($acls as $rp) : ?>
+                                <tr>
+                                    <td width="100">
+                                        <?php if ($rp['acl_parent'] != 0) {?>
+                                        <input class="checkbox-item-privilege" type="checkbox" name="acl[<?php echo $rp['acl_id']; ?>]" value="1"
+                                            <?php echo (array_key_exists($rp['acl_id'], $groupAcls)) ? 'checked="checked"' : '';?> />
+                                        <?php } else {?>
+                                            <input class="checkbox-item-privilege" type="hidden" name="acl[<?php echo $rp['acl_id']; ?>]" value="1" checked="checked" />
+                                        <?php }?>
+                                    </td>
+                                    <td <?php if ($rp['acl_parent'] == 0) {?> style="font-weight: bold" <?php }?>><?php echo $this->escapeHtml($rp['acl_name']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-left: 10px">
+                    <div class="col-lg-offset-2 col-lg-8" style="overflow: scroll; height: 500px; float: left; width: 50%">
+                        <table id="dataTable"
+                               class="table table-bordered table-condensed table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" class="checkbox-all-menu" /></th>
+                                <th>Menu</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($menus as $rm) : ?>
+                                <tr>
+                                    <td width="100"><input class="checkbox-item-menu" type="checkbox" name="menu[<?php echo $rm['menu_id'];?>]" value="1" <?php echo (array_key_exists($rm['menu_id'], $groupMenus)) ? 'checked="checked"' : '';?> /></td>
+                                    <td <?php if ($rm['menu_parent'] == 0) {?> style="font-weight: bold" <?php }?>><?php echo str_repeat('__', $rm['menu_level']) . ' ' . $this->escapeHtml($rm['menu_name']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-actions" style="float: right">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/' . $module);?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+                    <?php echo $this->formHidden($form->get('csrf')); ?>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+
+        //Check all privilege
+        $(".checkbox-all-privilege").change(function () {
+            var chec = false;
+            if ($(this).is(":checked"))
+            {
+                chec = true;
+            }
+            $(".checkbox-item-privilege").prop('checked', chec);
+        });
+
+        //Check all menu
+        $(".checkbox-all-menu").change(function () {
+            var chec = false;
+            if ($(this).is(":checked"))
+            {
+                chec = true;
+            }
+            $(".checkbox-item-menu").prop('checked', chec);
+        });
+    });
+</script>

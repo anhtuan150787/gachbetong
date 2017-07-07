@@ -1,0 +1,124 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> Form</h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-bordered', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                    <div class="control-group">
+                        <label class="control-label col-lg-2" for="group_navigation_id">Giao diện</label>
+                        <div class="controls">
+                            <strong><?php echo $this->escapeHtml($groupTemplate['group_template_name']);?></strong>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <?php echo $this->formLabel($form->get('template_name')); ?>
+                        <div class="controls">
+                            <?php echo $this->formElement($form->get('template_name')); ?>
+                            <?php echo $this->formElementErrors($form->get('template_name'), array('class' => 'error-message')); ?>
+                        </div>
+                    </div>
+
+
+                        <div class="control-group">
+                            <?php echo $this->formLabel($form->get('template_picture')); ?>
+                            <div class="controls">
+
+
+                                <?php echo $this->formElementErrors($form->get('template_picture'), array('class' => 'error-message')); ?>
+
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new thumbnail">
+                                        <?php if (isset($record) && $record['template_picture'] != '') {?>
+                                            <img title="Click để xóa" id="picture" onclick="deletePicture(<?php echo $record['template_id'];?>)" style="cursor: pointer" class="img-thumbnail" src="<?php echo $this->basePath('pictures/templates/' . $record['template_picture']);?>" />
+                                        <?php } else {?>
+                                            <img src="<?php echo $this->basePath('pictures/no-image.gif');?>" class="img-thumbnail" style="width: 50px; height: 50px" />
+                                        <?php }?>
+                                    </div>
+                                    <div class="fileupload-preview fileupload-exists thumbnail"></div>
+                                    <div>
+                                <span class="btn btn-file">
+                                    <span class="fileupload-new">Chọn hình</span><span class="fileupload-exists">Thay đổi</span>
+                                    <?php echo $this->formElement($form->get('template_picture')); ?></span>
+                                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Xóa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <?php echo $this->formLabel($form->get('template_url')); ?>
+                            <div class="controls">
+                                <?php echo $this->formElement($form->get('template_url')); ?>
+                                <?php echo $this->formElementErrors($form->get('template_url'), array('class' => 'error-message')); ?>
+                            </div>
+                        </div>
+
+
+
+                    <div class="control-group">
+                        <?php echo $this->formLabel($form->get('template_content')); ?>
+                        <div class="controls">
+                            <?php echo $this->formElement($form->get('template_content')); ?>
+                            <?php echo $this->formElementErrors($form->get('template_content'), array('class' => 'error-message')); ?>
+                        </div>
+                    </div>
+
+
+
+                    <div class="control-group">
+                        <?php echo $this->formLabel($form->get('template_status')); ?>
+                        <div class="controls">
+                            <?php echo $this->formElement($form->get('template_status')); ?>
+                            <?php echo $this->formElementErrors($form->get('template_status'), array('class' => 'error-message')); ?>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <input type="button" onclick="location.href='<?php echo $this->url('admin/template', array('action' => 'index'), array('query' => array('group_template_id' => $_GET['group_template_id'])));?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                        <?php echo $this->formSubmit($form->get('submit')); ?>
+                        <?php echo $this->formHidden($form->get('csrf')); ?>
+                    </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#frm").validate({
+            rules: {
+                template_name: 'required',
+            },
+            messages: {
+                template_name: 'Vui lòng nhập thông tin',
+            }
+        });
+    });
+
+    function deletePicture(id) {
+        if (confirm('Bạn có muốn xóa?')) {
+            $.ajax({
+                url: '<?php echo $this->url('admin/template', array('action' => 'delete-picture'));?>',
+                type: 'post',
+                data: {id: id},
+                success: function (response) {
+                    data = jQuery.parseJSON(response);
+                    if (data.return == 1) {
+                        $('#picture').remove();
+                    }
+                }
+            });
+        }
+    }
+</script>

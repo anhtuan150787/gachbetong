@@ -1,0 +1,9 @@
+<div class="col-md-12">
+    <div class="panel panel-primary group-item">
+        <div class="panel-heading"><h3 class="panel-title">Sản phẩm</h3></div>
+        <div class="panel-body">
+            <?php echo $this->partial('home/partial/product-item', array('products' => $products)); ?>
+        </div>
+    </div>
+    <?php echo $this->paginationControl($products, 'sliding', 'home/partial/paginator', array('url' => $this->url('home-product-category', array('name' => $name, 'id' => $id)))); ?>
+</div>

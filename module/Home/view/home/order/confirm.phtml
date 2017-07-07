@@ -1,0 +1,240 @@
+<link rel="stylesheet" media="all" href="<?php echo $this->basePath('css/checkout.css'); ?>"/>
+<script src="<?php echo $this->basePath('js/checkout.js'); ?>"></script>
+
+<style>
+    .wrap {
+        width: 100%;
+        padding: 0;
+    }
+</style>
+
+<div class="desktop-12 mobile-3" id="nav-border"></div>
+<?php echo $breadcrumbs; ?>
+<div id="page" class="desktop-12 tablet-6 mobile-3 page-template" data-section-id="">
+    <div class="content" data-content="">
+        <div class="wrap">
+            <div class="sidebar" role="complementary">
+                <div class="sidebar__content">
+                    <div class="order-summary order-summary--is-collapsed" data-order-summary="">
+                        <h2 class="visually-hidden">Order summary</h2>
+
+                        <div class="order-summary__sections">
+                            <div
+                                class="order-summary__section order-summary__section--product-list order-summary__section--is-scrollable">
+                                <div class="order-summary__section__content">
+                                    <table class="product-table">
+                                        <tbody data-order-summary-section="line-items">
+                                        <?php foreach ($order['products'] as $v) { ?>
+                                        <tr class="product" data-product-id="144271955" data-variant-id="334121148"
+                                            data-product-type="Dress">
+                                            <td class="product__image">
+                                                <div class="product-thumbnail">
+                                                    <div class="product-thumbnail__wrapper">
+                                                        <img class="product-thumbnail__image"
+                                                             src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/' . $v['product_picture']; ?>&w=52&h=64">
+                                                    </div>
+                                                    <span class="product-thumbnail__quantity"
+                                                          aria-hidden="true"><?php echo $v['quality']; ?></span>
+                                                </div>
+
+                                            </td>
+                                            <td class="product__description">
+                                                <span class="product__description__name order-summary__emphasis"><?php echo $this->escapeHtml($v['product_name']); ?></span>
+                                                <span class="product__description__variant order-summary__small-text"><?php echo $v['color'];?> / <?php echo $v['size'];?></span>
+
+                                            </td>
+                                            <td class="product__price">
+                                                <span class="order-summary__emphasis"><?php echo $this->currency($v['price_total']); ?></span>
+                                            </td>
+                                        </tr>
+                                        <?php }?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="order-summary__section order-summary__section--total-lines"
+                                 data-order-summary-section="payment-lines">
+                                <table class="total-line-table">
+                                    <tbody class="total-line-table__tbody">
+                                    <tr class="total-line total-line--subtotal">
+                                        <td class="total-line__name">Tổng tiền (VND)</td>
+                                        <td class="total-line__price">
+            <span class="order-summary__emphasis">
+              <?php echo $this->currency($order['amount']); ?>
+            </span>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr class="total-line total-line--shipping">
+                                        <td class="total-line__name">Phí vận chuyển (VND)</td>
+                                        <td class="total-line__price">
+              <span class="order-summary__emphasis">
+                <?php echo $this->currency($order['fee']); ?>
+              </span>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                    <tfoot class="total-line-table__footer">
+                                    <tr class="total-line">
+                                        <td class="total-line__name payment-due-label">
+                                            <span class="payment-due-label__total">Tổng cộng (VND)</span>
+                                        </td>
+                                        <td class="total-line__price payment-due">
+          <span class="payment-due__price">
+            <?php echo $this->currency($order['amountTotal']); ?>
+          </span>
+                                        </td>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="main main-confirm" role="main">
+                <div class="main__content">
+                    <div class="step" data-step="contact_information">
+
+                            <?php
+                            $form->setAttributes(['action' => '', 'class' => 'edit_checkout animate-floating-labels', 'id' => 'frm']);
+                            $form->prepare();
+                            echo $this->form()->openTag($form);
+                            ?>
+                            <div class="step__sections">
+
+                                <div class="section section--shipping-address">
+
+                                    <div class="section__header">
+                                        <h2 class="section__title">
+                                            Thông tin giao hàng
+                                        </h2>
+                                    </div>
+
+                                    <div class="section__content">
+                                        <div class="fieldset" data-address-fields="">
+
+                                            <div class="field field--optional field--show-floating-label">
+                                                <div class="field__input-wrapper">
+                                                    <?php echo $this->formLabel($form->get('order_fullname')); ?>
+                                                    <?php echo $this->formElement($form->get('order_fullname')); ?>
+                                                    <?php echo $this->formElementErrors($form->get('order_fullname'), array('class' => 'error-message')); ?>
+                                                </div>
+                                            </div>
+                                            <div class="field field--optional field--show-floating-label">
+                                                <div class="field__input-wrapper">
+                                                    <?php echo $this->formLabel($form->get('order_email')); ?>
+                                                    <?php echo $this->formElement($form->get('order_email')); ?>
+                                                    <?php echo $this->formElementErrors($form->get('order_email'), array('class' => 'error-message')); ?>
+                                                </div>
+                                            </div>
+                                            <div class="field field--required field--show-floating-label">
+                                                <div class="field__input-wrapper">
+                                                    <?php echo $this->formLabel($form->get('order_phone')); ?>
+                                                    <?php echo $this->formElement($form->get('order_phone')); ?>
+                                                    <?php echo $this->formElementErrors($form->get('order_phone'), array('class' => 'error-message')); ?>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="field field--optional field--show-floating-label">
+                                                <div class="field__input-wrapper">
+                                                    <?php echo $this->formLabel($form->get('order_address')); ?>
+                                                    <?php echo $this->formElement($form->get('order_address')); ?>
+                                                    <?php echo $this->formElementErrors($form->get('order_address'), array('class' => 'error-message')); ?>
+                                                </div>
+                                            </div>
+                                            <div class="field field--optional field--show-floating-label">
+                                                <div class="field__input-wrapper">
+                                                    <?php echo $this->formLabel($form->get('order_note')); ?>
+                                                    <?php echo $this->formElement($form->get('order_note')); ?>
+                                                    <?php echo $this->formElementErrors($form->get('order_note'), array('class' => 'error-message')); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="step__footer">
+
+                                <button id="finish_order" name="button" type="submit" class="step__footer__continue-btn btn ">
+                                    <span class="btn__content">Hoàn tất</span>
+                                    <i class="btn__spinner icon icon--button-spinner"></i>
+                                </button>
+                                <a class="step__footer__previous-link" href="<?php echo $this->url('home-order');?>">
+                                    <svg
+                                        class="icon-svg icon-svg--color-accent icon-svg--size-10 previous-link__icon rtl-flip"
+                                        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10">
+                                        <path d="M8 1L7 0 3 4 2 5l1 1 4 4 1-1-4-4"></path>
+                                    </svg>
+                                    <span class="step__footer__previous-link-content">Quay về giỏ hàng</span></a>
+                            </div>
+
+
+                        <?php echo $this->form()->closeTag(); ?>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#frm").validate({
+            rules: {
+                order_fullname: 'required',
+                order_phone: {
+                    required: true,
+                    number: true,
+                },
+                order_address: 'required',
+                order_email: {
+                    required: true,
+                    email: true,
+                },
+                order_note: {
+                    maxlength: 300,
+                },
+            },
+            messages: {
+                order_fullname: 'Vui lòng nhập thông tin',
+                order_phone: {
+                    required: 'Vui lòng nhập thông tin',
+                    number: 'Thông tin không đúng định dạng',
+                },
+                order_address: 'Vui lòng nhập thông tin',
+                order_email: {
+                    required: 'Vui lòng nhập thông tin',
+                    email: 'Thông tin không đúng định dạng',
+                },
+                order_note: {
+                    maxlength: 'Lời nhắn không quá 300 ký tự',
+                },
+            },
+            submitHandler: function(form) {
+                $.blockUI({
+                    message: 'Đang xử lý đơn hàng',
+                    css: {padding: '10px', margin: '0 auto', border: 'none'}
+                });
+                form.submit();
+                return;
+            }
+        });
+
+
+
+    });
+</script>

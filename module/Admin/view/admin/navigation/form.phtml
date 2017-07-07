@@ -1,0 +1,89 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> <?php echo $actionTitle; ?></h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-bordered', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="group_navigation_id">Menu</label>
+                    <div class="controls">
+                        <strong><?php echo $this->escapeHtml($groupNavigation['group_navigation_name']);?></strong>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('navigation_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('navigation_name')); ?>
+                        <?php echo $this->formElementErrors($form->get('navigation_name'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('navigation_parent')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('navigation_parent')); ?>
+                        <?php echo $this->formElementErrors($form->get('navigation_parent'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('navigation_url')); ?>
+                    <div class="controls">
+                        <div class="input-xlarge">
+                            <p><?php echo $this->formElement($form->get('navigation_url_select')); ?></p>
+                            <p><?php echo $this->formElement($form->get('navigation_url')); ?></p>
+                            <?php echo $this->formElementErrors($form->get('navigation_url'), array('class' => 'error-message')); ?>
+                            <?php echo $this->formElementErrors($form->get('navigation_url_select'), array('class' => 'error-message')); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('navigation_position')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('navigation_position')); ?>
+                        <?php echo $this->formElementErrors($form->get('navigation_position'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('navigation_status')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('navigation_status')); ?>
+                        <?php echo $this->formElementErrors($form->get('navigation_status'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/navigation', array('action' => 'index'), array('query' => array('group_navigation_id' => $_GET['group_navigation_id'])));?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+                    <?php echo $this->formHidden($form->get('csrf')); ?>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#frm").validate({
+            rules: {
+                navigation_name: 'required',
+            },
+            messages: {
+                navigation_name: 'Vui lòng nhập thông tin',
+            }
+        });
+    });
+</script>

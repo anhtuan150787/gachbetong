@@ -1,0 +1,85 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> <?php echo $actionTitle;?></h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-bordered', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_name')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_name'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_parent')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_parent')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_parent'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_module')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_module')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_module'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_controller')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_controller')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_controller'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_action')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_action')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_action'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('acl_status')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('acl_status')); ?>
+                        <?php echo $this->formElementErrors($form->get('acl_status'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/' . $module);?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+                    <?php echo $this->formHidden($form->get('csrf')); ?>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#frm").validate({
+            rules: {
+                menu_name: 'required',
+            },
+            messages: {
+                menu_name: 'Vui lòng nhập thông tin',
+            }
+        });
+    });
+</script>

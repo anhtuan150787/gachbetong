@@ -1,0 +1,166 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> <?php echo $actionTitle;?></h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-bordered', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('group_admin_id')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('group_admin_id')); ?>
+                        <?php echo $this->formElementErrors($form->get('group_admin_id'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('admin_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('admin_name')); ?>
+                        <?php echo $this->formElementErrors($form->get('admin_name'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('admin_email')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('admin_email')); ?>
+                        <?php echo $this->formElementErrors($form->get('admin_email'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('admin_password')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('admin_password')); ?>
+                        <?php echo $this->formElementErrors($form->get('admin_password'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('admin_password_confirm')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('admin_password_confirm')); ?>
+                        <?php echo $this->formElementErrors($form->get('admin_password_confirm'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('admin_status')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('admin_status')); ?>
+                        <?php echo $this->formElementErrors($form->get('admin_status'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/' . $module);?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+                    <?php echo $this->formHidden($form->get('csrf')); ?>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#frm").validate({
+            rules: {
+                admin_name: 'required',
+                admin_email: {
+                    <?php if (!isset($id)) {?>
+                    required: true,
+                    <?php }?>
+                    email: true,
+                },
+                <?php if (!isset($id)) {?>
+                admin_password: 'required',
+                <?php }?>
+                admin_password_confirm: {
+                    <?php if (!isset($id)) {?>
+                    required: true,
+                    <?php }?>
+                    equalTo: "#admin_password"
+                }
+            },
+            messages: {
+                admin_name: 'Vui lòng nhập thông tin',
+                admin_email: {
+                    <?php if (!isset($id)) {?>
+                    required: 'Vui lòng nhập thông tin',
+                    <?php }?>
+                    email: 'Email không hợp lệ',
+                },
+                admin_password: 'Vui lòng nhập thông tin',
+                admin_password_confirm: {
+                    <?php if (!isset($id)) {?>
+                    required: 'Vui lòng nhập thông tin',
+                    <?php }?>
+                    equalTo: 'Nhập lại mật khẩu không đúng',
+                }
+            }
+        });
+
+        <?php if (!isset($id)) {?>
+        $("#frm").validate({
+            rules: {
+                admin_name: 'required',
+                admin_email: {
+                    required: true,
+                    email: true,
+                },
+                admin_password: 'required',
+                admin_password_confirm: {
+                    required: true,
+                    equalTo: "#admin_password"
+                }
+            },
+            messages: {
+                admin_name: 'Vui lòng nhập thông tin',
+                admin_email: {
+                    required: 'Vui lòng nhập thông tin',
+                    email: 'Email không hợp lệ',
+                },
+                admin_password: 'Vui lòng nhập thông tin',
+                admin_password_confirm: {
+                    required: 'Vui lòng nhập thông tin',
+                    equalTo: 'Nhập lại mật khẩu không đúng',
+                }
+            }
+        });
+        <?php } else {?>
+        $("#frm").validate({
+            rules: {
+                admin_name: 'required',
+                admin_email: {
+                    email: true,
+                },
+                admin_password_confirm: {
+                    equalTo: "#admin_password"
+                }
+            },
+            messages: {
+                admin_name: 'Vui lòng nhập thông tin',
+                admin_email: {
+                    email: 'Email không hợp lệ',
+                },
+                admin_password: 'Vui lòng nhập thông tin',
+                admin_password_confirm: {
+                    equalTo: 'Nhập lại mật khẩu không đúng',
+                }
+            }
+        });
+        <?php }?>
+    });
+</script>

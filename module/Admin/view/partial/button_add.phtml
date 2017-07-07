@@ -1,0 +1,13 @@
+<div class="pull-right" style="margin-bottom: 10px">
+
+    <input type="button"
+           onclick="location.href='<?php
+           if ($urlOther) {
+               echo $urlOther;
+           } else {
+               echo $this->url('admin/' . $moduleName, array('action' => 'add'));
+           }
+           ?>'"
+           class="btn btn-primary" value="Thêm">
+
+</div>

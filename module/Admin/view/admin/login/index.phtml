@@ -1,0 +1,47 @@
+<h2>Đăng nhập</h2>
+
+<?php
+if ($message_error != '') {
+    echo '<div class="alert alert-danger">' . $message_error . '</div>';
+}
+?>
+
+<?php
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="email">
+    <?php echo $this->formElement($form->get('email')); ?>
+    <?php echo $this->formElementerrors($form->get('email'), ['class' => 'error-message']); ?>
+</div>
+
+<div class="pw">
+    <?php echo $this->formElement($form->get('password')); ?>
+    <?php echo $this->formElementerrors($form->get('password'), ['class' => 'error-message']); ?>
+</div>
+
+<div class="captcha">
+    <?php echo $this->formRow($form->get('Captcha'));?>
+    <?php echo $this->formElementerrors($form->get('Captcha'), ['class' => 'error-message']); ?>
+</div>
+
+<div class="submit">
+    <?php echo $this->formSubmit($form->get('submit')); ?>
+    <?php echo $this->formHidden($form->get('csrf')); ?>
+</div>
+<?php echo $this->form()->closeTag(); ?>
+<div class="forget">
+&nbsp;
+</div>
+
+<script>
+$(document).ready(function() {
+    $('div.captcha img').click(function(){
+        $.get('<?php echo $this->url('admin/captcha');?>', function(data) {
+            $('div.captcha img').attr('src', data.url);
+            $('input[name="Captcha[id]"]').val(data.id);
+        });
+
+    });
+})
+</script>

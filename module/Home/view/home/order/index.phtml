@@ -1,0 +1,92 @@
+<style>
+    @media only screen and (max-width: 740px) {
+        table, #shopping-cart thead, #shopping-cart tbody, #shopping-cart th, #shopping-cart td, #shopping-cart tr {
+            display: block;
+        }
+</style>
+
+<div class="desktop-12 mobile-3" id="nav-border"></div>
+<?php echo $breadcrumbs; ?>
+
+<div id="shopping-cart" class="desktop-12">
+
+    <h2>Giỏ hàng</h2>
+
+    <form action="" method="post" id="form-order">
+
+        <table>
+            <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Giá</th>
+                <th style="text-align: center;">Số lượng</th>
+                <th style="text-align: center;">Xóa</th>
+                <th>Thành tiền (VND)</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php if (!empty($order['products'])) { ?>
+            <?php foreach ($order['products'] as $v) { ?>
+            <tr>
+                <td>
+                    <div class="cart-item">
+                        <div class="cart-image">
+                            <a href="<?php echo $this->url('home-product-detail', array('name' => $this->functions()->formatTitle($v['product_name']), 'id' => $v['product_id'])); ?>"
+                               title="<?php echo $this->escapeHtml($v['product_name']); ?>">
+                                <img src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/' . $v['product_picture']; ?>&w=81&h=100"
+                                    alt="<?php echo $this->escapeHtml($v['product_name']); ?>">
+                            </a>
+                        </div>
+                        <div class="cart-title">
+                            <p><?php echo $this->escapeHtml($v['product_name']); ?> - <?php echo $v['color'];?> / <?php echo $v['size'];?></p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <p><span class="money"><?php echo $this->currency($v['product_price']); ?></span></p>
+                </td>
+                <td>
+                    <input class="form-control text-center" type="text"
+                           value="<?php echo $v['quality']; ?>"
+                           name="quality[<?php echo $v['product_id']; ?>]" style="min-width: 0; max-width: 50px; text-align: center; margin: 0 auto 10px; "/>
+                </td>
+                <td style="text-align: center">
+                    <p><a href="<?php echo $this->url('home-order-delete', array('id' => $v['product_id'])); ?>">X</a></p>
+                </td>
+                <td>
+                    <p><span class="money"><?php echo $this->currency($v['price_total']); ?></span></p>
+                </td>
+            </tr>
+            <?php } } else {?>
+                <tr>
+                    <td colspan="6" class="text-center"><p class="text-danger">Không có sản phẩm nào trong giỏ hàng</p></td>
+                </tr>
+            <?php }?>
+
+
+            </tbody>
+        </table>
+
+        <?php if (!empty($order['products'])) { ?>
+        <div class="clear"></div>
+
+        <div id="basket-right" class="desktop-3 tablet-6 mobile-3">
+            <h4>Tổng tiền (VND): <span class="money"><?php echo $this->currency($order['amountTotal']); ?></span></h4>
+            <input type="submit" id="update-order" value="Cập nhật" class="button">
+            <input type="button" class="button" onclick="location.href='<?php echo $this->url('home-order-confirm');?>#focus'" id="checkout" value="Tiếp tục">
+
+            <div class="clear"></div>
+        </div>
+        <?php }?>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#update-order').click(function () {
+            $('#form-order').attr('action', '<?php echo $this->url('home-order-update');?>');
+            $('#form-order').submit();
+        });
+    });
+</script>

@@ -1,0 +1,122 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<?php echo $this->partial('admin/partial/message'); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-th-list"></i> Tìm kiếm</h3>
+            </div>
+            <div class="box-content nopadding">
+                <form action="#" method="POST" class="form-horizontal form-column">
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Mã đơn hàng</label>
+                            <div class="controls">
+                                <input type="text" name="order_code" id="order_code" class="input-xlarge" value="<?php echo $search['order_code'];?>">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Email</label>
+                            <div class="controls">
+                                <input type="text" name="email" id="email" class="input-xlarge" value="<?php echo $search['email'];?>">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Điện thoại</label>
+                            <div class="controls">
+                                <input type="text" name="phone" id="phone" class="input-xlarge" value="<?php echo $search['phone'];?>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Ngày đặt hàng từ</label>
+                            <div class="controls">
+                                <input type="text" name="date_from" id="date_from" data-date-format="dd/mm/yyyy" class="input-xlarge datepick span5" value="<?php echo $search['date_from'];?>" placeholder="Từ">
+                                <input type="text" name="date_to" id="date_to" data-date-format="dd/mm/yyyy" class="input-xlarge datepick span5" value="<?php echo $search['date_to'];?>" placeholder="Đến">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Trạng thái</label>
+                            <div class="controls">
+                                <select name="status" class="input-xlarge">
+                                    <option value="-1">Tất cả</option>
+                                    <?php foreach($status as $k => $v) {?>
+                                        <option <?php echo (isset($search['status']) && $k == $search['status']) ? 'selected="selected"' : '';?> value="<?php echo $k;?>"><?php echo $v;?></option>
+                                    <?php }?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12">
+                        <div class="form-actions text-right" style="margin-top: 0; margin-bottom: 0; padding-top: 0">
+                            <button type="submit" class="btn btn-primary">Tìm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<?php echo $this->partial('admin/partial/message'); ?>
+
+<form name="" id="frm" action="<?php echo $this->url('admin/' . $module); ?>" method="post">
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+            <div class="box-content nopadding">
+                <table class="table table-nomargin table-striped table-colored-header">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox-all" /></th>
+                        <th>Tên</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th>Tổng tiền (VND)</th>
+                        <th>Ngày đặt</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Trạng thái</th>
+                        <th>Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($records as $record) { ?>
+                        <tr style="background: <?php echo $statusColor[$record['status']]; ?>">
+                            <td><input type="checkbox" class="checkbox-item" name="check_item[]" value="<?php echo $record['order_id']; ?>" /></td>
+                            <td><strong><?php echo $this->escapeHtml($record['order_fullname']); ?></strong></td>
+                            <td><?php echo $this->escapeHtml($record['order_phone']); ?></td>
+                            <td><?php echo $this->escapeHtml($record['order_email']); ?></td>
+                            <td><?php echo $this->currency($record['order_amount']); ?></td>
+                            <td><?php echo $this->functions()->formatDate($record['order_date']); ?></td>
+                            <td><?php echo $record['order_code'];?></td>
+                            <td><?php echo $status[$record['order_status']]; ?></td>
+                            <td>
+                                <a href="<?php echo $this->url('admin/' . $module, array('action' => 'edit'), array('query' => array('id' => $record['order_id']))); ?>">
+                                    <i class="icon-edit"></i>
+                                </a>
+                                <a onclick="return confirmDelete()"
+                                   href="<?php echo $this->url('admin/' . $module, array('action' => 'delete'), array('query' => array('id' => $record['order_id']))); ?>">
+                                    <i class="icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+                <div class="form-actions no-margin-bottom" style="text-align:right;">
+                    <?php echo $this->paginationControl($records, 'sliding', 'admin/partial/paginator', array('url' => $this->url('admin/' . $module),)); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+<?php echo $this->partial('admin/partial/action_list'); ?>

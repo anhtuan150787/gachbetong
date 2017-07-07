@@ -1,0 +1,113 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<?php echo $this->partial('admin/partial/message'); ?>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> <?php echo $actionTitle;?></h3>
+            </div>
+            <div class="box-content nopadding">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal form-bordered', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                    <div class="control-group">
+                        <?php echo $this->formLabel($form->get('website_name')); ?>
+                        <div class="controls">
+                            <?php echo $this->formElement($form->get('website_name')); ?>
+                            <?php echo $this->formElementErrors($form->get('website_name'), array('class' => 'error-message')); ?>
+                        </div>
+                    </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('website_title')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('website_title')); ?>
+                        <?php echo $this->formElementErrors($form->get('website_title'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('website_description')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('website_description')); ?>
+                        <?php echo $this->formElementErrors($form->get('website_description'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('website_keyword')); ?>
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('website_keyword')); ?>
+                        <?php echo $this->formElementErrors($form->get('website_keyword'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('website_icon')); ?>
+                    <div class="controls">
+
+
+                        <?php echo $this->formElementErrors($form->get('website_icon'), array('class' => 'error-message')); ?>
+
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;">
+                                <?php if (isset($record) && $record['website_icon'] != '') {?>
+                                    <img title="Click để xóa" id="picture" onclick="deletePicture(<?php echo $record['website_id'];?>)" style="width: 50px; height: 50px; cursor: pointer" class="img-thumbnail" src="<?php echo $this->basePath('pictures/websites/' . $record['website_icon']);?>" />
+                                <?php } else {?>
+                                    <img src="<?php echo $this->basePath('pictures/no-image.gif');?>" class="img-thumbnail" style="width: 50px; height: 50px" />
+                                <?php }?>
+                            </div>
+                            <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"></div>
+                            <div>
+                                <span class="btn btn-file">
+                                    <span class="fileupload-new">Chọn hình</span><span class="fileupload-exists">Thay đổi</span>
+                                    <?php echo $this->formElement($form->get('website_icon')); ?></span>
+                                <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Xóa</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="form-actions">
+                        <?php echo $this->formSubmit($form->get('submit')); ?>
+                        <?php echo $this->formHidden($form->get('csrf')); ?>
+                    </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $("#frm").validate({
+            rules: {
+                website_name: 'required',
+            },
+            messages: {
+                website_name: 'Vui lòng nhập thông tin',
+            }
+        });
+    });
+
+    function deletePicture(id) {
+        if (confirm('Bạn có muốn xóa?')) {
+            $.ajax({
+                url: '<?php echo $this->url('admin/website', array('action' => 'delete-picture'));?>',
+                type: 'post',
+                data: {id: id},
+                success: function (response) {
+                    data = jQuery.parseJSON(response);
+                    if (data.return == 1) {
+                        $('#picture').remove();
+                    }
+                }
+            });
+        }
+    }
+</script>

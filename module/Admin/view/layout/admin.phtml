@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <?php echo $this->headTitle($this->translate('CMS'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/chosen/chosen.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/multiselect/multi-select.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/datepicker/datepicker.css'))
+        ->prependStylesheet($this->basePath('cms/js/plugins/jquery-validation/css/style.css'))
+        ->prependStylesheet($this->basePath('cms/css/themes.css'))
+        ->prependStylesheet($this->basePath('cms/css/style.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/fullcalendar/fullcalendar.print.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/fullcalendar/fullcalendar.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/pageguide/pageguide.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/jquery-ui/smoothness/jquery-ui.css'))
+        ->prependStylesheet($this->basePath('cms/css/bootstrap-responsive.min.css'))
+        ->prependStylesheet($this->basePath('cms/css/bootstrap.min.css'))
+    ?>
+
+    <!-- Scripts -->
+
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath('cms/js/plugins/chosen/chosen.jquery.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/multiselect/jquery.multi-select.js'))
+        ->prependFile($this->basePath('cms/js/plugins/fileupload/bootstrap-fileupload.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/datepicker/bootstrap-datepicker.js'))
+        ->prependFile($this->basePath('cms/js/plugins/tinymce/tinymce.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-validation/dist/jquery.validate.js'))
+        //->prependFile($this->basePath('cms/js/demonstration.min.js'))
+        ->prependFile($this->basePath('cms/js/application.min.js'))
+        ->prependFile($this->basePath('cms/js/eakroko.min.js'))
+
+        ->prependFile($this->basePath('cms/js/plugins/fullcalendar/fullcalendar.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/pageguide/jquery.pageguide.js'))
+        ->prependFile($this->basePath('cms/js/plugins/imagesLoaded/jquery.imagesloaded.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.resize.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.pie.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.bar.order.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/bootbox/jquery.bootbox.js'))
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.sampledata.js'))
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.world.js'))
+
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.min.js'))
+        ->prependFile($this->basePath('cms/js/bootstrap.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/slimscroll/jquery.slimscroll.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/touch-punch/jquery.touch-punch.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.resizable.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.draggable.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.mouse.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.widget.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.core.min.js'))
+        ->prependFile($this->basePath('cms/js/jquery.min.js'))
+    ; ?>
+
+    <!-- Tinymce -->
+    <script>
+        var tinymce_filemanager_path = '<?php echo $this->basePath('cms/js/plugins/tinymce/filemanager/');?>';
+
+        $(document).ready(function(){
+            /*
+             *  Tinymce
+             */
+            if ($(".description").length)
+            {
+                tinymce.init({
+                    selector: "textarea.description", theme: "modern", height: 200,
+                    toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+                });
+            }
+
+            if ($(".content").length)
+            {
+                tinymce.init({
+                    selector: "textarea.content", theme: "modern", height: 200,
+                    font_size_style_values: ["6px,7px,8px,9px,10px,11px,12px,13px,14px,15px,16px,17px,18px,19px,20px,21px,22px,23px,24px,25px,26px,27px,28px,29px,30px,31px,32px,36px,38px,40px"],
+                    relative_urls: false,
+                    plugins: [
+                        "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                        "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking",
+                        "table contextmenu directionality emoticons paste textcolor responsivefilemanager code",
+                        "textcolor"
+                    ],
+
+                    toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
+                    toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor  | print preview code | fontsizeselect",
+                    image_advtab: true,
+                    external_filemanager_path: tinymce_filemanager_path,
+                    filemanager_title: "Responsive Filemanager",
+                    external_plugins: {"filemanager": tinymce_filemanager_path + "plugin.min.js"},
+                    filemanager_access_key: 'konokoshino2002'
+                });
+            }
+        });
+    </script>
+    <!-- End Tinymce -->
+
+
+</head>
+
+<body>
+<div id="navigation">
+    <div class="container-fluid">
+        <a href="#" id="brand">CMS</a>
+        <a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+        <ul class='main-nav'>
+        <?php foreach ($menu as $v) : ?>
+            <?php if ($v['menu_parent'] == 0) : ?>
+                <?php $sub = false; $s = ''; ?>
+                    <li>
+                        <a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+                            <i class="icon-edit"></i>
+                            <span><?php echo $v['menu_name']; ?></span>
+                            <span class="caret"></span>
+                        </a>
+
+                        <?php
+                        foreach ($menu as $vv) {
+                            if ($vv['menu_parent'] == $v['menu_id']) {
+                                $sub = true;
+                                $s .= '<li><a href="' . (($vv['menu_url'] != '') ? $this->serverUrl('/' . $vv['menu_url']) : '') . '">' . $vv['menu_name'] . '</a></li>';
+                            }
+                        }
+                        ?>
+                        <?php if ($sub == true) {
+                            echo '<ul class="dropdown-menu">' . $s . '</ul>';
+                        } ?>
+                    </li>
+            <?php endif;?>
+        <?php endforeach;?>
+        </ul>
+
+
+        <div class="user">
+            <ul class="icon-nav">
+                <li class="dropdown sett">
+                    <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+                    <ul class="dropdown-menu pull-right theme-settings">
+                        <li>
+                            <span>Layout-width</span>
+                            <div class="version-toggle">
+                                <a href="#" class='set-fixed'>Fixed</a>
+                                <a href="#" class="active set-fluid">Fluid</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Topbar</span>
+                            <div class="topbar-toggle">
+                                <a href="#" class='set-topbar-fixed'>Fixed</a>
+                                <a href="#" class="active set-topbar-default">Default</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Sidebar</span>
+                            <div class="sidebar-toggle">
+                                <a href="#" class='set-sidebar-fixed'>Fixed</a>
+                                <a href="#" class="active set-sidebar-default">Default</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class='dropdown colo'>
+                    <a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-tint"></i></a>
+                    <ul class="dropdown-menu pull-right theme-colors">
+                        <li class="subtitle">
+                            Predefined colors
+                        </li>
+                        <li>
+                            <span class='red'></span>
+                            <span class='orange'></span>
+                            <span class='green'></span>
+                            <span class="brown"></span>
+                            <span class="blue"></span>
+                            <span class='lime'></span>
+                            <span class="teal"></span>
+                            <span class="purple"></span>
+                            <span class="pink"></span>
+                            <span class="magenta"></span>
+                            <span class="grey"></span>
+                            <span class="darkblue"></span>
+                            <span class="lightred"></span>
+                            <span class="lightgrey"></span>
+                            <span class="satblue"></span>
+                            <span class="satgreen"></span>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+                </li>
+            </ul>
+            <div class="dropdown">
+                <a href="#" class='dropdown-toggle' data-toggle="dropdown">
+                    <?php echo $user->admin_name;?>
+                    <?php if ($user->admin_picture == '') { echo '<img src="' . $this->basePath('cms/img/no-picture-person.png') . '" class="img-rounded avatar" />'; }?>
+                </a>
+                <ul class="dropdown-menu pull-right">
+                    <li>
+                        <a href="<?php echo $this->url('admin/logout');?>">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="#" class='toggle-mobile'><i class="icon-reorder"></i></a>
+    </div>
+</div>
+<div class="container-fluid" id="content">
+    <div id="left">
+        <?php foreach ($menu as $v) : ?>
+            <?php if ($v['menu_parent'] == 0) : ?>
+                <?php $sub = false; $s = ''; $activeMenuParent = false; $activeMenuSub = false; ?>
+        <div class="subnav subnav-hidden">
+            <div class="subnav-title">
+                <a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span><?php echo $v['menu_name']; ?></span></a>
+            </div>
+            <?php
+            foreach ($menu as $vv) {
+                if ($vv['menu_parent'] == $v['menu_id'] && $vv['menu_status'] == 1) {
+                    $sub = true;
+                    $menuUrlArray = explode('/', $vv['menu_url']);
+                    $menuUrlArray[1] = str_replace('-', '', $menuUrlArray[1]);
+                    if($menuUrlArray[1] == $controller_name) {
+                        $activeMenuParent = true;
+                        $activeMenuSub = true;
+                    } else {
+                        $activeMenuSub = false;
+                    }
+
+                    $s .= '<li><a ' . (($activeMenuSub == true) ? 'class="active"' : '') . ' href="' . (($vv['menu_url'] != '') ? $this->serverUrl('/' . $vv['menu_url']) : '') . '">' . $vv['menu_name'] . '</a></li>';
+                }
+            }
+            ?>
+            <?php if ($sub == true) {
+                echo '<ul class="subnav-menu" ' . (($activeMenuParent == false) ? 'style="display: none"' : '') . '>' . $s . '</ul>';
+            } ?>
+        </div>
+                <?php endif;?>
+        <?php endforeach;?>
+
+    </div>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="page-header">
+                    <div class="pull-left">
+                        <h1><?php echo $moduleCurrentTitle;?></h1>
+                    </div>
+                </div>
+                <?php echo $breadcrumbsHtml;?>
+                <?php echo $this->content;?>
+            </div>
+        </div>
+    </div></div>
+
+<script src="<?php echo $this->basePath('cms/js/scripts.js');?>"></script>
+
+</body>
+
+</html>
+

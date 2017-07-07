@@ -1,0 +1,51 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<?php echo $this->partial('admin/partial/message'); ?>
+
+<form name="" id="frm" action="<?php echo $this->url('admin/' . $module); ?>" method="post">
+
+<div class="pull-right" style="margin-bottom: 10px">
+    <form action="<?php echo $this->url('admin/' . $module, array('action' => 'export')); ?>" method="post" target="_blank">
+    <input type="submit" class="btn btn-success" value="Xuất Excel">
+    </form>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-nomargin table-striped table-colored-header">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox-all" /></th>
+                        <th>Email</th>
+                        <th>Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($records as $record) { ?>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox-item" name="check_item[]" value="<?php echo $record['email_customer_id']; ?>" /></td>
+                            <td><strong><?php echo $this->escapeHtml($record['email_customer_name']); ?></strong></td>
+                            <td>
+                                <a onclick="return confirmDelete()"
+                                   href="<?php echo $this->url('admin/' . $module, array('action' => 'delete'), array('query' => array('id' => $record['email_customer_id']))); ?>">
+                                    <i class="icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+                <div class="form-actions no-margin-bottom" style="text-align:right;">
+                    <?php echo $this->paginationControl($records, 'sliding', 'admin/partial/paginator', array('url' => $this->url('admin/' . $module),)); ?>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</form>
+
+<?php echo $this->partial('admin/partial/action_list'); ?>

@@ -1,0 +1,51 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<?php echo $this->partial('admin/partial/button_add', array('moduleName' => $module)); ?>
+
+<?php echo $this->partial('admin/partial/message'); ?>
+
+<form name="" id="frm" action="<?php echo $this->url('admin/' . $module); ?>" method="post">
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="table-responsive scroll-div">
+                <table class="table table-nomargin table-striped table-colored-header">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox-all" /></th>
+                        <th>Acl</th>
+                        <th>Module</th>
+                        <th>Controller</th>
+                        <th>Action</th>
+                        <th>Trạng thái</th>
+                        <th>Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($records as $record) { ?>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox-item" name="check_item[]" value="<?php echo $record['acl_id']; ?>" /></td>
+                            <td><?php echo str_repeat('__', $record['acl_level']) . ' <strong>' . $this->escapeHtml($record['acl_name']) . '</strong>'; ?></td>
+                            <td><?php echo $this->escapeHtml($record['acl_module']); ?></></td>
+                            <td><?php echo $this->escapeHtml($record['acl_controller']); ?></></td>
+                            <td><?php echo $this->escapeHtml($record['acl_action']); ?></></td>
+                            <td><?php echo $status[$record['acl_status']]; ?></td>
+                            <td>
+                                <a href="<?php echo $this->url('admin/' . $module, array('action' => 'edit'), array('query' => array('id' => $record['acl_id']))); ?>">
+                                    <i class="icon-edit"></i>
+                                </a>
+                                <a onclick="return confirmDelete()"
+                                   href="<?php echo $this->url('admin/' . $module, array('action' => 'delete'), array('query' => array('id' => $record['acl_id']))); ?>">
+                                    <i class="icon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<?php echo $this->partial('admin/partial/action_list'); ?>

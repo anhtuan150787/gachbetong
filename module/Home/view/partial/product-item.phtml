@@ -1,0 +1,11 @@
+<?php foreach ($products as $v) { ?>
+<div class="col-md-3 col-sm-6 col-xs-6">
+    <div class="thumbnail">
+        <a href="<?php echo $this->url('home-product-detail', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_name'])), 'id' => $v['product_id'])); ?>"><img src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $this->escapeHtml($v['product_picture']); ?>&w=193&h=193" alt="<?php echo $this->escapeHtml($v['product_name']); ?>"/></a>
+
+        <div class="caption text-center">
+            <h5><a href="<?php echo $this->url('home-product-detail', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_name'])), 'id' => $v['product_id'])); ?>"><?php echo $this->escapeHtml($v['product_name']); ?></a></h5>
+        </div>
+    </div>
+</div>
+<?php }?>

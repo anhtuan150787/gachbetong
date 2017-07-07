@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf8">
+    <?php echo $this->headTitle($this->translate('CMS'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/chosen/chosen.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/multiselect/multi-select.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/datepicker/datepicker.css'))
+        ->prependStylesheet($this->basePath('cms/js/plugins/jquery-validation/css/style.css'))
+        ->prependStylesheet($this->basePath('cms/css/themes.css'))
+        ->prependStylesheet($this->basePath('cms/css/style.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/fullcalendar/fullcalendar.print.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/fullcalendar/fullcalendar.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/pageguide/pageguide.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/jquery-ui/smoothness/jquery.ui.theme.css'))
+        ->prependStylesheet($this->basePath('cms/css/plugins/jquery-ui/smoothness/jquery-ui.css'))
+        ->prependStylesheet($this->basePath('cms/css/bootstrap-responsive.min.css'))
+        ->prependStylesheet($this->basePath('cms/css/bootstrap.min.css'))
+    ?>
+
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <!-- Scripts -->
+
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath('cms/js/plugins/chosen/chosen.jquery.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/multiselect/jquery.multi-select.js'))
+        ->prependFile($this->basePath('cms/js/plugins/fileupload/bootstrap-fileupload.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/datepicker/bootstrap-datepicker.js'))
+        ->prependFile($this->basePath('cms/js/plugins/tinymce/tinymce.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-validation/dist/jquery.validate.js'))
+        //->prependFile($this->basePath('cms/js/demonstration.min.js'))
+        ->prependFile($this->basePath('cms/js/application.min.js'))
+        ->prependFile($this->basePath('cms/js/eakroko.min.js'))
+
+        ->prependFile($this->basePath('cms/js/plugins/fullcalendar/fullcalendar.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/pageguide/jquery.pageguide.js'))
+        ->prependFile($this->basePath('cms/js/plugins/imagesLoaded/jquery.imagesloaded.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.resize.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.pie.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.bar.order.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/flot/jquery.flot.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/bootbox/jquery.bootbox.js'))
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.sampledata.js'))
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.world.js'))
+
+        ->prependFile($this->basePath('cms/js/plugins/vmap/jquery.vmap.min.js'))
+        ->prependFile($this->basePath('cms/js/bootstrap.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/slimscroll/jquery.slimscroll.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/touch-punch/jquery.touch-punch.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.resizable.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.draggable.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.mouse.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.widget.min.js'))
+        ->prependFile($this->basePath('cms/js/plugins/jquery-ui/jquery.ui.core.min.js'))
+        ->prependFile($this->basePath('cms/js/jquery.min.js'))
+    ; ?>
+
+</head>
+
+<body>
+
+<?php echo $this->content;?>
+
+</body>
+
+</html>
+

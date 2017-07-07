@@ -1,0 +1,23 @@
+<div class="col-md-12">
+    <div class="panel panel-primary group-item">
+        <div class="panel-heading"><h3 class="panel-title"><?php echo $this->escapeHtml($newsCategory['news_category_name']);?></h3></div>
+        <div class="panel-body">
+            <?php foreach($news as $v) {?>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>">
+                            <img class="media-object img-thumbnail" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/news/' . $v['news_picture'];?>&w=150&h=150">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>"><h4 class="media-heading"><?php echo $this->escapeHtml($v['news_title']);?></h4></a>
+                        <?php echo $v['news_quote'];?>
+                    </div>
+                </div>
+            <?php }?>
+            <div class="col-md-12 col-sm-12" style="text-align:right;">
+                <?php echo $this->paginationControl($news, 'sliding', 'home/partial/paginator', array('url' => $this->url('home-news-category', array('name' => $name, 'id' => $id)))); ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,118 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box">
+            <div class="box-title">
+                <h3 style="float: right"><i class="icon-edit"></i> <strong>Ngày đặt hàng:</strong> <?php echo $this->functions()->formatDate($record['order_date']);?></h3>
+                <h3 style="float: left"><i class="icon-edit"></i><strong>Mã đơn hàng:</strong> <?php echo $record['order_code'];?></h3>
+            </div>
+            <div class="box-content">
+                <?php
+                $form->setAttributes(['action' => '', 'class' => 'form-horizontal', 'id' => 'frm']);
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+
+                <dl class="dl-horizontal">
+                    <dt>Tên</dt>
+                    <dd><?php echo $this->escapeHtml($record['order_fullname']);?></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Điện thoại</dt>
+                    <dd><?php echo $this->escapeHtml($record['order_phone']);?></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Địa chỉ</dt>
+                    <dd><?php echo $this->escapeHtml($record['order_address']);?></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Email</dt>
+                    <dd><?php echo $this->escapeHtml($record['order_email']);?></dd>
+                </dl>
+
+                <dl class="dl-horizontal">
+                    <dt>Ghi chú</dt>
+                    <dd><?php echo $this->escapeHtml($record['order_note']);?></dd>
+                </dl>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Mã</th>
+                        <th>Đơn giá (VND)</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền (VND)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <?php foreach ($order['products'] as $v) { ?>
+                        <tr>
+                            <td><img class="media-object img-thumbnail"
+                                     src="<?php echo $this->basePath('pictures/' . $v['product_picture']); ?>"
+                                     style="float: left; width: 75px; height: 75px">&nbsp;&nbsp;<?php echo $this->escapeHtml($v['product_name']); ?>
+                            </td>
+                            <td>
+                                <?php echo $v['product_code']; ?>
+                            </td>
+                            <td style="width: 150px;"
+                                class="text-right price-order"><?php echo $this->currency($v['product_price']); ?></td>
+                            <td style="width: 100px;" class="text-center"><?php echo $v['quality']; ?></td>
+                            <td style="width: 150px;"
+                                class="text-right price-order"><?php echo $this->currency($v['price_total']); ?></td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td colspan="4" class="text-right" style="text-align: right">Tổng tiền (VND)</td>
+                        <td colspan="1" class="price-order"><?php echo $this->currency($order['amount']); ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="text-align: right">Phí vận chuyển (VND)</td>
+                        <td colspan="1" class="price-order"><?php echo $this->currency($order['fee']); ?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" class="text-right" style="text-align: right">Tổng cộng (VND)</td>
+                        <td colspan="1" class="price-order"><?php echo $this->currency($order['amountTotal']); ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="control-group">
+                    <label for="textfield"
+                           class="control-label"><?php echo $this->formLabel($form->get('order_status')); ?></label>
+
+                    <div class="controls">
+                        <?php echo $this->formElement($form->get('order_status')); ?>
+                        <?php echo $this->formElementErrors($form->get('order_status'), array('class' => 'error-message')); ?>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/' . $module);?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                    <?php echo $this->formSubmit($form->get('submit')); ?>
+                    <?php echo $this->formHidden($form->get('csrf')); ?>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#frm").validate({
+            rules: {
+                page_title: 'required',
+            },
+            messages: {
+                page_title: 'Vui lòng nhập thông tin',
+            }
+        });
+    });
+</script>

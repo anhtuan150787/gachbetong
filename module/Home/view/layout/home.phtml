@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="<?php echo $this->basePath('pictures/websites/' . $this->escapeHtml($website['website_icon'])); ?>" rel="stylesheet" type="text/css">
+
+    <title><?php echo $this->escapeHtml($website['website_title']); ?></title>
+    <meta name="description" content="<?php echo $this->escapeHtml($website['website_description']); ?>"/>
+    <meta name="keywords" content="<?php echo $this->escapeHtml($website['website_keyword']); ?>"/>
+
+    <?php
+    echo $this->headLink()
+        ->prependStylesheet($this->basePath('frontend/js/jquery-validation/css/style.css'))
+        ->prependStylesheet($this->basePath('frontend/css/style.css'))
+        ->prependStylesheet($this->basePath('frontend/css/bootstrap.css'));
+    ?>
+
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath('frontend/js/jquery-validation/dist/jquery.validate.js'))
+        ->prependFile($this->basePath('frontend/js/bootstrap.min.js'))
+        ->prependFile($this->basePath('frontend/js/jquery-1.10.2.js'));
+    ?>
+</head>
+<body>
+
+<div class="container body">
+    <div class="row">
+        <div class="banner col-md-12">
+            <div class="logo">
+                <img src="<?php echo $this->basePath() . '/public/pictures/templates/' . $template[10]['template_picture']; ?>"/>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-left">
+<!--                            <li><a href="#">Trang chủ</a></li>-->
+<!--                            <li><a href="#">Giới thiệu</a></li>-->
+<!--                            <li><a href="#">Sản phẩm</a></li>-->
+<!--                            <li><a href="#">Liên hệ</a></li>-->
+
+                            <?php foreach ($navigations as $v) : ?>
+                                <?php if ($v['navigation_parent'] == 0) : ?>
+                                    <?php $sub = false;
+                                    $s = ''; ?>
+                                    <?php
+                                    foreach ($navigations as $vv) {
+                                        if ($vv['navigation_parent'] == $v['navigation_id']) {
+                                            $sub = true;
+                                            $s .= '<li><a href="' . (($vv['navigation_url_select'] == '') ? $vv['navigation_url'] : ($this->serverUrl() . '/' . $this->escapeHtml($vv['navigation_url_select']))) . '">' . $this->escapeHtml($vv['navigation_name']) . '</a></li>';
+                                        }
+                                    }
+                                    ?>
+                                    <?php if ($sub == true) {
+                                        echo '<li class="dropdown"><a class="dlink">' . $v['navigation_name'] . '</a><ul>' . $s . '</ul></li>';
+                                    } else {
+                                        echo '<li><a href="' . (($v['navigation_url_select'] == '') ? $v['navigation_url'] : ($this->serverUrl() . '/' . $this->escapeHtml($v['navigation_url_select']))) . '">' . $this->escapeHtml($v['navigation_name']) . '</a></li>';
+                                    } ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+
+
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </div>
+        <div class="col-md-12">
+
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <?php $sttt = 0; foreach($template as $v) {?>
+                        <?php if ($v['group_template_id'] == 7) {?>
+                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $sttt;?>" class="<?php echo ($sttt == 0) ? 'active' : '';?>"></li>
+                            <?php $sttt++; }?>
+                    <?php }?>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+
+                    <?php $stt = 1; foreach($template as $v) {?>
+                        <?php if ($v['group_template_id'] == 7) {?>
+                    <div class="item <?php echo ($stt == 1) ? 'active' : '';?>">
+                        <img src="<?php echo $this->basePath() . '/public/pictures/templates/' . $v['template_picture']; ?>">
+
+                        <div class="carousel-caption">
+                            <?php echo $v['template_content']; ?>
+                        </div>
+                    </div>
+                    <?php $stt++; }?>
+                    <?php }?>
+                </div>
+
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <!--<div>-->
+            <!--<ol class="breadcrumb">-->
+            <!--<li><a href="#">Home</a></li>-->
+            <!--<li><a href="#">Clothing</a></li>-->
+            <!--<li class="active">Men's Clothing</li>-->
+            <!--</ol>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    Danh mục sản phẩm
+                </a>
+                <?php foreach($productCategorys as $v) {?>
+                <a href="<?php echo $this->url('home-product-category', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_category_name'])), 'id' => $v['product_category_id']));?>" class="list-group-item"><?php echo $this->escapeHtml($v['product_category_name']);?></a>
+               <?php }?>
+            </div>
+            <!-- /.div -->
+            <div class="list-group">
+                <a href="#" class="list-group-item active">
+                    Sản phẩm mới
+                </a>
+                <?php foreach($productNews as $v) {?>
+                <a href="<?php echo $this->url('home-product-detail', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_name'])), 'id' => $v['product_id'])); ?>" class="list-group-item"><?php echo $this->escapeHtml($v['product_name']);?></a>
+                <?php }?>
+            </div>
+            <!-- /.div -->
+
+        </div>
+        <div class="col-md-9" style="padding: 0">
+
+        <?php echo $this->content;?>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-12 end-box ">
+    <div class="container text-center">
+        <?php echo $template[11]['template_content']; ?>
+    </div>
+</div>
+
+
+</body>
+</html>

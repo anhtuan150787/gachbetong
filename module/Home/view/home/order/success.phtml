@@ -1,0 +1,32 @@
+<div class="desktop-12 mobile-3" id="nav-border"></div>
+<?php echo $breadcrumbs; ?>
+
+<button id="btn-popup" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="display: none"></button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Đặt hàng thành công</h4>
+            </div>
+            <div class="modal-body">
+                Bạn đã đặt hàng thành công. Cám ơn Bạn đã ghé thăm shop.<Br>
+                Chúng tôi sẽ liên hệ với bạn để hoàn tất và chuyển hàng trong thời gian sớm nhất.<br>
+                Vui lòng đợi trong vài giây để chuyển trang hoặc nhấn vào nút <strong>Chuyển trang</strong> nếu không muốn chờ lâu.
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="location.href='<?php echo $this->url('home');?>'" class="btn btn-primary">Chuyển trang</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#btn-popup').trigger('click');
+    });
+    setTimeout(function(){
+        window.location.href = "<?php echo $this->url('home');?>";
+    }, 10000);
+</script>

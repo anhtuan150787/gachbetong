@@ -4,13 +4,13 @@
         <div class="panel-body">
             <?php foreach($news as $v) {?>
                 <div class="media">
-                    <div class="media-left">
+                    <div class="col-md-2 col-xs-12 col-sm-12 media-left" style="padding-right: 10px">
                         <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>">
-                            <img class="media-object img-thumbnail" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/news/' . $v['news_picture'];?>&w=150&h=150">
+                            <img class="media-object thumbnail" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/news/' . $v['news_picture'];?>&w=130&h=108">
                         </a>
                     </div>
-                    <div class="media-body">
-                        <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>"><h4 class="media-heading"><?php echo $this->escapeHtml($v['news_title']);?></h4></a>
+                    <div class="col-md-10 col-xs-12 col-sm-12 media-body" style="padding-left: 10px">
+                        <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>"><h5 class="media-heading"><?php echo $this->escapeHtml($v['news_title']);?></h5></a>
                         <?php echo $v['news_quote'];?>
                     </div>
                 </div>

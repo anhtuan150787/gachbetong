@@ -52,6 +52,7 @@ class NewsController extends AbstractActionController
         $view->setVariables([
             'news' => $news,
             'newsOther' => $newsOther,
+            'newsCategory' => $newsCategory
         ]);
 
         return $view;

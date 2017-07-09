@@ -53,6 +53,10 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .contact ul {display: none}
 .contact .error-message {color: red; display: block}
 
-.pagination > li > a, .pagination > li > span {padding: 3px 8px}
+.pagination > li > a, .pagination > li > span {padding: 1px 8px}
 
 .panel-title {font-size: 14px;}
+
+.news-other .list-group-item {border: none !important; padding: 5px 7px;}
+.news-other .list-group-item span {margin-right: 5px}
+.media {padding: 10px 0px; border-bottom: 1px solid #DDD; margin-top: 0}

@@ -1,42 +1,27 @@
-<div class="desktop-12 mobile-3" id="nav-border"></div>
-<?php echo $breadcrumbs; ?>
-<div id="shopify-section-article-template" class="shopify-section"><div class="article-template" data-section-id="article-template">
-        <div id="article-body" class="desktop-9 mobile-3">
-            <h1><?php echo $this->escapeHtml($news['news_title']);?></h1>
+<div class="col-md-12">
+    <div class="panel panel-primary group-item">
+        <div class="panel-heading"><h3 class="panel-title"><?php echo $this->escapeHtml($newsCategory['news_category_name']);?></h3></div>
+        <div class="panel-body">
+            <h4><strong><?php echo $this->escapeHtml($news['news_title']);?></strong></h4>
 
             <div class="rte">
                 <?php echo $news['news_content'];?>
             </div>
-            <div id="social">
-                <div class="share-icons">
-                    <?php
-                    echo $this->social()->shareFacebook(array(
-                        'url' => $this->serverUrl() . $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($news['news_title']), 'id' => $news['news_id'])),
-                        'title' => $news['news_title'],
-                        'description' => $news['news_quote'],
-                        'image' => $this->serverUrl() . '/thumbs/timthumb.php?src=' . $this->basePath() . '/pictures/' . $news['news_picture'] . '&w=200',
-                    ));
 
-                    echo $this->social()->shareGoogle();
-                    echo '&nbsp;';
-                    echo $this->social()->shareTweet();
-                    ?>
-                </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="panel panel-primary group-item">
+        <div class="panel-heading"><h3 class="panel-title">Liên quan</h3></div>
+        <div class="panel-body">
+            <div class="list-group news-other">
+                <?php foreach($newsOther as $v) {?>
+                    <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>" class="list-group-item"><span class="glyphicon glyphicon-chevron-right"></span> <?php echo $this->escapeHtml($v['news_title']);?></a>
+                <?php }?>
             </div>
         </div>
-
-        <div id="sidebar" class="desktop-3 mobile-3">
-            <h3>Liên quan</h3>
-            <ul id="posts">
-                <?php foreach($newsOther as $v) {?>
-                <li><h4><a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>"><?php echo $this->escapeHtml($v['news_title']);?></a></h4>
-                    <?php echo $v['news_quote'];?>
-                </li>
-                <?php }?>
-
-            </ul>
-        </div>
-
     </div>
-
 </div>
+

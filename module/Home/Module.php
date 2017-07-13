@@ -152,7 +152,7 @@ class Module
             $controller = strtolower($controllerArr[2]);
             $module = strtolower($controllerArr[0]);
 
-            if ($module == 'home') {
+            if ($module == strtolower(__NAMESPACE__)) {
                 $c->layout('layout/layout');
 
                 $dbAdapter = $e->getApplication()->getServiceManager()->get('Zend\Db\Adapter\Adapter');
@@ -178,6 +178,12 @@ class Module
                 $statement = $dbAdapter->query($sql);
                 $result = $statement->execute();
                 $viewModel->productNews = $result;
+
+                //Load tin tuc moi
+                $sql = 'SELECT * FROM news WHERE news_status = 1  ORDER BY news_id DESC LIMIT 6';
+                $statement = $dbAdapter->query($sql);
+                $result = $statement->execute();
+                $viewModel->newsNew = $result;
 
                 //Load template
                 $statement = $dbAdapter->query('SELECT * FROM template');

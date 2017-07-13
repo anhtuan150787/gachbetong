@@ -7,10 +7,15 @@ return array(
         'port'              => 465,
         'connection_class'  => 'login',
         'connection_config' => array(
-            'username' => 'anhtuan150787.2@gmail.com',
-            'password' => 'sejbkaydxrekrnce',
+            'username' => 'anhtuan150787.4@gmail.com',
+            'password' => 'smqboefvodhhdpxx',
             'ssl'      => 'ssl',
         ),
     ),
-    'from' => 'anhtuan150787.2@gmail.com',
+    'from' => 'anhtuan150787@gmail.com',
+    'to_second' => 'anhtuan150787@gmail.com',
+    'from_name' => 'Gachbetong',
+
+    //'from' => 'anhtuan150787@gmail.com',
+    //'to_second' => 'anhtuan150787@gmail.com',
 );

@@ -36,6 +36,31 @@ class ContactController extends AbstractActionController
 
                 $model->save($params);
 
+
+                $patterns = [];
+                $patterns[0] = '/{fullname}/';
+                $patterns[1] = '/{email}/';
+                $patterns[2] = '/{phone}/';
+                $patterns[3] = '/{content}/';
+
+                $replacements = [];
+                $replacements[0] = $params['contact_fullname'];
+                $replacements[1] = $params['contact_email'];
+                $replacements[2] = $params['contact_phone'];
+                $replacements[3] = $params['contact_content'];
+
+                $bodyMail = file_get_contents('data/email-template/contact.php');
+                $bodyMail = preg_replace($patterns, $replacements, $bodyMail);
+
+                $sendMail = $this->getServiceLocator()->get('send_mail');
+
+                $config = include 'config/mailer.php';
+                $sendMail->setTo($config['to_second']);
+                $sendMail->setSubject('Liên hệ');
+                $sendMail->setBody($bodyMail);
+                $sendMail->action();
+
+
                 $this->redirect()->toRoute('home-lien-he-success');
             }
         }

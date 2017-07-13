@@ -196,95 +196,98 @@ class Module
             $controller = strtolower($controllerArr[2]);
             $module = strtolower($controllerArr[0]);
 
-            if ($auth->hasIdentity()) {
-                $user = $auth->getIdentity();
+            if ($module == strtolower(__NAMESPACE__)) {
+                if ($auth->hasIdentity()) {
+                    $user = $auth->getIdentity();
 
-                /*
-                 * Menu
-                 */
-                if (!$cache->checkItem('permission_menu_' . $user->group_admin_id)) {
-                    $menu = $groupMenuModel->getGroupMenu($user->group_admin_id);
-                    $cache->set('permission_menu_' . $user->group_admin_id, $menu);
-                } else {
-                    $menu = $cache->get('permission_menu_' . $user->group_admin_id);
-                }
-
-                /*
-                 * Get module title
-                 */
-                foreach ($menu as $v) {
-                    if (str_replace('-', '', $v['menu_url']) == $module . '/' . $controller) {
-                        $moduleCurrentTitle = $v['menu_name'];
-                        $moduleCurrentUrl = $v['menu_url'];
+                    /*
+                     * Menu
+                     */
+                    if (!$cache->checkItem('permission_menu_' . $user->group_admin_id)) {
+                        $menu = $groupMenuModel->getGroupMenu($user->group_admin_id);
+                        $cache->set('permission_menu_' . $user->group_admin_id, $menu);
+                    } else {
+                        $menu = $cache->get('permission_menu_' . $user->group_admin_id);
                     }
-                }
 
-                $serverUrl = $e->getApplication()->getServiceManager()->get('ViewHelperManager')->get('serverUrl')->__invoke();
+                    /*
+                     * Get module title
+                     */
+                    foreach ($menu as $v) {
+                        if (str_replace('-', '', $v['menu_url']) == $module . '/' . $controller) {
+                            $moduleCurrentTitle = $v['menu_name'];
+                            $moduleCurrentUrl = $v['menu_url'];
+                        }
+                    }
 
-                /*
-                 * Breadcrumb
-                 */
-                $breadcrumbsHtml = '<div class="breadcrumbs"><ul>';
-                $breadcrumbsHtml .= '<li><a href="' . $serverUrl . '/' . $module . '">' . ucfirst($module) . '</a></li>';
+                    $serverUrl = $e->getApplication()->getServiceManager()->get('ViewHelperManager')->get('serverUrl')->__invoke();
 
-                foreach ($menu as $v) {
-                    if ($v['menu_parent'] == 0) {
-                        foreach ($menu as $vv) {
+                    /*
+                     * Breadcrumb
+                     */
+                    $breadcrumbsHtml = '<div class="breadcrumbs"><ul>';
+                    $breadcrumbsHtml .= '<li><a href="' . $serverUrl . '/' . $module . '">' . ucfirst($module) . '</a></li>';
 
-                            if ($vv['menu_parent'] == $v['menu_id']) {
+                    foreach ($menu as $v) {
+                        if ($v['menu_parent'] == 0) {
+                            foreach ($menu as $vv) {
 
-                                if (str_replace('-', '', $vv['menu_url']) == $module . '/' . $controller) {
-                                    $breadcrumbModuleParentName = $v['menu_name'];
+                                if ($vv['menu_parent'] == $v['menu_id']) {
 
-                                    $breadcrumbModuleLevel2Name = $moduleCurrentTitle;
-                                    $breadcrumbModuleLevel2Url = $vv['menu_url'];
+                                    if (str_replace('-', '', $vv['menu_url']) == $module . '/' . $controller) {
+                                        $breadcrumbModuleParentName = $v['menu_name'];
 
-                                    break;
+                                        $breadcrumbModuleLevel2Name = $moduleCurrentTitle;
+                                        $breadcrumbModuleLevel2Url = $vv['menu_url'];
 
-                                } else {
+                                        break;
 
-                                    foreach ($menu as $vvv) {
-                                        if ($vvv['menu_parent'] == $vv['menu_id']) {
+                                    } else {
 
-                                            if (str_replace('-', '', $vvv['menu_url']) == $module . '/' . $controller) {
-                                                $breadcrumbModuleParentName = $v['menu_name'];
+                                        foreach ($menu as $vvv) {
+                                            if ($vvv['menu_parent'] == $vv['menu_id']) {
 
-                                                $breadcrumbModuleLevel2Name = $vv['menu_name'];
-                                                $breadcrumbModuleLevel2Url = $vv['menu_url'];
+                                                if (str_replace('-', '', $vvv['menu_url']) == $module . '/' . $controller) {
+                                                    $breadcrumbModuleParentName = $v['menu_name'];
 
-                                                $breadcrumbModuleLevel3Name = $vvv['menu_name'];
-                                                $breadcrumbModuleLevel3Url = $vvv['menu_url'];
+                                                    $breadcrumbModuleLevel2Name = $vv['menu_name'];
+                                                    $breadcrumbModuleLevel2Url = $vv['menu_url'];
 
-                                                break;
+                                                    $breadcrumbModuleLevel3Name = $vvv['menu_name'];
+                                                    $breadcrumbModuleLevel3Url = $vvv['menu_url'];
+
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
 
+                            }
                         }
                     }
+
+                    if ($breadcrumbModuleParentName != '') {
+                        $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="#">' . $breadcrumbModuleParentName . '</a></li>';
+                    }
+                    if ($breadcrumbModuleLevel2Name != '') {
+                        $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="' . $serverUrl . '/' . $breadcrumbModuleLevel2Url . '">' . $breadcrumbModuleLevel2Name . '</a></li>';
+                    }
+                    if ($breadcrumbModuleLevel3Name != '') {
+                        $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="' . $serverUrl . '/' . $breadcrumbModuleLevel3Url . '">' . $breadcrumbModuleLevel3Name . '</a></li>';
+                    }
+                    $breadcrumbsHtml .= '</ul><div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div></div>';
+
+                    $viewModel->menu = $menu;
+                    $viewModel->user = $user;
+                    $viewModel->moduleCurrentTitle = $moduleCurrentTitle;
+                    $viewModel->breadcrumbsHtml = $breadcrumbsHtml;
                 }
 
-                if ($breadcrumbModuleParentName != '') {
-                    $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="#">' . $breadcrumbModuleParentName . '</a></li>';
-                }
-                if ($breadcrumbModuleLevel2Name != '') {
-                    $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="' . $serverUrl . '/' . $breadcrumbModuleLevel2Url . '">' . $breadcrumbModuleLevel2Name . '</a></li>';
-                }
-                if ($breadcrumbModuleLevel3Name != '') {
-                    $breadcrumbsHtml .= '<li><i class="icon-angle-right"></i><a href="' . $serverUrl . '/' . $breadcrumbModuleLevel3Url . '">' . $breadcrumbModuleLevel3Name . '</a></li>';
-                }
-                $breadcrumbsHtml .= '</ul><div class="close-bread"><a href="#"><i class="icon-remove"></i></a></div></div>';
-
-                $viewModel->menu = $menu;
-                $viewModel->user = $user;
-                $viewModel->moduleCurrentTitle = $moduleCurrentTitle;
-                $viewModel->breadcrumbsHtml = $breadcrumbsHtml;
+                $viewModel->controller_name = $controller;
             }
+        }
 
-            $viewModel->controller_name = $controller;
-
-        });
+        );
     }
 }

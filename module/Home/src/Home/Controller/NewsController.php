@@ -25,8 +25,12 @@ class NewsController extends AbstractActionController
         $id = $data['id'];
         $newsCategory = $newsCategoryModel->fetchRow($id);
 
+        $news = $model->getListNewsByCategory($id);
+        $news->setCurrentPageNumber($this->params()->fromQuery('page', 1));
+        $news->setItemCountPerPage(6);
+
         $view->setVariables([
-            'news' => $model->getListNewsByCategory($id),
+            'news' => $news,
             'newsCategory' => $newsCategory,
             'name' => $data['name'],
             'id' => $data['id'],

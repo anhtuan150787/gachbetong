@@ -13,10 +13,26 @@ class News {
         $this->tableGateway = $tableGateway;
     }
 
-    public function fetchAll()
+    public function fetchAll($search)
     {
         $select = new Select('news');
         $select->join('news_category', 'news.news_category_id=news_category.news_category_id', array('news_category_name'), 'left');
+
+        $where = '';
+        $predicate = new  \Zend\Db\Sql\Where();
+
+        $where = $predicate->isNotNull('news_id');
+
+        if (isset($search['name'])) {
+            $where->and;
+            $select->where($predicate->like('news_title', '%' . $search['name'] . '%'));
+        }
+        if (isset($search['category'])) {
+            $where->and;
+            $select->where($predicate->equalTo('news.news_category_id', $search['category']));
+        }
+
+        $select->where($where);
         $select->order('news_id DESC');
 
         $paginatorAdapter   = new DbSelect($select, $this->tableGateway->getAdapter());

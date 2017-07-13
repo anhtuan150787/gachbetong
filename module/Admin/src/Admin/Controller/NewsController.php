@@ -11,6 +11,7 @@ namespace Admin\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
 
 use Admin\Form\News;
 
@@ -34,14 +35,34 @@ class NewsController extends AbstractActionController
     public function indexAction()
     {
         $view = new ViewModel();
+        $session = new Container();
+        $search = [];
+
+        if (!isset($_GET['page'])) {
+            $session->offsetUnset('search-news');
+        }
+
+        if ($session->offsetExists('search-news')) {
+            $search = $session->offsetGet('search-news');
+        }
+
+        if ($this->getRequest()->isPost()) {
+            $data = $this->params()->fromPost();
+            $search['name'] = ($data['name'] != '') ? $data['name'] : null;
+            $search['category'] = ($data['category'] != '') ? $data['category'] : null;
+            $session->offsetSet('search-news', $search);
+        }
 
         $model = $this->getServiceLocator()->get('NewsModel');
+        $newsCategoryModel = $this->getServiceLocator()->get('NewsCategoryModel');
 
-        $records = $model->fetchAll();
+        $records = $model->fetchAll($search);
         $records->setCurrentPageNumber($this->params()->fromQuery('page', 1));
         $records->setItemCountPerPage(20);
 
-        $view->setVariables(['records' => $records, 'status' => $this->status, 'module' => $this->module]);
+        $newsCategory = $newsCategoryModel->getNewsCategoryList();
+
+        $view->setVariables(['records' => $records, 'status' => $this->status, 'module' => $this->module, 'newsCategory' => $newsCategory, 'search' => $search]);
 
         return $view;
     }

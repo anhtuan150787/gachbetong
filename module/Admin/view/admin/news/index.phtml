@@ -1,8 +1,55 @@
 <?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
 
-<?php echo $this->partial('admin/partial/button_add', array('moduleName' => $module)); ?>
-
 <?php echo $this->partial('admin/partial/message'); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color box-search">
+            <div class="box-title">
+                <h3><i class="icon-th-list"></i> Tìm kiếm</h3>
+            </div>
+            <div class="box-content nopadding">
+                <form action="#" method="POST" class="form-horizontal form-column">
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Tiêu đề</label>
+
+                            <div class="controls">
+                                <input type="text" name="name" id="name" class="input-xlarge"
+                                       value="<?php echo $search['name']; ?>">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="span6">
+                        <div class="control-group">
+                            <label for="textfield" class="control-label">Danh mục</label>
+
+                            <div class="controls">
+                                <select name="category" class="input-xlarge">
+                                    <option value="">Tất cả</option>
+                                    <?php foreach ($newsCategory as $v) { ?>
+                                        <option <?php echo ($v['news_category_id'] == $search['category']) ? 'selected="selected"' : ''; ?>
+                                            value="<?php echo $v['news_category_id']; ?>"><?php echo $v['news_category_name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12">
+                        <div class="form-actions text-right" style="margin-top: 0; margin-bottom: 0; padding-top: 0">
+                            <button type="submit" class="btn btn-primary">Tìm</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br>
+
+<?php echo $this->partial('admin/partial/button_add', array('moduleName' => $module)); ?>
 
 <form name="" id="frm" action="<?php echo $this->url('admin/' . $module); ?>" method="post">
 <div class="col-lg-12">

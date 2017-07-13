@@ -31,7 +31,7 @@ class ProductController extends AbstractActionController
 
         $products = $model->getListProductAll();
         $products->setCurrentPageNumber($this->params()->fromQuery('page', 1));
-        $products->setItemCountPerPage(20);
+        $products->setItemCountPerPage(16);
 
         $view->setVariables([
             'products'          => $products,
@@ -57,7 +57,7 @@ class ProductController extends AbstractActionController
 
         $products = $model->getListProductByCategory($productCategoryId);
         $products->setCurrentPageNumber($this->params()->fromQuery('page', 1));
-        $products->setItemCountPerPage(20);
+        $products->setItemCountPerPage(16);
 
         $productCategory = $productCategoryModel->fetchRow($productCategoryId);
 

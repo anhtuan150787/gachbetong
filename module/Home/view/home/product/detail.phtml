@@ -1,11 +1,36 @@
+<style>
+    /* these styles are for the demo, but are not required for the plugin */
+    .zoom {
+        display: inline-block;
+        position: relative;
+    }
+
+    /* magnifying glass icon */
+    .zoom:after {
+        content: '';
+        display: block;
+        width: 33px;
+        height: 33px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .zoom img {
+        display: block;
+    }
+</style>
 <div class="col-md-12">
     <div class="panel panel-primary group-item">
         <div class="panel-heading"><h3 class="panel-title">Chi tiết sản phẩm</h3></div>
         <div class="panel-body">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                <img  width="100%" style="cursor: pointer" class="img-thumbnail" data-toggle="modal" data-target=".bs-example-modal-lg"
+
+                <img id="img-zoom"  width="100%" style="cursor: pointer" class="img-thumbnail"
                      src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=270&h=270"
+                      data-zoom-image="<?php echo $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>"
                      alt="post image">
+
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-left: 15px;">
@@ -32,10 +57,16 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <img style="width: 100%" src="<?php echo $this->basePath() . '/pictures/products/' . $product['product_picture'];?>" />
-        </div>
-    </div>
-</div>
+<!--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">-->
+<!--    <div class="modal-dialog" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <img style="width: 100%" src="--><?php //echo $this->basePath() . '/pictures/products/' . $product['product_picture'];?><!--" />-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<script>
+    $(document).ready(function () {
+        $("#img-zoom").elevateZoom();
+    });
+</script>

@@ -17,6 +17,7 @@
     ?>
 
     <?php echo $this->headScript()
+        ->prependFile($this->basePath('frontend/js/jquery.elevatezoom.js'))
         ->prependFile($this->basePath('frontend/js/jquery-validation/dist/jquery.validate.js'))
         ->prependFile($this->basePath('frontend/js/bootstrap.min.js'))
         ->prependFile($this->basePath('frontend/js/jquery-1.10.2.js'));
@@ -133,32 +134,28 @@
     </div>
     <div class="row">
         <div class="col-md-3">
+
+            <?php foreach ($navigationLefts as $v) : ?>
+            <?php if ($v['navigation_parent'] == 0) : ?>
+                    <?php $sub = false;
+                    $s = ''; ?>
+                    <?php
+                    foreach ($navigationLefts as $vv) {
+                        if ($vv['navigation_parent'] == $v['navigation_id']) {
+                            $sub = true;
+                            $s .= '<a href="' . (($vv['navigation_url_select'] == '') ? $vv['navigation_url'] : ($this->serverUrl() . '/' . $this->escapeHtml($vv['navigation_url_select']))) .'" class="list-group-item">' . $this->escapeHtml($vv['navigation_name']) .'</a>';
+                        }
+                    }
+                    ?>
             <div class="list-group">
                 <a href="#" class="list-group-item active">
-                    Danh mục sản phẩm
+                    <?php echo $this->escapeHtml($v['navigation_name']);?>
                 </a>
-                <?php foreach($productCategorys as $v) {?>
-                <a href="<?php echo $this->url('home-product-category', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_category_name'])), 'id' => $v['product_category_id']));?>" class="list-group-item"><?php echo $this->escapeHtml($v['product_category_name']);?></a>
-               <?php }?>
+                    <?php if ($sub == true) { echo $s; };?>
             </div>
-            <!-- /.div -->
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    Sản phẩm mới
-                </a>
-                <?php foreach($productNews as $v) {?>
-                <a href="<?php echo $this->url('home-product-detail', array('name' => $this->functions()->formatTitle($this->escapeHtml($v['product_name'])), 'id' => $v['product_id'])); ?>" class="list-group-item"><?php echo $this->escapeHtml($v['product_name']);?></a>
-                <?php }?>
-            </div>
-            <!-- /.div -->
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    Tin tức mới
-                </a>
-                <?php foreach($newsNew as $v) {?>
-                    <a href="<?php echo $this->url('home-news-detail', array('name' => $this->functions()->formatTitle($v['news_title']), 'id' => $v['news_id']));?>" class="list-group-item"><?php echo $this->escapeHtml($v['news_title']);?></a>
-                <?php }?>
-            </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
+
 
         </div>
         <div class="col-md-9" style="padding: 0">

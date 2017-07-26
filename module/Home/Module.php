@@ -164,26 +164,30 @@ class Module
                 $viewModel->website = $websiteResult->current();
 
                 //Load menu top
-                $navigations = $this->getNavigationList($dbAdapter);
+                $navigations = $this->getNavigationList(12, $dbAdapter);
                 $viewModel->navigations = $navigations;
 
+                //Load menu left
+                $navigationLefts = $this->getNavigationList(13, $dbAdapter);
+                $viewModel->navigationLefts = $navigationLefts;
+
                 //Load Danh muc san pham
-                $sql = 'SELECT * FROM product_category WHERE product_category_status = 1 ORDER BY product_category_id ASC';
-                $statement = $dbAdapter->query($sql);
-                $result = $statement->execute();
-                $viewModel->productCategorys = $result;
+//                $sql = 'SELECT * FROM product_category WHERE product_category_status = 1 ORDER BY product_category_id ASC';
+//                $statement = $dbAdapter->query($sql);
+//                $result = $statement->execute();
+//                $viewModel->productCategorys = $result;
 
                 //Load san pham moi
-                $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_new = 1  ORDER BY product_id DESC LIMIT 6';
-                $statement = $dbAdapter->query($sql);
-                $result = $statement->execute();
-                $viewModel->productNews = $result;
+//                $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_new = 1  ORDER BY product_id DESC LIMIT 6';
+//                $statement = $dbAdapter->query($sql);
+//                $result = $statement->execute();
+//                $viewModel->productNews = $result;
 
                 //Load tin tuc moi
-                $sql = 'SELECT * FROM news WHERE news_status = 1  ORDER BY news_id DESC LIMIT 6';
-                $statement = $dbAdapter->query($sql);
-                $result = $statement->execute();
-                $viewModel->newsNew = $result;
+//                $sql = 'SELECT * FROM news WHERE news_status = 1  ORDER BY news_id DESC LIMIT 6';
+//                $statement = $dbAdapter->query($sql);
+//                $result = $statement->execute();
+//                $viewModel->newsNew = $result;
 
                 //Load template
                 $statement = $dbAdapter->query('SELECT * FROM template');
@@ -204,9 +208,9 @@ class Module
         });
     }
 
-    public function getNavigationList($dbAdapter, $parent = 0, $level = -1, $data = array())
+    public function getNavigationList($group_navigation_id, $dbAdapter, $parent = 0, $level = -1, $data = array())
     {
-        $sql = 'SELECT * FROM navigation WHERE group_navigation_id=12 AND navigation_parent = ' . $parent . ' AND navigation_status = 1 ORDER BY navigation_position ASC';
+        $sql = 'SELECT * FROM navigation WHERE group_navigation_id=' . $group_navigation_id . ' AND navigation_parent = ' . $parent . ' AND navigation_status = 1 ORDER BY navigation_position ASC';
         $statement = $dbAdapter->query($sql);
         $result = $statement->execute();
 
@@ -218,13 +222,13 @@ class Module
             $data[$navigation_id] = (array) $row;
             $data[$navigation_id]['navigation_level'] = $level;
 
-            $sql = 'SELECT * FROM navigation WHERE group_navigation_id=12 AND navigation_parent = ' . $navigation_id . ' AND navigation_status = 1 ORDER BY navigation_position ASC';
+            $sql = 'SELECT * FROM navigation WHERE group_navigation_id=' . $group_navigation_id . ' AND navigation_parent = ' . $navigation_id . ' AND navigation_status = 1 ORDER BY navigation_position ASC';
 
             $statement = $dbAdapter->query($sql);
             $result = $statement->execute();
 
             if ($result->count() > 0) {
-                $data = $this->getNavigationList($dbAdapter, $navigation_id, $level, $data);
+                $data = $this->getNavigationList($group_navigation_id, $dbAdapter, $navigation_id, $level, $data);
             }
         }
         return $data;

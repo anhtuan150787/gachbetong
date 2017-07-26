@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 18, 2017 at 09:34 PM
--- Server version: 5.5.55-0ubuntu0.14.04.1
--- PHP Version: 5.6.30-12~ubuntu14.04.1+deb.sury.org+1
+-- Host: 127.0.0.1
+-- Generation Time: Jul 26, 2017 at 03:42 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `gachbetong`
@@ -26,16 +28,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `acl`
 --
 
-CREATE TABLE IF NOT EXISTS `acl` (
-  `acl_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `acl` (
+  `acl_id` int(11) NOT NULL,
   `acl_module` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `acl_controller` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `acl_action` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `acl_status` int(11) NOT NULL,
   `acl_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `acl_parent` int(11) NOT NULL,
-  PRIMARY KEY (`acl_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=124 ;
+  `acl_parent` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `acl`
@@ -133,16 +134,15 @@ INSERT INTO `acl` (`acl_id`, `acl_module`, `acl_controller`, `acl_action`, `acl_
 -- Table structure for table `admin`
 --
 
-CREATE TABLE IF NOT EXISTS `admin` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL,
   `admin_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `admin_password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `admin_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `admin_picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `group_admin_id` int(11) NOT NULL,
-  `admin_status` int(11) NOT NULL,
-  PRIMARY KEY (`admin_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+  `admin_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `admin`
@@ -157,17 +157,16 @@ INSERT INTO `admin` (`admin_id`, `admin_email`, `admin_password`, `admin_name`, 
 -- Table structure for table `build`
 --
 
-CREATE TABLE IF NOT EXISTS `build` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `build` (
+  `id` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `component` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `folder` text COLLATE utf8_unicode_ci NOT NULL,
   `subversion` text COLLATE utf8_unicode_ci NOT NULL,
   `status` int(11) NOT NULL,
   `note` text COLLATE utf8_unicode_ci NOT NULL,
-  `date_created` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=105 ;
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `build`
@@ -271,15 +270,14 @@ INSERT INTO `build` (`id`, `name`, `component`, `folder`, `subversion`, `status`
 -- Table structure for table `contact`
 --
 
-CREATE TABLE IF NOT EXISTS `contact` (
-  `contact_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `contact` (
+  `contact_id` int(11) NOT NULL,
   `contact_fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `contact_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `contact_phone` int(11) NOT NULL,
   `contact_content` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `contact_date` datetime NOT NULL,
-  PRIMARY KEY (`contact_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+  `contact_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contact`
@@ -296,12 +294,10 @@ INSERT INTO `contact` (`contact_id`, `contact_fullname`, `contact_email`, `conta
 -- Table structure for table `email_customer`
 --
 
-CREATE TABLE IF NOT EXISTS `email_customer` (
-  `email_customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `email_customer_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`email_customer_id`),
-  UNIQUE KEY `email_customer_name` (`email_customer_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+CREATE TABLE `email_customer` (
+  `email_customer_id` int(11) NOT NULL,
+  `email_customer_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `email_customer`
@@ -316,13 +312,12 @@ INSERT INTO `email_customer` (`email_customer_id`, `email_customer_name`) VALUES
 -- Table structure for table `group_acl`
 --
 
-CREATE TABLE IF NOT EXISTS `group_acl` (
-  `group_acl_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_acl` (
+  `group_acl_id` int(11) NOT NULL,
   `acl_id` int(11) NOT NULL,
   `group_admin_id` int(11) NOT NULL,
-  `group_acl_status` int(11) NOT NULL,
-  PRIMARY KEY (`group_acl_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=184 ;
+  `group_acl_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_acl`
@@ -455,12 +450,11 @@ INSERT INTO `group_acl` (`group_acl_id`, `acl_id`, `group_admin_id`, `group_acl_
 -- Table structure for table `group_admin`
 --
 
-CREATE TABLE IF NOT EXISTS `group_admin` (
-  `group_admin_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_admin` (
+  `group_admin_id` int(11) NOT NULL,
   `group_admin_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `group_admin_status` int(1) NOT NULL,
-  PRIMARY KEY (`group_admin_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+  `group_admin_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_admin`
@@ -475,13 +469,12 @@ INSERT INTO `group_admin` (`group_admin_id`, `group_admin_name`, `group_admin_st
 -- Table structure for table `group_menu`
 --
 
-CREATE TABLE IF NOT EXISTS `group_menu` (
-  `group_menu_id` bigint(20) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_menu` (
+  `group_menu_id` bigint(20) NOT NULL,
   `group_admin_id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
-  `group_menu_status` int(11) NOT NULL,
-  PRIMARY KEY (`group_menu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
+  `group_menu_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_menu`
@@ -527,19 +520,19 @@ INSERT INTO `group_menu` (`group_menu_id`, `group_admin_id`, `menu_id`, `group_m
 -- Table structure for table `group_navigation`
 --
 
-CREATE TABLE IF NOT EXISTS `group_navigation` (
-  `group_navigation_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_navigation` (
+  `group_navigation_id` int(11) NOT NULL,
   `group_navigation_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `group_navigation_status` int(1) NOT NULL,
-  PRIMARY KEY (`group_navigation_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
+  `group_navigation_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_navigation`
 --
 
 INSERT INTO `group_navigation` (`group_navigation_id`, `group_navigation_name`, `group_navigation_status`) VALUES
-(12, 'Menu top', 1);
+(12, 'Menu top', 1),
+(13, 'Menu left', 1);
 
 -- --------------------------------------------------------
 
@@ -547,12 +540,11 @@ INSERT INTO `group_navigation` (`group_navigation_id`, `group_navigation_name`, 
 -- Table structure for table `group_template`
 --
 
-CREATE TABLE IF NOT EXISTS `group_template` (
-  `group_template_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `group_template` (
+  `group_template_id` int(11) NOT NULL,
   `group_template_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `group_template_status` int(1) NOT NULL,
-  PRIMARY KEY (`group_template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+  `group_template_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `group_template`
@@ -570,14 +562,13 @@ INSERT INTO `group_template` (`group_template_id`, `group_template_name`, `group
 -- Table structure for table `menu`
 --
 
-CREATE TABLE IF NOT EXISTS `menu` (
-  `menu_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `menu` (
+  `menu_id` int(11) NOT NULL,
   `menu_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `menu_parent` int(11) DEFAULT '0',
   `menu_status` int(11) NOT NULL,
-  `menu_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=38 ;
+  `menu_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `menu`
@@ -615,17 +606,16 @@ INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_parent`, `menu_status`, `menu_
 -- Table structure for table `navigation`
 --
 
-CREATE TABLE IF NOT EXISTS `navigation` (
-  `navigation_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `navigation` (
+  `navigation_id` int(11) NOT NULL,
   `navigation_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `navigation_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `navigation_status` int(1) NOT NULL,
   `navigation_parent` int(11) NOT NULL,
   `navigation_position` int(11) NOT NULL,
   `navigation_url_select` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `group_navigation_id` int(11) NOT NULL,
-  PRIMARY KEY (`navigation_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+  `group_navigation_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `navigation`
@@ -636,7 +626,19 @@ INSERT INTO `navigation` (`navigation_id`, `navigation_name`, `navigation_url`, 
 (25, 'Giới thiệu', '', 1, 0, 2, 'gioi-thieu-nc-2', 12),
 (26, 'Sản phẩm', 'san-pham', 1, 0, 3, '', 12),
 (27, 'Tin tức', '', 1, 0, 4, 'tin-tuc-nc-1', 12),
-(28, 'Liên hệ', 'lien-he', 1, 0, 5, '', 12);
+(28, 'Liên hệ', 'lien-he', 1, 0, 5, '', 12),
+(29, 'Danh mục sản phẩm', '', 1, 0, 1, '', 13),
+(30, 'Gạch nội thất', '', 1, 29, 1, 'gach-noi-that-pc-1', 13),
+(31, 'Gạch ngoại thất', '', 1, 29, 2, 'gach-ngoai-that-pc-2', 13),
+(32, 'Gạch Block', '', 1, 29, 3, 'gach-block-pc-3', 13),
+(33, 'Gạch Tezzarro', '', 1, 29, 4, 'gach-tezzarro-pc-4', 13),
+(34, 'Gạch ốp Taluy', '', 1, 29, 5, 'gach-op-taluy-pc-5', 13),
+(35, 'Gạch bờ kè', '', 1, 29, 6, 'gach-bo-ke-pc-6', 13),
+(36, 'Gạch không nung', '', 1, 29, 7, 'gach-xay-khong-nung-pc-7', 13),
+(38, 'Giới thiệu', '', 1, 0, 2, '', 13),
+(39, 'Năng lực kinh doanh', '', 1, 38, 1, 'nang-luc-kinh-doanh-pham-vi-hoat-dong-n-7', 13),
+(40, 'Thư ngỏ', '', 1, 38, 2, 'thu-ngo-n-6', 13),
+(41, 'Liên hệ', 'lien-he', 1, 38, 3, '', 13);
 
 -- --------------------------------------------------------
 
@@ -644,29 +646,28 @@ INSERT INTO `navigation` (`navigation_id`, `navigation_name`, `navigation_url`, 
 -- Table structure for table `news`
 --
 
-CREATE TABLE IF NOT EXISTS `news` (
-  `news_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `news` (
+  `news_id` int(11) NOT NULL,
   `news_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `news_quote` text COLLATE utf8_unicode_ci,
   `news_content` longtext COLLATE utf8_unicode_ci,
   `news_status` int(11) NOT NULL,
   `news_picture` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `news_category_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+  `news_category_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`news_id`, `news_title`, `news_quote`, `news_content`, `news_status`, `news_picture`, `news_category_id`) VALUES
-(1, 'Không tìm thấy chất kích thích trong 19 trâu chọi Đồ Sơn', '<p>19/31 tr&acirc;u chọi ở Đồ Sơn được kết luận &acirc;m t&iacute;nh với chất k&iacute;ch th&iacute;ch, tăng lực, ri&ecirc;ng tr&acirc;u h&uacute;c chết chủ chưa c&oacute; kết quả x&eacute;t nghiệm.</p>', '<p class="Normal" style="text-align: center;"><img src="/pictures/contents/trau-choi-9193-1499575091.jpg" alt="" width="500" height="289" /></p>\r\n<p class="Normal">Ng&agrave;y 9/7, một l&atilde;nh đạo UBND quận Đồ Sơn (Hải Ph&ograve;ng) cho biết 19 trong số 31 con tr&acirc;u tham gia v&ograve;ng loại Lễ hội chọi tr&acirc;u Đồ Sơn 2017 đ&atilde; c&oacute; kết quả &acirc;m t&iacute;nh với chất k&iacute;ch th&iacute;ch, tăng lực.</p>\r\n<p class="Normal">Ri&ecirc;ng mẫu phẩm tr&acirc;u số 18 - con tr&acirc;u h&uacute;c chết chủ của m&igrave;nh - đang chờ kết quả từ Bộ C&ocirc;ng an.</p>\r\n<p class="Normal">Trong số 31 tr&acirc;u thi đấu v&ograve;ng loại, chỉ 19 con được lấy mẫu nước tiểu v&agrave; m&aacute;u do số c&ograve;n lại thua trận bị giết thịt gần hết, ngo&agrave;i ra số &iacute;t chủ tr&acirc;u kh&ocirc;ng hợp t&aacute;c lấy mẫu với l&yacute; do t&acirc;m linh.</p>\r\n<p class="Normal">Trước đ&oacute; s&aacute;ng 1/7, tại&nbsp;v&ograve;ng đấu loại Lễ hội chọi tr&acirc;u quận Đồ Sơn, hơn 30 tr&acirc;u tham gia 16 trận đấu. Đến trận 14, tr&acirc;u số 18 h&uacute;c chủ l&agrave; &ocirc;ng Đinh Xu&acirc;n Hướng ngay trong sới chọi. &Ocirc;ng Hướng tử vong sau nhiều giờ cấp cứu.</p>\r\n<p class="Normal">UBND TP Hải Ph&ograve;ng đ&atilde; chỉ đạo dừng lễ hội chọi tr&acirc;u 2017; x&eacute;t nghiệm chất k&iacute;ch th&iacute;ch với c&aacute;c con tr&acirc;u.&nbsp;Ng&agrave;y 4/7,&nbsp;Ban tổ chức lễ hội đ&atilde; họp b&agrave;n, cho ph&eacute;p chủ tr&acirc;u tự lấy mẫu nước tiểu hoặc mẫu m&aacute;u của tr&acirc;u nh&agrave; rồi gửi l&ecirc;n Trung t&acirc;m văn h&oacute;a quận Đồ Sơn để chuyển tiếp C&ocirc;ng an Hải Ph&ograve;ng.</p>\r\n<p class="Normal">C&aacute;ch thức n&agrave;y được một số chuy&ecirc;n gia nhận x&eacute;t thiếu kh&aacute;ch quan v&agrave; ch&iacute;nh x&aacute;c C&oacute; loại chất k&iacute;ch th&iacute;ch chỉ t&aacute;c dụng trong một đến 5 tiếng. Nếu để 3-4 ng&agrave;y sau mới lấy mẫu, chất k&iacute;ch th&iacute;ch đ&atilde; đủ thời gian giải ph&oacute;ng hết khỏi cơ thể người hoặc động vật.</p>', 1, 'news_1499591580_trau-choi-9193-1499575091.jpg', 1),
-(2, 'Doanh nghiệp quân đội đang kinh doanh những lĩnh vực gì', '<p>D&ugrave; số lượng kh&ocirc;ng qu&aacute; nhiều nhưng c&aacute;c doanh nghiệp quốc ph&ograve;ng đang giữ vị thế lớn ở nhiều lĩnh vực.</p>', '<p class="Normal" style="text-align: center;"><img src="/pictures/contents/22a4e52c-ac31-432e-bf77-0c670f-1558-2415-1499476232.jpg" alt="" width="500" height="351" /></p>\r\n<p class="Normal">Bộ Quốc ph&ograve;ng hiện l&agrave; bộ trực tiếp quản l&yacute; nhiều tập đo&agrave;n, tổng c&ocirc;ng ty với hơn 20 doanh nghiệp trực thuộc. Do đặc th&ugrave; hoạt động, c&aacute;c tập đo&agrave;n, tổng c&ocirc;ng ty thuộc Bộ Quốc ph&ograve;ng hoạt động tr&ecirc;n rất nhiều lĩnh vực kh&aacute;c nhau, từ x&acirc;y dựng - bất động sản, viễn th&ocirc;ng, t&agrave;i ch&iacute;nh, logistics, cơ kh&iacute;, xăng dầu, cho tới n&ocirc;ng nghiệp.</p>\r\n<p class="Normal">Trong đ&oacute;, nhiều doanh nghiệp hoạt động đang trở th&agrave;nh những doanh nghiệp top đầu trong lĩnh vực kinh doanh của m&igrave;nh như Viettel, Ng&acirc;n h&agrave;ng Qu&acirc;n đội, Tổng c&ocirc;ng ty T&acirc;n Cảng S&agrave;i G&ograve;n, Tổng c&ocirc;ng ty Xăng dầu Qu&acirc;n đội hay Tổng c&ocirc;ng ty Đ&ocirc;ng Bắc...</p>\r\n<p class="Normal">Đứng đầu trong danh s&aacute;ch n&agrave;y l&agrave; Tập đo&agrave;n Viễn th&ocirc;ng Qu&acirc;n đội (Viettel). D&ugrave; chỉ l&agrave; doanh nghiệp duy nhất của Bộ Quốc ph&ograve;ng hoạt động trong lĩnh vực viễn th&ocirc;ng nhưng Viettel lại l&agrave; đơn vị đang giữ vị thế lớn nhất tr&ecirc;n thị trường v&agrave; tạo sự c&aacute;ch biệt lớn với hai nh&agrave; mạng đứng sau l&agrave; VinaPhone v&agrave; Mobifone.</p>\r\n<p class="Normal">Năm 2016, Viettel đạt hơn 226.000 tỷ đồng doanh thu, xấp xỉ 10 tỷ USD v&agrave; hơn 43.000 tỷ đồng lợi nhuận trước thuế. Tổng doanh thu của Viettel cũng gấp gần 3 lần doanh thu của VinaPhone v&agrave; Mobifone cộng lại, đồng thời l&agrave; đơn vị đang đ&oacute;ng g&oacute;p v&agrave;o ng&acirc;n s&aacute;ch lớn nhất trong số c&aacute;c doanh nghiệp quốc ph&ograve;ng, đạt tr&ecirc;n 40.000 tỷ đồng.</p>', 1, 'news_1499591668_22a4e52c-ac31-432e-bf77-0c670f-1558-2415-1499476232.jpg', 1),
-(3, 'VTV và SCIC xin rút khỏi dự án tháp truyền hình cao nhất thế giới', '<p>VTV xin tho&aacute;i vốn để tập trung v&agrave;o ph&aacute;t triển truyền h&igrave;nh, trong khi SCIC cho rằng dự &aacute;n kh&ocirc;ng nằm trong danh mục Nh&agrave; nước cần chi phối.&nbsp;</p>', '<div class="fck_detail width_common block_ads_connect">\r\n<p class="Normal">Bộ T&agrave;i ch&iacute;nh vừa c&oacute; c&ocirc;ng văn gửi Văn ph&ograve;ng Ch&iacute;nh phủ b&aacute;o c&aacute;o về dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam v&agrave; phương &aacute;n t&aacute;i cơ cấu vốn đầu tư tại C&ocirc;ng ty cổ phần Th&aacute;p truyền h&igrave;nh Việt Nam.</p>\r\n<p class="Normal">Cơ quan n&agrave;y cho biết, từ cuối th&aacute;ng 5, Đ&agrave;i truyền h&igrave;nh Việt Nam (VTV) đ&atilde; c&oacute; c&ocirc;ng văn đề nghị tho&aacute;i to&agrave;n bộ hoặc phần lớn vốn tại c&ocirc;ng ty tr&ecirc;n. Điều đ&oacute; cũng đồng nghĩa VTV sẽ kh&ocirc;ng tham gia đầu tư dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam - một trong những th&aacute;p theo dự kiến ban đầu sẽ thuộc loại cao nhất thế giới. L&yacute; do của đơn vị n&agrave;y l&agrave; hiện cần tập trung ưu ti&ecirc;n d&agrave;nh nguồn lực đầu tư cho sản xuất chương tr&igrave;nh v&agrave; ph&aacute;t triển kinh doanh trong lĩnh vực truyền h&igrave;nh.&nbsp;</p>\r\n<p class="Normal">Tại c&ocirc;ng văn n&ecirc;u tr&ecirc;n, VTV cũng cho biết Tổng c&ocirc;ng ty Đầu tư v&agrave; Kinh doanh vốn Nh&agrave; nước (SCIC) chủ trương đưa C&ocirc;ng ty cổ phần Th&aacute;p truyền h&igrave;nh Việt Nam v&agrave;o danh mục điều chỉnh triển khai tho&aacute;i vốn (r&uacute;t 100% vốn khỏi c&ocirc;ng ty) do dự &aacute;n kh&ocirc;ng nằm trong danh mục hiện hữu m&agrave; Nh&agrave; nước cần chi phối hoặc đầu tư g&oacute;p vốn trong định hướng ph&aacute;t triển của SCIC.&nbsp;Mặt kh&aacute;c, theo b&aacute;o c&aacute;o của VTV th&igrave; hiện tại dự &aacute;n chưa được Thủ tướng ph&ecirc; duyệt, chưa triển khai thực hiện.</p>\r\n<p class="Normal">Do vậy, Bộ T&agrave;i ch&iacute;nh đề nghị Văn ph&ograve;ng Ch&iacute;nh phủ y&ecirc;u cầu chủ đầu tư dự &aacute;n b&aacute;o c&aacute;o lại Thủ tướng về sự cần thiết phải triển khai dự &aacute;n, mục ti&ecirc;u v&agrave; năng lực thực hiện dự &aacute;n của chủ đầu tư. Trường hợp VTV v&agrave; SCIC kh&ocirc;ng tham gia dự &aacute;n đồng nghĩa với việc Nh&agrave; nước kh&ocirc;ng đầu tư vốn v&agrave;o dự &aacute;n.</p>\r\n<p class="Normal">Bộ T&agrave;i ch&iacute;nh cũng đề nghị VTV v&agrave; SCIC y&ecirc;u cầu c&ocirc;ng ty tổ chức Đại hội đồng cổ đ&ocirc;ng để x&aacute;c định lại sự cần thiết, mục ti&ecirc;u của dự &aacute;n, b&aacute;o c&aacute;o Thủ tướng xem x&eacute;t quyết định.&nbsp;</p>\r\n<p class="Normal">Trước đ&oacute;, dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam được Thủ tướng đồng &yacute; về chủ trương nghi&ecirc;n cứu, hợp t&aacute;c đầu tư từ đầu năm 2015. C&ocirc;ng tr&igrave;nh dự kiến được x&acirc;y dựng tr&ecirc;n khu đất hơn 14 ha tại khu trung t&acirc;m đ&ocirc; thị T&acirc;y Hồ T&acirc;y. Đ&acirc;y được đ&aacute;nh gi&aacute; l&agrave; dự &aacute;n tầm cỡ quốc tế, c&oacute; t&iacute;nh chất đặc th&ugrave; n&ecirc;n cần c&oacute; cơ chế đặc biệt do Thủ tướng quyết định về vốn, h&igrave;nh thức giao đất v&agrave; phương thức chọn nh&agrave; thầu. Dự &aacute;n cũng được &aacute;p dụng ch&iacute;nh s&aacute;ch ưu đ&atilde;i cao nhất theo quy định của ph&aacute;p luật.</p>\r\n<p class="Normal">Tập đo&agrave;n BRG được lựa chọn sau khi Thủ tướng cho ph&eacute;p Đ&agrave;i Truyền h&igrave;nh Việt Nam chọn th&ecirc;m đối t&aacute;c l&agrave; doanh nghiệp tư nh&acirc;n c&oacute; năng lực t&agrave;i ch&iacute;nh v&agrave; kinh doanh, g&oacute;p vốn c&ugrave;ng tham gia dự &aacute;n.</p>\r\n<p class="Normal">Khi đ&oacute;, l&atilde;nh đạo VTV cũng cho biết độ cao của th&aacute;p sẽ l&agrave; 636m, hơn th&aacute;p cao nhất ch&acirc;u &Aacute; hiện nay l&agrave; Sky Tree ở Tokyo - Nhật Bản (634m) v&agrave; th&aacute;p truyền h&igrave;nh Quảng Ch&acirc;u - Trung Quốc (600m) v&agrave; sẽ thuộc loại cao nhất trong số th&aacute;p truyền h&igrave;nh đ&atilde; được x&acirc;y dựng tr&ecirc;n thế giới.&nbsp;</p>\r\n<p class="Normal">C&ocirc;ng ty Cổ phần Th&aacute;p truyền h&igrave;nh được cấp giấy chứng nhận đăng k&yacute; v&agrave;o cuối năm 2015 với số vốn điều lệ 600 tỷ đồng. Theo b&aacute;o c&aacute;o của VTV, đến nay 3 đơn vị g&oacute;p vốn mới g&oacute;p được 150 tỷ đồng.&nbsp;</p>\r\n</div>\r\n<div class="author_mail width_common">&nbsp;</div>', 1, 'news_1499591844_thaptruyenhinh-1499488361_180x108.jpg', 1),
-(4, 'Đông Nam Á sắp soán ngôi Trung Quốc về hút đầu tư hậu cần', '<p>Sự b&ugrave;ng nổ thương mại điện tử c&ugrave;ng chi ph&iacute; sản xuất thấp đang khiến nhiều nh&agrave; sản xuất dịch chuyển từ Trung Quốc sang Đ&ocirc;ng Nam &Aacute;.</p>', '<p class="Normal">Trưởng bộ phận Nghi&ecirc;n cứu Thị trường vốn Đ&ocirc;ng Nam &Aacute; Jones Lang LaSalle (JLL), Regina Lim cho biết điểm đến của ng&agrave;nh hậu cần đang c&oacute; sự dịch chuyển mạnh mẽ từ Trung Quốc sang Đ&ocirc;ng Nam &Aacute;. Nguy&ecirc;n nh&acirc;n chủ yếu l&agrave; b&agrave;i to&aacute;n chi ph&iacute; cạnh tranh.</p>\r\n<p class="Normal">Mức lương của Trung Quốc hiện cao hơn 3-4 lần so với trước đ&acirc;y trong khi mức lương nội địa tối thiểu ở một số nước Đ&ocirc;ng Nam &Aacute; lại rẻ hơn. Điều n&agrave;y đang thu h&uacute;t c&aacute;c nh&agrave; sản xuất thiết lập nh&agrave; m&aacute;y tại đ&acirc;y nhằm phục vụ cho số đ&ocirc;ng người ti&ecirc;u d&ugrave;ng ng&agrave;y c&agrave;ng tăng l&ecirc;n. Sản lượng sản xuất của Indonesia c&oacute; thể tăng l&ecirc;n 6,5% trong nửa thập ni&ecirc;n tới, so với 5% hiện tại. C&ograve;n Việt Nam lại l&agrave; quốc gia nổi bật với lực lượng lao động l&agrave;nh nghề v&agrave; chi ph&iacute; tương đối thấp.</p>\r\n<p class="Normal" style="text-align: center;"><img src="/pictures/contents/a-tb-bds-hau-can-kcn-4782-1499432648.jpg" alt="" width="500" height="300" /></p>\r\n<p class="Normal">Theo chuy&ecirc;n gia JLL, quy m&ocirc; thị trường của Đ&ocirc;ng Nam &Aacute; v&agrave; tiềm năng ng&agrave;nh ti&ecirc;u d&ugrave;ng tại đ&acirc;y đang cực kỳ hấp dẫn. Đến năm 2050, Hiệp hội c&aacute;c Quốc gia Đ&ocirc;ng Nam &Aacute; (ASEAN) sẽ c&oacute; quy m&ocirc; tương đương với ch&acirc;u &Acirc;u, trở th&agrave;nh khu kinh tế lớn thứ tư thế giới, sau Trung Quốc, Ấn Độ v&agrave; Mỹ. C&aacute;c nước Đ&ocirc;ng Nam &Aacute; sẽ trở th&agrave;nh c&aacute;c cường quốc; Indonesia được dự b&aacute;o l&agrave; nền kinh tế lớn thứ tư tr&ecirc;n thế giới, trong khi Philippines v&agrave; Việt Nam đứng thứ 19 v&agrave; 20.</p>\r\n<p class="Normal">Nghi&ecirc;n cứu của Google v&agrave; Temasek nhấn mạnh th&ecirc;m tiềm năng của khu vực, dự b&aacute;o rằng thị trường thương mại điện tử c&oacute; thể tăng trưởng từ 5,5 tỷ USD năm 2015 l&ecirc;n 88 tỷ USD năm 2025, trong đ&oacute; Indonesia chiếm 52% thị trường.</p>\r\n<p class="Normal">Nh&acirc;n khẩu học trẻ trong khu vực sẽ sớm th&uacute;c đẩy thời đại của thương mại điện tử. Giới trẻ ở Đ&ocirc;ng Nam &Aacute; rất th&agrave;nh thạo trong việc sử dụng c&aacute;c phương tiện truyền th&ocirc;ng x&atilde; hội v&agrave; họ đang sử dụng c&ocirc;ng nghệ để kh&aacute;m ph&aacute; nhiều hơn. Người ti&ecirc;u d&ugrave;ng dần bỏ qua m&aacute;y t&iacute;nh v&agrave; đang sử dụng điện thoại th&ocirc;ng minh để mua sắm. 20-30% người ở Đ&ocirc;ng Nam &Aacute; đ&atilde; mua sắm trực tuyến qua internet mỗi th&aacute;ng, tương đương Mỹ hoặc Anh.</p>\r\n<p class="Normal">Thị trường tiềm năng n&agrave;y đ&atilde; nằm trong tầm ngắm của c&aacute;c &ocirc;ng lớn thương mại điện tử. Alibaba vừa gia tăng cổ phần của m&igrave;nh trong trang thương mại điện tử lớn nhất khu vực &ndash; Lazada Group, đưa tổng số cổ phần l&ecirc;n 95% v&agrave; ra mắt nền tảng Tmall đang thịnh h&agrave;nh ở Malaysia v&agrave; Singapore. Tập đo&agrave;n n&agrave;y cũng đang thiết lập c&aacute;c trung t&acirc;m hậu cần ở Malaysia v&agrave; Th&aacute;i Lan.</p>\r\n<p class="Normal">Th&aacute;ng trước, Reebonz - thương hiệu thương mại điện tử cao cấp đ&atilde; khai trương một Trung t&acirc;m Thương mại Điện tử c&oacute; diện t&iacute;ch 18.580 m2 tại Singapore, trong khi Singpost đ&atilde; giới thiệu một trụ sở hậu cần thương mại điện tử trị gi&aacute; 131 triệu USD tại C&ocirc;ng vi&ecirc;n Logistics Tampines ở Singapore.</p>\r\n<p class="Normal" style="text-align: center;">&nbsp;</p>', 1, 'news_1499592065_a-tb-bds-hau-can-kcn-4782-1499432648.jpg', 1),
-(5, 'Sản lượng Ôtô Trường Hải giảm hơn 5.200 xe', '<p>Thị trường &ocirc;t&ocirc; giảm nhẹ trong nửa đầu năm 2017 v&agrave; Trường Hải l&agrave; nh&agrave; sản xuất c&oacute; số giảm tuyệt đối lớn nhất, hơn 5.200 xe.</p>', '<p class="Normal">Theo số liệu của Hiệp hội c&aacute;c nh&agrave; sản xuất &ocirc;t&ocirc; Việt Nam (VAMA), nh&agrave; sản xuất Trường Hải b&aacute;n được hơn 47.800 xe trong 6 th&aacute;ng đầu năm. So với c&ugrave;ng kỳ 2016, doanh số giảm 10%, tương đương với hơn 5.200 xe. Đ&acirc;y l&agrave; mức giảm cao nhất trong c&aacute;c nh&agrave; sản xuất &ocirc;t&ocirc; nửa đầu năm nay do Trường Hải cũng l&agrave; đơn vị c&oacute; sản lượng đứng đầu thị trường.</p>\r\n<p class="Normal">Tất cả c&aacute;c thương hiệu m&agrave; Trường Hải lắp r&aacute;p đều ghi nhận doanh số giảm. Trong đ&oacute;, Kia giảm 12%, tương đương hơn 1.600 xe; Mazda giảm 8%, tương đương gần 1.200 xe. Ri&ecirc;ng ti&ecirc;u thụ của Peugeot giảm đến 61%, tương đương hơn 200 xe.</p>\r\n<p class="Normal">T&igrave;nh h&igrave;nh kinh doanh của Trường Hải suy giảm diễn ra trong bối cảnh thị trường &ocirc;t&ocirc; Việt Nam nửa đầu năm kh&ocirc;ng c&oacute; tăng trưởng, thậm ch&iacute; l&agrave; giảm nhẹ. VAMA cho hay, ti&ecirc;u thụ xe to&agrave;n thị trường s&aacute;u th&aacute;ng qua đạt khoảng 134.200 chiếc, giảm 1% so với c&ugrave;ng kỳ năm ngo&aacute;i.</p>\r\n<p class="Normal">&nbsp;</p>\r\n<p class="Normal" style="text-align: center;"><img src="/pictures/contents/thaco-2387-1499402334.jpg" alt="" width="500" height="302" /></p>\r\n<p class="Normal">Đ&acirc;y kh&ocirc;ng phải l&agrave; kết quả bất ngờ khi thị trường li&ecirc;n tục ghi nhận những dấu hiệu kh&ocirc;ng mấy s&aacute;ng sủa trong v&agrave;i th&aacute;ng gần đ&acirc;y. Hồi th&aacute;ng 4/2016, sản lượng xe b&aacute;n ra bỗng dưng lao dốc kỳ lạ, giảm đến 15% so với th&aacute;ng 4/2016. Th&aacute;ng 6 vừa rồi, ti&ecirc;u thụ &ocirc;t&ocirc; c&oacute; phần ổn định hơn nhưng cũng giảm 0,2% so với th&aacute;ng 6/2016.</p>\r\n<p class="Normal">Theo nhiều l&yacute; giải, ti&ecirc;u thụ &ocirc;t&ocirc; đang c&oacute; chiều hướng sụt giảm một phần do nhiều người đang c&oacute; t&acirc;m l&yacute; đợi đến đầu năm 2018, thời điểm thuế nhập khẩu &ocirc;t&ocirc; nguy&ecirc;n chiếc từ khu vực ASEAN v&agrave;o Việt Nam giảm xuống c&ograve;n 0% so với mức 30% như hiện nay. Tuy nhi&ecirc;n, trong một dự b&aacute;o đưa ra cuối th&aacute;ng rồi, chủ tịch VAMA Toru Kinoshita cho rằng, thị trường nửa cuối năm vẫn sẽ tăng trưởng. Do đ&oacute;, VAMA giữ nguy&ecirc;n dự b&aacute;o ti&ecirc;u thụ &ocirc;t&ocirc; tăng 10% trong năm 2017 đ&atilde; được đưa ra đầu năm.</p>\r\n<p class="Normal">X&eacute;t kỹ hơn, thị trường 6 th&aacute;ng qua suy giảm sản lượng ở mảng xe lắp r&aacute;p trong nước, với mức 6%. Trong khi đ&oacute;, sản lượng xe nhập khẩu b&aacute;n ra vẫn tăng 15%. Kh&aacute;c với Trường Hải, h&agrave;ng loạt đơn vị vừa sản xuất vừa nhập khẩu đều b&aacute;o c&aacute;o sản lượng ti&ecirc;u thụ tăng.</p>\r\n<p class="Normal">So với nửa đầu năm ngo&aacute;i, Toyota b&aacute;n được nhiều hơn gần 4.800 xe, tương đương tăng trưởng 19%. Mercedes-Benz cũng b&aacute;n th&ecirc;m được hơn 900 chiếc, tăng trưởng đến 37%. GM Việt Nam v&agrave; Mitsubishi cũng tăng ở mức hai con số. Sản lượng xe ti&ecirc;u thụ của Ford tăng nhưng khi&ecirc;m tốn ở mức 4%.</p>\r\n<p class="Normal">Li&ecirc;n tục những th&aacute;ng qua, để thu h&uacute;t người mua, nhiều h&atilde;ng li&ecirc;n doanh lắp r&aacute;p &ocirc;t&ocirc; trong nước kh&ocirc;ng ngần ngại đưa ra c&aacute;c chương tr&igrave;nh khuyến m&atilde;i, giảm gi&aacute; l&ecirc;n đến gần trăm triệu đồng mỗi xe, một động th&aacute;i chưa c&oacute; tiền lệ trong ng&agrave;nh kinh doanh &ocirc;t&ocirc; v&agrave;i năm trước đ&acirc;y.</p>\r\n<p class="Normal">Tuy nhi&ecirc;n, chủ tịch VAMA cũng nhận định, c&aacute;c h&atilde;ng v&agrave; đại l&yacute; sẽ kh&oacute; l&ograve;ng giảm th&ecirc;m trong&nbsp;6 th&aacute;ng c&ograve;n lại v&igrave; c&aacute;c mức gi&aacute; hiện nay đ&atilde; gần như "chạm đ&aacute;y" đối với c&aacute;c nh&agrave; lắp r&aacute;p trong nước.</p>', 1, 'news_1499592005_thaco-2387-1499402334.jpg', 1),
-(6, 'Thư ngõ', '<p><span style="color: #302f2f; font-family: Arial, Helvetica, sans-serif; font-size: 14px; text-align: justify;">Trước ti&ecirc;n C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t gởi lời ch&agrave;o tr&acirc;n trọng cũng như cảm ơn qu&yacute; C&ocirc;ng ty đ&atilde; quan t&acirc;m đến sản phẩm của ch&uacute;ng t&ocirc;i. C&aacute;c sản phẩm do C&ocirc;ng ty sản xuất &ndash; đạt theo TCVN do bộ x&acirc;y dựng bi&ecirc;n soạn v&agrave; ban h&agrave;nh. C&ugrave;ng 1 số chỉ ti&ecirc;u kh&aacute;c do chủ dự &aacute;n y&ecirc;u cầu để ph&ugrave; hợp sử dụng cho từng dự &aacute;n &ndash; c&ocirc;ng tr&igrave;nh sử dụng như: bờ k&egrave; chắn s&oacute;ng &ndash; gạch ốp taluy &ndash; gạch b&ecirc; t&ocirc;ng tự ch&egrave;n cường độ cao chịu được độ ma s&aacute;t m&agrave;i m&ograve;n tốt nhất nhằm phục vụ cho s&acirc;n b&atilde;i &ndash; bến cảng container.</span></p>', '<div class="noidung">\r\n<p><span style="color: #3366ff;">Trước ti&ecirc;n <strong>C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t</strong></span> gởi lời ch&agrave;o tr&acirc;n trọng cũng như cảm ơn qu&yacute; C&ocirc;ng ty đ&atilde; quan t&acirc;m đến sản phẩm của ch&uacute;ng t&ocirc;i</p>\r\n<p><span style="color: #3366ff;"><strong>C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t</strong> </span>chuy&ecirc;n hoạt động trong lĩnh vực sản&nbsp;xuất c&aacute;c mặt h&agrave;ng gạch bằng ciment như:&nbsp;</p>\r\n<p>1. Gạch x&acirc;y bằng b&ecirc; t&ocirc;ng cốt liệu (gạch kh&ocirc;ng nung).<br />2. Gạch Block.<br />3. Gạch b&ecirc; t&ocirc;ng tự ch&egrave;n.<br />4. Gạch Tezzarro.<br />5. Gạch ốp taluy.<br />6. Gạch bờ k&egrave;.</p>\r\n<p><br />C&aacute;c sản phẩm do C&ocirc;ng ty sản xuất &ndash; đạt theo TCVN do bộ x&acirc;y dựng bi&ecirc;n soạn v&agrave; ban h&agrave;nh.&nbsp;</p>\r\n<p>C&ugrave;ng 1 số chỉ ti&ecirc;u kh&aacute;c do chủ dự &aacute;n y&ecirc;u cầu để ph&ugrave; hợp sử dụng cho từng dự &aacute;n &ndash; c&ocirc;ng tr&igrave;nh sử dụng như: bờ k&egrave; chắn s&oacute;ng &ndash; gạch ốp taluy &ndash; gạch b&ecirc; t&ocirc;ng tự ch&egrave;n cường độ cao&nbsp;chịu được độ ma s&aacute;t m&agrave;i m&ograve;n tốt nhất nhằm phục vụ cho s&acirc;n b&atilde;i &ndash; bến cảng container.&nbsp;</p>\r\n<p>Trong lĩnh vực sản xuất v&agrave; cung cấp c&aacute;c c&ocirc;ng tr&igrave;nh, ti&ecirc;u ch&iacute; của tập thể c&aacute;n bộ nh&acirc;n vi&ecirc;n của c&ocirc;ng ty- thỏa m&atilde;n nhu cầu sử dụng cũng như sự h&agrave;i l&ograve;ng của kh&aacute;ch h&agrave;ng l&agrave; phương ch&acirc;m hoạt động của ch&uacute;ng t&ocirc;i.</p>\r\n<p>Hệ thống kho b&atilde;i rộng r&atilde;i được trang bị thiết bị n&acirc;ng hạ v&agrave; phương tiện vận tải phục vụ&nbsp;an to&agrave;n &ndash; nhanh ch&oacute;ng. Nh&agrave; m&aacute;y trang bị d&acirc;y chuyền m&aacute;y m&oacute;c, thiết bị c&ocirc;ng nghệ ti&ecirc;n tiến hiện đại, đội ngũ kỹ sư cơ kh&iacute;, huy&ecirc;n gia giỏi, c&ocirc;ng nh&acirc;n kỹ thuật l&agrave;nh nghề lu&ocirc;n đảm bảo c&aacute;c sản phẩm xuất xưởng đạt y&ecirc;u cầu chất lượng, thẩm mỹ ch&iacute;nh x&aacute;c đến từng chi tiết phục vụ cho ng&agrave;nh c&ocirc;ng nghiệp v&agrave; x&acirc;y dựng.</p>\r\n<p>&nbsp;</p>\r\n<p>Nếu qu&yacute; C&ocirc;ng ty c&oacute; nhu cầu cung cấp h&agrave;ng h&oacute;a dịch vụ, vui l&ograve;ng li&ecirc;n hệ địa chỉ b&ecirc;n dưới:</p>\r\n<p>&nbsp;</p>\r\n<table border="0">\r\n<tbody>\r\n<tr>\r\n<td><span style="color: #3366ff;"><strong>&nbsp;&nbsp;</strong></span>\r\n<p><span style="color: #3366ff;"><strong>VĂN PH&Ograve;NG</strong></span><br /><br />151/54 Đường Li&ecirc;n Khu 4-5,P B&igrave;nh Hưng H&ograve;a B,&nbsp;Quận B&igrave;nh T&acirc;n, TP HCM. &nbsp; &nbsp; &nbsp;<br />ĐT: 08.6274.0626 &ndash; 0909.849.626 &nbsp;<br />Fax: 08.3754.5227.&nbsp;<br />Email: <a href="mailto:quocvinh_bp2@yahoo.com">quocvinh_bp2@yahoo.com</a></p>\r\n</td>\r\n<td>\r\n<p>&nbsp;<br /><strong><span style="color: #3366ff;">NH&Agrave; M&Aacute;Y</span><br /></strong><br />Xưởng 1: Ấp 3, X&atilde; An Thạnh, Huyện Bến Lức, Tỉnh Long An<br />Xưởng 2: X&atilde; Ph&uacute; Thạnh, Huyện Nhơn&nbsp;Trạch, Tỉnh Đồng Nai.<br />&nbsp;Xưởng 3: Thị Trấn Long Th&agrave;nh &ndash; Tỉnh&nbsp;Đồng Nai.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p><br />Rất mong được hợp t&aacute;c với qu&yacute; C&ocirc;ng ty !</p>\r\n<p><br />Tr&acirc;n trọng !<br />Gi&aacute;m đốc</p>\r\n<p>&nbsp;<br />Huỳnh Thị Diễm Th&uacute;y</p>\r\n</div>', 1, 'news_1499948626_872218944851.PNG', 2),
-(7, 'Năng lực kinh doanh & phạm vi hoạt động', '<p><span style="color: #302f2f; font-family: Arial, Helvetica, sans-serif; font-size: 14px; text-align: justify;">C&ocirc;ng ty Vĩnh Ph&aacute;t hoạt động trong lĩnh vực sản xuất gạch b&ecirc; t&ocirc;ng tự ch&egrave;n đ&aacute;p ứng được Y&ecirc;u cầu c&aacute;c c&ocirc;ng tr&igrave;nh c&ocirc;ng nghiệp</span></p>', '<div class="noidung">\r\n<p>C&ocirc;ng ty Vĩnh Ph&aacute;t hoạt động trong lĩnh vực sản xuất gạch b&ecirc; t&ocirc;ng tự&nbsp;ch&egrave;n đ&aacute;p ứng được y&ecirc;u cầu c&aacute;c c&ocirc;ng tr&igrave;nh c&ocirc;ng nghiệp.</p>\r\n<p>&nbsp;Hệ thống kho b&atilde;i rộng r&atilde;i, m&aacute;y m&oacute;c ti&ecirc;n tiến hiện đại, c&ocirc;ng nh&acirc;n kỹ thuật l&agrave;nh nghề lu&ocirc;n đảm bảo c&aacute;c sản phẩm xuất xưởng đạt y&ecirc;u cầu chất lượng, thẩm mỹ, ch&iacute;nh x&aacute;c đến từng chi tiết phục vụ cho ng&agrave;nh c&ocirc;ng nghiệp v&agrave; x&acirc;y dựng.</p>\r\n<p><br /><span style="color: #3366ff;"><strong>PHỤC VỤ TỐT NHẤT</strong></span></p>\r\n<p>&nbsp;Ch&uacute;ng t&ocirc;i xem chất lượng của sản phẩm v&agrave; dịch vụ l&agrave; yếu tố h&agrave;ng đầu, tạo n&ecirc;n uy t&iacute;n của c&ocirc;ng ty. C&aacute;c nh&agrave; đầu tư, c&aacute;c qu&yacute; c&ocirc;ng ty mua v&agrave; sử dụng sản phẩm,dịch vụ của c&ocirc;ng ty lu&ocirc;n được phục vụ v&agrave; đ&aacute;p ứng nhanh mọi y&ecirc;u cầu gi&uacute;p kh&aacute;ch h&agrave;ng đề c&oacute; kết quả tốt nhất.</p>\r\n<p><br /><span style="color: #3366ff;"><strong>GI&Aacute; CẢ CẠNH TRANH</strong></span></p>\r\n<p>&nbsp;C&ocirc;ng ty lu&ocirc;n chủ động nguồn nguy&ecirc;n vật liệu th&ocirc;ng qua trực tiếp, quy tr&igrave;nh sản xuất kh&eacute;p k&iacute;n gi&uacute;p tiết kiệm nguy&ecirc;n vật liệu v&agrave; hao ph&iacute; sản xuất, xếp đỡ h&agrave;ng h&oacute;a trực tiếp đến c&ocirc;ng tr&igrave;nh đ&uacute;ng tiến độ gi&uacute;p kh&aacute;ch <br />h&agrave;ng giảm chi ph&iacute; đầu tư v&agrave; gi&aacute; cả cạnh tranh nhất&hellip;</p>\r\n<p><br /><span style="color: #3366ff;"><strong>CHẤT LƯỢNG H&Agrave;NG H&Oacute;A</strong>&nbsp;</span></p>\r\n<p>C&aacute;c sản phẩm c&ocirc;ng ty sản xuất ra đều sử dụng đ&uacute;ng với m&aacute;c b&ecirc; t&ocirc;ng theo từng chủng loại h&agrave;ng h&oacute;a. Từng l&ocirc; h&agrave;ng khi đến với c&ocirc;ng tr&igrave;nh đều được Trung T&acirc;m Kỹ Thuật Ti&ecirc;u Chuẩn Đo Lường Chất Lượng 3 kiểm tra <br />cường độ b&ecirc; t&ocirc;ng. D&acirc;y chuyền m&aacute;y m&oacute;c hiện đại, bộ phận kiểm tra chất lượng nội bộ nghi&ecirc;m ngặt lu&ocirc;n đảm bảo tất cả c&aacute;c sản phẩm được sản&nbsp;xuất ph&ugrave; hợp với c&aacute;c ti&ecirc;u chuẩn v&agrave; y&ecirc;u cầu khắc khe nhất của c&ocirc;ng&nbsp;tr&igrave;nh. Gi&uacute;p kh&aacute;ch h&agrave;ng y&ecirc;n t&acirc;m về chất lượng&hellip;</p>\r\n<p>&nbsp;</p>\r\n<p><span style="color: #3366ff;"><strong>ĐỐI T&Aacute;C L&Acirc;U D&Agrave;I CỦA KH&Aacute;CH H&Agrave;NG</strong></span></p>\r\n<p>Ch&uacute;ng t&ocirc;i nhận thức rằng lợi &iacute;ch kinh doanh của kh&aacute;ch h&agrave;ng l&agrave; yếu tố&nbsp;quan trọng, bằng sự trung thực, chia sẽ tr&aacute;ch nhiệm v&agrave; kh&ocirc;ng ngừng đổi mới về c&ocirc;ng nghệ ti&ecirc;n tiến v&agrave; phương thức phục vụ. Ch&uacute;ng t&ocirc;i mong <br />muốn gi&agrave;nh được sự t&iacute;n nhiệm,niềm tin v&agrave; được tiếp tục hợp t&aacute;c trong tương lai của Qu&yacute; kh&aacute;ch h&agrave;ng&hellip;<br />Tập thể c&ocirc;ng nh&acirc;n vi&ecirc;n c&ocirc;ng ty Vĩnh Ph&aacute;t rất h&acirc;n hạnh phục vụ Qu&yacute; kh&aacute;ch.</p>\r\n</div>', 1, 'news_1499948682_184672326363.PNG', 2);
+(1, 'Không tìm thấy chất kích thích trong 19 trâu chọi Đồ Sơn', '<p>19/31 tr&acirc;u chọi ở Đồ Sơn được kết luận &acirc;m t&iacute;nh với chất k&iacute;ch th&iacute;ch, tăng lực, ri&ecirc;ng tr&acirc;u h&uacute;c chết chủ chưa c&oacute; kết quả x&eacute;t nghiệm.</p>', '<p class=\"Normal\" style=\"text-align: center;\"><img src=\"/pictures/contents/trau-choi-9193-1499575091.jpg\" alt=\"\" width=\"500\" height=\"289\" /></p>\r\n<p class=\"Normal\">Ng&agrave;y 9/7, một l&atilde;nh đạo UBND quận Đồ Sơn (Hải Ph&ograve;ng) cho biết 19 trong số 31 con tr&acirc;u tham gia v&ograve;ng loại Lễ hội chọi tr&acirc;u Đồ Sơn 2017 đ&atilde; c&oacute; kết quả &acirc;m t&iacute;nh với chất k&iacute;ch th&iacute;ch, tăng lực.</p>\r\n<p class=\"Normal\">Ri&ecirc;ng mẫu phẩm tr&acirc;u số 18 - con tr&acirc;u h&uacute;c chết chủ của m&igrave;nh - đang chờ kết quả từ Bộ C&ocirc;ng an.</p>\r\n<p class=\"Normal\">Trong số 31 tr&acirc;u thi đấu v&ograve;ng loại, chỉ 19 con được lấy mẫu nước tiểu v&agrave; m&aacute;u do số c&ograve;n lại thua trận bị giết thịt gần hết, ngo&agrave;i ra số &iacute;t chủ tr&acirc;u kh&ocirc;ng hợp t&aacute;c lấy mẫu với l&yacute; do t&acirc;m linh.</p>\r\n<p class=\"Normal\">Trước đ&oacute; s&aacute;ng 1/7, tại&nbsp;v&ograve;ng đấu loại Lễ hội chọi tr&acirc;u quận Đồ Sơn, hơn 30 tr&acirc;u tham gia 16 trận đấu. Đến trận 14, tr&acirc;u số 18 h&uacute;c chủ l&agrave; &ocirc;ng Đinh Xu&acirc;n Hướng ngay trong sới chọi. &Ocirc;ng Hướng tử vong sau nhiều giờ cấp cứu.</p>\r\n<p class=\"Normal\">UBND TP Hải Ph&ograve;ng đ&atilde; chỉ đạo dừng lễ hội chọi tr&acirc;u 2017; x&eacute;t nghiệm chất k&iacute;ch th&iacute;ch với c&aacute;c con tr&acirc;u.&nbsp;Ng&agrave;y 4/7,&nbsp;Ban tổ chức lễ hội đ&atilde; họp b&agrave;n, cho ph&eacute;p chủ tr&acirc;u tự lấy mẫu nước tiểu hoặc mẫu m&aacute;u của tr&acirc;u nh&agrave; rồi gửi l&ecirc;n Trung t&acirc;m văn h&oacute;a quận Đồ Sơn để chuyển tiếp C&ocirc;ng an Hải Ph&ograve;ng.</p>\r\n<p class=\"Normal\">C&aacute;ch thức n&agrave;y được một số chuy&ecirc;n gia nhận x&eacute;t thiếu kh&aacute;ch quan v&agrave; ch&iacute;nh x&aacute;c C&oacute; loại chất k&iacute;ch th&iacute;ch chỉ t&aacute;c dụng trong một đến 5 tiếng. Nếu để 3-4 ng&agrave;y sau mới lấy mẫu, chất k&iacute;ch th&iacute;ch đ&atilde; đủ thời gian giải ph&oacute;ng hết khỏi cơ thể người hoặc động vật.</p>', 1, 'news_1499591580_trau-choi-9193-1499575091.jpg', 1),
+(2, 'Doanh nghiệp quân đội đang kinh doanh những lĩnh vực gì', '<p>D&ugrave; số lượng kh&ocirc;ng qu&aacute; nhiều nhưng c&aacute;c doanh nghiệp quốc ph&ograve;ng đang giữ vị thế lớn ở nhiều lĩnh vực.</p>', '<p class=\"Normal\" style=\"text-align: center;\"><img src=\"/pictures/contents/22a4e52c-ac31-432e-bf77-0c670f-1558-2415-1499476232.jpg\" alt=\"\" width=\"500\" height=\"351\" /></p>\r\n<p class=\"Normal\">Bộ Quốc ph&ograve;ng hiện l&agrave; bộ trực tiếp quản l&yacute; nhiều tập đo&agrave;n, tổng c&ocirc;ng ty với hơn 20 doanh nghiệp trực thuộc. Do đặc th&ugrave; hoạt động, c&aacute;c tập đo&agrave;n, tổng c&ocirc;ng ty thuộc Bộ Quốc ph&ograve;ng hoạt động tr&ecirc;n rất nhiều lĩnh vực kh&aacute;c nhau, từ x&acirc;y dựng - bất động sản, viễn th&ocirc;ng, t&agrave;i ch&iacute;nh, logistics, cơ kh&iacute;, xăng dầu, cho tới n&ocirc;ng nghiệp.</p>\r\n<p class=\"Normal\">Trong đ&oacute;, nhiều doanh nghiệp hoạt động đang trở th&agrave;nh những doanh nghiệp top đầu trong lĩnh vực kinh doanh của m&igrave;nh như Viettel, Ng&acirc;n h&agrave;ng Qu&acirc;n đội, Tổng c&ocirc;ng ty T&acirc;n Cảng S&agrave;i G&ograve;n, Tổng c&ocirc;ng ty Xăng dầu Qu&acirc;n đội hay Tổng c&ocirc;ng ty Đ&ocirc;ng Bắc...</p>\r\n<p class=\"Normal\">Đứng đầu trong danh s&aacute;ch n&agrave;y l&agrave; Tập đo&agrave;n Viễn th&ocirc;ng Qu&acirc;n đội (Viettel). D&ugrave; chỉ l&agrave; doanh nghiệp duy nhất của Bộ Quốc ph&ograve;ng hoạt động trong lĩnh vực viễn th&ocirc;ng nhưng Viettel lại l&agrave; đơn vị đang giữ vị thế lớn nhất tr&ecirc;n thị trường v&agrave; tạo sự c&aacute;ch biệt lớn với hai nh&agrave; mạng đứng sau l&agrave; VinaPhone v&agrave; Mobifone.</p>\r\n<p class=\"Normal\">Năm 2016, Viettel đạt hơn 226.000 tỷ đồng doanh thu, xấp xỉ 10 tỷ USD v&agrave; hơn 43.000 tỷ đồng lợi nhuận trước thuế. Tổng doanh thu của Viettel cũng gấp gần 3 lần doanh thu của VinaPhone v&agrave; Mobifone cộng lại, đồng thời l&agrave; đơn vị đang đ&oacute;ng g&oacute;p v&agrave;o ng&acirc;n s&aacute;ch lớn nhất trong số c&aacute;c doanh nghiệp quốc ph&ograve;ng, đạt tr&ecirc;n 40.000 tỷ đồng.</p>', 1, 'news_1499591668_22a4e52c-ac31-432e-bf77-0c670f-1558-2415-1499476232.jpg', 1),
+(3, 'VTV và SCIC xin rút khỏi dự án tháp truyền hình cao nhất thế giới', '<p>VTV xin tho&aacute;i vốn để tập trung v&agrave;o ph&aacute;t triển truyền h&igrave;nh, trong khi SCIC cho rằng dự &aacute;n kh&ocirc;ng nằm trong danh mục Nh&agrave; nước cần chi phối.&nbsp;</p>', '<div class=\"fck_detail width_common block_ads_connect\">\r\n<p class=\"Normal\">Bộ T&agrave;i ch&iacute;nh vừa c&oacute; c&ocirc;ng văn gửi Văn ph&ograve;ng Ch&iacute;nh phủ b&aacute;o c&aacute;o về dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam v&agrave; phương &aacute;n t&aacute;i cơ cấu vốn đầu tư tại C&ocirc;ng ty cổ phần Th&aacute;p truyền h&igrave;nh Việt Nam.</p>\r\n<p class=\"Normal\">Cơ quan n&agrave;y cho biết, từ cuối th&aacute;ng 5, Đ&agrave;i truyền h&igrave;nh Việt Nam (VTV) đ&atilde; c&oacute; c&ocirc;ng văn đề nghị tho&aacute;i to&agrave;n bộ hoặc phần lớn vốn tại c&ocirc;ng ty tr&ecirc;n. Điều đ&oacute; cũng đồng nghĩa VTV sẽ kh&ocirc;ng tham gia đầu tư dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam - một trong những th&aacute;p theo dự kiến ban đầu sẽ thuộc loại cao nhất thế giới. L&yacute; do của đơn vị n&agrave;y l&agrave; hiện cần tập trung ưu ti&ecirc;n d&agrave;nh nguồn lực đầu tư cho sản xuất chương tr&igrave;nh v&agrave; ph&aacute;t triển kinh doanh trong lĩnh vực truyền h&igrave;nh.&nbsp;</p>\r\n<p class=\"Normal\">Tại c&ocirc;ng văn n&ecirc;u tr&ecirc;n, VTV cũng cho biết Tổng c&ocirc;ng ty Đầu tư v&agrave; Kinh doanh vốn Nh&agrave; nước (SCIC) chủ trương đưa C&ocirc;ng ty cổ phần Th&aacute;p truyền h&igrave;nh Việt Nam v&agrave;o danh mục điều chỉnh triển khai tho&aacute;i vốn (r&uacute;t 100% vốn khỏi c&ocirc;ng ty) do dự &aacute;n kh&ocirc;ng nằm trong danh mục hiện hữu m&agrave; Nh&agrave; nước cần chi phối hoặc đầu tư g&oacute;p vốn trong định hướng ph&aacute;t triển của SCIC.&nbsp;Mặt kh&aacute;c, theo b&aacute;o c&aacute;o của VTV th&igrave; hiện tại dự &aacute;n chưa được Thủ tướng ph&ecirc; duyệt, chưa triển khai thực hiện.</p>\r\n<p class=\"Normal\">Do vậy, Bộ T&agrave;i ch&iacute;nh đề nghị Văn ph&ograve;ng Ch&iacute;nh phủ y&ecirc;u cầu chủ đầu tư dự &aacute;n b&aacute;o c&aacute;o lại Thủ tướng về sự cần thiết phải triển khai dự &aacute;n, mục ti&ecirc;u v&agrave; năng lực thực hiện dự &aacute;n của chủ đầu tư. Trường hợp VTV v&agrave; SCIC kh&ocirc;ng tham gia dự &aacute;n đồng nghĩa với việc Nh&agrave; nước kh&ocirc;ng đầu tư vốn v&agrave;o dự &aacute;n.</p>\r\n<p class=\"Normal\">Bộ T&agrave;i ch&iacute;nh cũng đề nghị VTV v&agrave; SCIC y&ecirc;u cầu c&ocirc;ng ty tổ chức Đại hội đồng cổ đ&ocirc;ng để x&aacute;c định lại sự cần thiết, mục ti&ecirc;u của dự &aacute;n, b&aacute;o c&aacute;o Thủ tướng xem x&eacute;t quyết định.&nbsp;</p>\r\n<p class=\"Normal\">Trước đ&oacute;, dự &aacute;n Th&aacute;p truyền h&igrave;nh Việt Nam được Thủ tướng đồng &yacute; về chủ trương nghi&ecirc;n cứu, hợp t&aacute;c đầu tư từ đầu năm 2015. C&ocirc;ng tr&igrave;nh dự kiến được x&acirc;y dựng tr&ecirc;n khu đất hơn 14 ha tại khu trung t&acirc;m đ&ocirc; thị T&acirc;y Hồ T&acirc;y. Đ&acirc;y được đ&aacute;nh gi&aacute; l&agrave; dự &aacute;n tầm cỡ quốc tế, c&oacute; t&iacute;nh chất đặc th&ugrave; n&ecirc;n cần c&oacute; cơ chế đặc biệt do Thủ tướng quyết định về vốn, h&igrave;nh thức giao đất v&agrave; phương thức chọn nh&agrave; thầu. Dự &aacute;n cũng được &aacute;p dụng ch&iacute;nh s&aacute;ch ưu đ&atilde;i cao nhất theo quy định của ph&aacute;p luật.</p>\r\n<p class=\"Normal\">Tập đo&agrave;n BRG được lựa chọn sau khi Thủ tướng cho ph&eacute;p Đ&agrave;i Truyền h&igrave;nh Việt Nam chọn th&ecirc;m đối t&aacute;c l&agrave; doanh nghiệp tư nh&acirc;n c&oacute; năng lực t&agrave;i ch&iacute;nh v&agrave; kinh doanh, g&oacute;p vốn c&ugrave;ng tham gia dự &aacute;n.</p>\r\n<p class=\"Normal\">Khi đ&oacute;, l&atilde;nh đạo VTV cũng cho biết độ cao của th&aacute;p sẽ l&agrave; 636m, hơn th&aacute;p cao nhất ch&acirc;u &Aacute; hiện nay l&agrave; Sky Tree ở Tokyo - Nhật Bản (634m) v&agrave; th&aacute;p truyền h&igrave;nh Quảng Ch&acirc;u - Trung Quốc (600m) v&agrave; sẽ thuộc loại cao nhất trong số th&aacute;p truyền h&igrave;nh đ&atilde; được x&acirc;y dựng tr&ecirc;n thế giới.&nbsp;</p>\r\n<p class=\"Normal\">C&ocirc;ng ty Cổ phần Th&aacute;p truyền h&igrave;nh được cấp giấy chứng nhận đăng k&yacute; v&agrave;o cuối năm 2015 với số vốn điều lệ 600 tỷ đồng. Theo b&aacute;o c&aacute;o của VTV, đến nay 3 đơn vị g&oacute;p vốn mới g&oacute;p được 150 tỷ đồng.&nbsp;</p>\r\n</div>\r\n<div class=\"author_mail width_common\">&nbsp;</div>', 1, 'news_1499591844_thaptruyenhinh-1499488361_180x108.jpg', 1),
+(4, 'Đông Nam Á sắp soán ngôi Trung Quốc về hút đầu tư hậu cần', '<p>Sự b&ugrave;ng nổ thương mại điện tử c&ugrave;ng chi ph&iacute; sản xuất thấp đang khiến nhiều nh&agrave; sản xuất dịch chuyển từ Trung Quốc sang Đ&ocirc;ng Nam &Aacute;.</p>', '<p class=\"Normal\">Trưởng bộ phận Nghi&ecirc;n cứu Thị trường vốn Đ&ocirc;ng Nam &Aacute; Jones Lang LaSalle (JLL), Regina Lim cho biết điểm đến của ng&agrave;nh hậu cần đang c&oacute; sự dịch chuyển mạnh mẽ từ Trung Quốc sang Đ&ocirc;ng Nam &Aacute;. Nguy&ecirc;n nh&acirc;n chủ yếu l&agrave; b&agrave;i to&aacute;n chi ph&iacute; cạnh tranh.</p>\r\n<p class=\"Normal\">Mức lương của Trung Quốc hiện cao hơn 3-4 lần so với trước đ&acirc;y trong khi mức lương nội địa tối thiểu ở một số nước Đ&ocirc;ng Nam &Aacute; lại rẻ hơn. Điều n&agrave;y đang thu h&uacute;t c&aacute;c nh&agrave; sản xuất thiết lập nh&agrave; m&aacute;y tại đ&acirc;y nhằm phục vụ cho số đ&ocirc;ng người ti&ecirc;u d&ugrave;ng ng&agrave;y c&agrave;ng tăng l&ecirc;n. Sản lượng sản xuất của Indonesia c&oacute; thể tăng l&ecirc;n 6,5% trong nửa thập ni&ecirc;n tới, so với 5% hiện tại. C&ograve;n Việt Nam lại l&agrave; quốc gia nổi bật với lực lượng lao động l&agrave;nh nghề v&agrave; chi ph&iacute; tương đối thấp.</p>\r\n<p class=\"Normal\" style=\"text-align: center;\"><img src=\"/pictures/contents/a-tb-bds-hau-can-kcn-4782-1499432648.jpg\" alt=\"\" width=\"500\" height=\"300\" /></p>\r\n<p class=\"Normal\">Theo chuy&ecirc;n gia JLL, quy m&ocirc; thị trường của Đ&ocirc;ng Nam &Aacute; v&agrave; tiềm năng ng&agrave;nh ti&ecirc;u d&ugrave;ng tại đ&acirc;y đang cực kỳ hấp dẫn. Đến năm 2050, Hiệp hội c&aacute;c Quốc gia Đ&ocirc;ng Nam &Aacute; (ASEAN) sẽ c&oacute; quy m&ocirc; tương đương với ch&acirc;u &Acirc;u, trở th&agrave;nh khu kinh tế lớn thứ tư thế giới, sau Trung Quốc, Ấn Độ v&agrave; Mỹ. C&aacute;c nước Đ&ocirc;ng Nam &Aacute; sẽ trở th&agrave;nh c&aacute;c cường quốc; Indonesia được dự b&aacute;o l&agrave; nền kinh tế lớn thứ tư tr&ecirc;n thế giới, trong khi Philippines v&agrave; Việt Nam đứng thứ 19 v&agrave; 20.</p>\r\n<p class=\"Normal\">Nghi&ecirc;n cứu của Google v&agrave; Temasek nhấn mạnh th&ecirc;m tiềm năng của khu vực, dự b&aacute;o rằng thị trường thương mại điện tử c&oacute; thể tăng trưởng từ 5,5 tỷ USD năm 2015 l&ecirc;n 88 tỷ USD năm 2025, trong đ&oacute; Indonesia chiếm 52% thị trường.</p>\r\n<p class=\"Normal\">Nh&acirc;n khẩu học trẻ trong khu vực sẽ sớm th&uacute;c đẩy thời đại của thương mại điện tử. Giới trẻ ở Đ&ocirc;ng Nam &Aacute; rất th&agrave;nh thạo trong việc sử dụng c&aacute;c phương tiện truyền th&ocirc;ng x&atilde; hội v&agrave; họ đang sử dụng c&ocirc;ng nghệ để kh&aacute;m ph&aacute; nhiều hơn. Người ti&ecirc;u d&ugrave;ng dần bỏ qua m&aacute;y t&iacute;nh v&agrave; đang sử dụng điện thoại th&ocirc;ng minh để mua sắm. 20-30% người ở Đ&ocirc;ng Nam &Aacute; đ&atilde; mua sắm trực tuyến qua internet mỗi th&aacute;ng, tương đương Mỹ hoặc Anh.</p>\r\n<p class=\"Normal\">Thị trường tiềm năng n&agrave;y đ&atilde; nằm trong tầm ngắm của c&aacute;c &ocirc;ng lớn thương mại điện tử. Alibaba vừa gia tăng cổ phần của m&igrave;nh trong trang thương mại điện tử lớn nhất khu vực &ndash; Lazada Group, đưa tổng số cổ phần l&ecirc;n 95% v&agrave; ra mắt nền tảng Tmall đang thịnh h&agrave;nh ở Malaysia v&agrave; Singapore. Tập đo&agrave;n n&agrave;y cũng đang thiết lập c&aacute;c trung t&acirc;m hậu cần ở Malaysia v&agrave; Th&aacute;i Lan.</p>\r\n<p class=\"Normal\">Th&aacute;ng trước, Reebonz - thương hiệu thương mại điện tử cao cấp đ&atilde; khai trương một Trung t&acirc;m Thương mại Điện tử c&oacute; diện t&iacute;ch 18.580 m2 tại Singapore, trong khi Singpost đ&atilde; giới thiệu một trụ sở hậu cần thương mại điện tử trị gi&aacute; 131 triệu USD tại C&ocirc;ng vi&ecirc;n Logistics Tampines ở Singapore.</p>\r\n<p class=\"Normal\" style=\"text-align: center;\">&nbsp;</p>', 1, 'news_1499592065_a-tb-bds-hau-can-kcn-4782-1499432648.jpg', 1),
+(5, 'Sản lượng Ôtô Trường Hải giảm hơn 5.200 xe', '<p>Thị trường &ocirc;t&ocirc; giảm nhẹ trong nửa đầu năm 2017 v&agrave; Trường Hải l&agrave; nh&agrave; sản xuất c&oacute; số giảm tuyệt đối lớn nhất, hơn 5.200 xe.</p>', '<p class=\"Normal\">Theo số liệu của Hiệp hội c&aacute;c nh&agrave; sản xuất &ocirc;t&ocirc; Việt Nam (VAMA), nh&agrave; sản xuất Trường Hải b&aacute;n được hơn 47.800 xe trong 6 th&aacute;ng đầu năm. So với c&ugrave;ng kỳ 2016, doanh số giảm 10%, tương đương với hơn 5.200 xe. Đ&acirc;y l&agrave; mức giảm cao nhất trong c&aacute;c nh&agrave; sản xuất &ocirc;t&ocirc; nửa đầu năm nay do Trường Hải cũng l&agrave; đơn vị c&oacute; sản lượng đứng đầu thị trường.</p>\r\n<p class=\"Normal\">Tất cả c&aacute;c thương hiệu m&agrave; Trường Hải lắp r&aacute;p đều ghi nhận doanh số giảm. Trong đ&oacute;, Kia giảm 12%, tương đương hơn 1.600 xe; Mazda giảm 8%, tương đương gần 1.200 xe. Ri&ecirc;ng ti&ecirc;u thụ của Peugeot giảm đến 61%, tương đương hơn 200 xe.</p>\r\n<p class=\"Normal\">T&igrave;nh h&igrave;nh kinh doanh của Trường Hải suy giảm diễn ra trong bối cảnh thị trường &ocirc;t&ocirc; Việt Nam nửa đầu năm kh&ocirc;ng c&oacute; tăng trưởng, thậm ch&iacute; l&agrave; giảm nhẹ. VAMA cho hay, ti&ecirc;u thụ xe to&agrave;n thị trường s&aacute;u th&aacute;ng qua đạt khoảng 134.200 chiếc, giảm 1% so với c&ugrave;ng kỳ năm ngo&aacute;i.</p>\r\n<p class=\"Normal\">&nbsp;</p>\r\n<p class=\"Normal\" style=\"text-align: center;\"><img src=\"/pictures/contents/thaco-2387-1499402334.jpg\" alt=\"\" width=\"500\" height=\"302\" /></p>\r\n<p class=\"Normal\">Đ&acirc;y kh&ocirc;ng phải l&agrave; kết quả bất ngờ khi thị trường li&ecirc;n tục ghi nhận những dấu hiệu kh&ocirc;ng mấy s&aacute;ng sủa trong v&agrave;i th&aacute;ng gần đ&acirc;y. Hồi th&aacute;ng 4/2016, sản lượng xe b&aacute;n ra bỗng dưng lao dốc kỳ lạ, giảm đến 15% so với th&aacute;ng 4/2016. Th&aacute;ng 6 vừa rồi, ti&ecirc;u thụ &ocirc;t&ocirc; c&oacute; phần ổn định hơn nhưng cũng giảm 0,2% so với th&aacute;ng 6/2016.</p>\r\n<p class=\"Normal\">Theo nhiều l&yacute; giải, ti&ecirc;u thụ &ocirc;t&ocirc; đang c&oacute; chiều hướng sụt giảm một phần do nhiều người đang c&oacute; t&acirc;m l&yacute; đợi đến đầu năm 2018, thời điểm thuế nhập khẩu &ocirc;t&ocirc; nguy&ecirc;n chiếc từ khu vực ASEAN v&agrave;o Việt Nam giảm xuống c&ograve;n 0% so với mức 30% như hiện nay. Tuy nhi&ecirc;n, trong một dự b&aacute;o đưa ra cuối th&aacute;ng rồi, chủ tịch VAMA Toru Kinoshita cho rằng, thị trường nửa cuối năm vẫn sẽ tăng trưởng. Do đ&oacute;, VAMA giữ nguy&ecirc;n dự b&aacute;o ti&ecirc;u thụ &ocirc;t&ocirc; tăng 10% trong năm 2017 đ&atilde; được đưa ra đầu năm.</p>\r\n<p class=\"Normal\">X&eacute;t kỹ hơn, thị trường 6 th&aacute;ng qua suy giảm sản lượng ở mảng xe lắp r&aacute;p trong nước, với mức 6%. Trong khi đ&oacute;, sản lượng xe nhập khẩu b&aacute;n ra vẫn tăng 15%. Kh&aacute;c với Trường Hải, h&agrave;ng loạt đơn vị vừa sản xuất vừa nhập khẩu đều b&aacute;o c&aacute;o sản lượng ti&ecirc;u thụ tăng.</p>\r\n<p class=\"Normal\">So với nửa đầu năm ngo&aacute;i, Toyota b&aacute;n được nhiều hơn gần 4.800 xe, tương đương tăng trưởng 19%. Mercedes-Benz cũng b&aacute;n th&ecirc;m được hơn 900 chiếc, tăng trưởng đến 37%. GM Việt Nam v&agrave; Mitsubishi cũng tăng ở mức hai con số. Sản lượng xe ti&ecirc;u thụ của Ford tăng nhưng khi&ecirc;m tốn ở mức 4%.</p>\r\n<p class=\"Normal\">Li&ecirc;n tục những th&aacute;ng qua, để thu h&uacute;t người mua, nhiều h&atilde;ng li&ecirc;n doanh lắp r&aacute;p &ocirc;t&ocirc; trong nước kh&ocirc;ng ngần ngại đưa ra c&aacute;c chương tr&igrave;nh khuyến m&atilde;i, giảm gi&aacute; l&ecirc;n đến gần trăm triệu đồng mỗi xe, một động th&aacute;i chưa c&oacute; tiền lệ trong ng&agrave;nh kinh doanh &ocirc;t&ocirc; v&agrave;i năm trước đ&acirc;y.</p>\r\n<p class=\"Normal\">Tuy nhi&ecirc;n, chủ tịch VAMA cũng nhận định, c&aacute;c h&atilde;ng v&agrave; đại l&yacute; sẽ kh&oacute; l&ograve;ng giảm th&ecirc;m trong&nbsp;6 th&aacute;ng c&ograve;n lại v&igrave; c&aacute;c mức gi&aacute; hiện nay đ&atilde; gần như \"chạm đ&aacute;y\" đối với c&aacute;c nh&agrave; lắp r&aacute;p trong nước.</p>', 1, 'news_1499592005_thaco-2387-1499402334.jpg', 1),
+(6, 'Thư ngõ', '<p><span style=\"color: #302f2f; font-family: Arial, Helvetica, sans-serif; font-size: 14px; text-align: justify;\">Trước ti&ecirc;n C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t gởi lời ch&agrave;o tr&acirc;n trọng cũng như cảm ơn qu&yacute; C&ocirc;ng ty đ&atilde; quan t&acirc;m đến sản phẩm của ch&uacute;ng t&ocirc;i. C&aacute;c sản phẩm do C&ocirc;ng ty sản xuất &ndash; đạt theo TCVN do bộ x&acirc;y dựng bi&ecirc;n soạn v&agrave; ban h&agrave;nh. C&ugrave;ng 1 số chỉ ti&ecirc;u kh&aacute;c do chủ dự &aacute;n y&ecirc;u cầu để ph&ugrave; hợp sử dụng cho từng dự &aacute;n &ndash; c&ocirc;ng tr&igrave;nh sử dụng như: bờ k&egrave; chắn s&oacute;ng &ndash; gạch ốp taluy &ndash; gạch b&ecirc; t&ocirc;ng tự ch&egrave;n cường độ cao chịu được độ ma s&aacute;t m&agrave;i m&ograve;n tốt nhất nhằm phục vụ cho s&acirc;n b&atilde;i &ndash; bến cảng container.</span></p>', '<div class=\"noidung\">\r\n<p><span style=\"color: #3366ff;\">Trước ti&ecirc;n <strong>C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t</strong></span> gởi lời ch&agrave;o tr&acirc;n trọng cũng như cảm ơn qu&yacute; C&ocirc;ng ty đ&atilde; quan t&acirc;m đến sản phẩm của ch&uacute;ng t&ocirc;i</p>\r\n<p><span style=\"color: #3366ff;\"><strong>C&ocirc;ng ty TNHH MTV SX &ndash; TM &ndash; DV Vĩnh Ph&aacute;t</strong> </span>chuy&ecirc;n hoạt động trong lĩnh vực sản&nbsp;xuất c&aacute;c mặt h&agrave;ng gạch bằng ciment như:&nbsp;</p>\r\n<p>1. Gạch x&acirc;y bằng b&ecirc; t&ocirc;ng cốt liệu (gạch kh&ocirc;ng nung).<br />2. Gạch Block.<br />3. Gạch b&ecirc; t&ocirc;ng tự ch&egrave;n.<br />4. Gạch Tezzarro.<br />5. Gạch ốp taluy.<br />6. Gạch bờ k&egrave;.</p>\r\n<p><br />C&aacute;c sản phẩm do C&ocirc;ng ty sản xuất &ndash; đạt theo TCVN do bộ x&acirc;y dựng bi&ecirc;n soạn v&agrave; ban h&agrave;nh.&nbsp;</p>\r\n<p>C&ugrave;ng 1 số chỉ ti&ecirc;u kh&aacute;c do chủ dự &aacute;n y&ecirc;u cầu để ph&ugrave; hợp sử dụng cho từng dự &aacute;n &ndash; c&ocirc;ng tr&igrave;nh sử dụng như: bờ k&egrave; chắn s&oacute;ng &ndash; gạch ốp taluy &ndash; gạch b&ecirc; t&ocirc;ng tự ch&egrave;n cường độ cao&nbsp;chịu được độ ma s&aacute;t m&agrave;i m&ograve;n tốt nhất nhằm phục vụ cho s&acirc;n b&atilde;i &ndash; bến cảng container.&nbsp;</p>\r\n<p>Trong lĩnh vực sản xuất v&agrave; cung cấp c&aacute;c c&ocirc;ng tr&igrave;nh, ti&ecirc;u ch&iacute; của tập thể c&aacute;n bộ nh&acirc;n vi&ecirc;n của c&ocirc;ng ty- thỏa m&atilde;n nhu cầu sử dụng cũng như sự h&agrave;i l&ograve;ng của kh&aacute;ch h&agrave;ng l&agrave; phương ch&acirc;m hoạt động của ch&uacute;ng t&ocirc;i.</p>\r\n<p>Hệ thống kho b&atilde;i rộng r&atilde;i được trang bị thiết bị n&acirc;ng hạ v&agrave; phương tiện vận tải phục vụ&nbsp;an to&agrave;n &ndash; nhanh ch&oacute;ng. Nh&agrave; m&aacute;y trang bị d&acirc;y chuyền m&aacute;y m&oacute;c, thiết bị c&ocirc;ng nghệ ti&ecirc;n tiến hiện đại, đội ngũ kỹ sư cơ kh&iacute;, huy&ecirc;n gia giỏi, c&ocirc;ng nh&acirc;n kỹ thuật l&agrave;nh nghề lu&ocirc;n đảm bảo c&aacute;c sản phẩm xuất xưởng đạt y&ecirc;u cầu chất lượng, thẩm mỹ ch&iacute;nh x&aacute;c đến từng chi tiết phục vụ cho ng&agrave;nh c&ocirc;ng nghiệp v&agrave; x&acirc;y dựng.</p>\r\n<p>&nbsp;</p>\r\n<p>Nếu qu&yacute; C&ocirc;ng ty c&oacute; nhu cầu cung cấp h&agrave;ng h&oacute;a dịch vụ, vui l&ograve;ng li&ecirc;n hệ địa chỉ b&ecirc;n dưới:</p>\r\n<p>&nbsp;</p>\r\n<table border=\"0\">\r\n<tbody>\r\n<tr>\r\n<td><span style=\"color: #3366ff;\"><strong>&nbsp;&nbsp;</strong></span>\r\n<p><span style=\"color: #3366ff;\"><strong>VĂN PH&Ograve;NG</strong></span><br /><br />151/54 Đường Li&ecirc;n Khu 4-5,P B&igrave;nh Hưng H&ograve;a B,&nbsp;Quận B&igrave;nh T&acirc;n, TP HCM. &nbsp; &nbsp; &nbsp;<br />ĐT: 08.6274.0626 &ndash; 0909.849.626 &nbsp;<br />Fax: 08.3754.5227.&nbsp;<br />Email: <a href=\"mailto:quocvinh_bp2@yahoo.com\">quocvinh_bp2@yahoo.com</a></p>\r\n</td>\r\n<td>\r\n<p>&nbsp;<br /><strong><span style=\"color: #3366ff;\">NH&Agrave; M&Aacute;Y</span><br /></strong><br />Xưởng 1: Ấp 3, X&atilde; An Thạnh, Huyện Bến Lức, Tỉnh Long An<br />Xưởng 2: X&atilde; Ph&uacute; Thạnh, Huyện Nhơn&nbsp;Trạch, Tỉnh Đồng Nai.<br />&nbsp;Xưởng 3: Thị Trấn Long Th&agrave;nh &ndash; Tỉnh&nbsp;Đồng Nai.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p><br />Rất mong được hợp t&aacute;c với qu&yacute; C&ocirc;ng ty !</p>\r\n<p><br />Tr&acirc;n trọng !<br />Gi&aacute;m đốc</p>\r\n<p>&nbsp;<br />Huỳnh Thị Diễm Th&uacute;y</p>\r\n</div>', 1, 'news_1499948626_872218944851.PNG', 2),
+(7, 'Năng lực kinh doanh & phạm vi hoạt động', '<p><span style=\"color: #302f2f; font-family: Arial, Helvetica, sans-serif; font-size: 14px; text-align: justify;\">C&ocirc;ng ty Vĩnh Ph&aacute;t hoạt động trong lĩnh vực sản xuất gạch b&ecirc; t&ocirc;ng tự ch&egrave;n đ&aacute;p ứng được Y&ecirc;u cầu c&aacute;c c&ocirc;ng tr&igrave;nh c&ocirc;ng nghiệp</span></p>', '<div class=\"noidung\">\r\n<p>C&ocirc;ng ty Vĩnh Ph&aacute;t hoạt động trong lĩnh vực sản xuất gạch b&ecirc; t&ocirc;ng tự&nbsp;ch&egrave;n đ&aacute;p ứng được y&ecirc;u cầu c&aacute;c c&ocirc;ng tr&igrave;nh c&ocirc;ng nghiệp.</p>\r\n<p>&nbsp;Hệ thống kho b&atilde;i rộng r&atilde;i, m&aacute;y m&oacute;c ti&ecirc;n tiến hiện đại, c&ocirc;ng nh&acirc;n kỹ thuật l&agrave;nh nghề lu&ocirc;n đảm bảo c&aacute;c sản phẩm xuất xưởng đạt y&ecirc;u cầu chất lượng, thẩm mỹ, ch&iacute;nh x&aacute;c đến từng chi tiết phục vụ cho ng&agrave;nh c&ocirc;ng nghiệp v&agrave; x&acirc;y dựng.</p>\r\n<p><br /><span style=\"color: #3366ff;\"><strong>PHỤC VỤ TỐT NHẤT</strong></span></p>\r\n<p>&nbsp;Ch&uacute;ng t&ocirc;i xem chất lượng của sản phẩm v&agrave; dịch vụ l&agrave; yếu tố h&agrave;ng đầu, tạo n&ecirc;n uy t&iacute;n của c&ocirc;ng ty. C&aacute;c nh&agrave; đầu tư, c&aacute;c qu&yacute; c&ocirc;ng ty mua v&agrave; sử dụng sản phẩm,dịch vụ của c&ocirc;ng ty lu&ocirc;n được phục vụ v&agrave; đ&aacute;p ứng nhanh mọi y&ecirc;u cầu gi&uacute;p kh&aacute;ch h&agrave;ng đề c&oacute; kết quả tốt nhất.</p>\r\n<p><br /><span style=\"color: #3366ff;\"><strong>GI&Aacute; CẢ CẠNH TRANH</strong></span></p>\r\n<p>&nbsp;C&ocirc;ng ty lu&ocirc;n chủ động nguồn nguy&ecirc;n vật liệu th&ocirc;ng qua trực tiếp, quy tr&igrave;nh sản xuất kh&eacute;p k&iacute;n gi&uacute;p tiết kiệm nguy&ecirc;n vật liệu v&agrave; hao ph&iacute; sản xuất, xếp đỡ h&agrave;ng h&oacute;a trực tiếp đến c&ocirc;ng tr&igrave;nh đ&uacute;ng tiến độ gi&uacute;p kh&aacute;ch <br />h&agrave;ng giảm chi ph&iacute; đầu tư v&agrave; gi&aacute; cả cạnh tranh nhất&hellip;</p>\r\n<p><br /><span style=\"color: #3366ff;\"><strong>CHẤT LƯỢNG H&Agrave;NG H&Oacute;A</strong>&nbsp;</span></p>\r\n<p>C&aacute;c sản phẩm c&ocirc;ng ty sản xuất ra đều sử dụng đ&uacute;ng với m&aacute;c b&ecirc; t&ocirc;ng theo từng chủng loại h&agrave;ng h&oacute;a. Từng l&ocirc; h&agrave;ng khi đến với c&ocirc;ng tr&igrave;nh đều được Trung T&acirc;m Kỹ Thuật Ti&ecirc;u Chuẩn Đo Lường Chất Lượng 3 kiểm tra <br />cường độ b&ecirc; t&ocirc;ng. D&acirc;y chuyền m&aacute;y m&oacute;c hiện đại, bộ phận kiểm tra chất lượng nội bộ nghi&ecirc;m ngặt lu&ocirc;n đảm bảo tất cả c&aacute;c sản phẩm được sản&nbsp;xuất ph&ugrave; hợp với c&aacute;c ti&ecirc;u chuẩn v&agrave; y&ecirc;u cầu khắc khe nhất của c&ocirc;ng&nbsp;tr&igrave;nh. Gi&uacute;p kh&aacute;ch h&agrave;ng y&ecirc;n t&acirc;m về chất lượng&hellip;</p>\r\n<p>&nbsp;</p>\r\n<p><span style=\"color: #3366ff;\"><strong>ĐỐI T&Aacute;C L&Acirc;U D&Agrave;I CỦA KH&Aacute;CH H&Agrave;NG</strong></span></p>\r\n<p>Ch&uacute;ng t&ocirc;i nhận thức rằng lợi &iacute;ch kinh doanh của kh&aacute;ch h&agrave;ng l&agrave; yếu tố&nbsp;quan trọng, bằng sự trung thực, chia sẽ tr&aacute;ch nhiệm v&agrave; kh&ocirc;ng ngừng đổi mới về c&ocirc;ng nghệ ti&ecirc;n tiến v&agrave; phương thức phục vụ. Ch&uacute;ng t&ocirc;i mong <br />muốn gi&agrave;nh được sự t&iacute;n nhiệm,niềm tin v&agrave; được tiếp tục hợp t&aacute;c trong tương lai của Qu&yacute; kh&aacute;ch h&agrave;ng&hellip;<br />Tập thể c&ocirc;ng nh&acirc;n vi&ecirc;n c&ocirc;ng ty Vĩnh Ph&aacute;t rất h&acirc;n hạnh phục vụ Qu&yacute; kh&aacute;ch.</p>\r\n</div>', 1, 'news_1499948682_184672326363.PNG', 2);
 
 -- --------------------------------------------------------
 
@@ -674,13 +675,12 @@ INSERT INTO `news` (`news_id`, `news_title`, `news_quote`, `news_content`, `news
 -- Table structure for table `news_category`
 --
 
-CREATE TABLE IF NOT EXISTS `news_category` (
-  `news_category_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `news_category` (
+  `news_category_id` int(11) NOT NULL,
   `news_category_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `news_category_parent` int(11) NOT NULL,
-  `news_category_status` int(11) NOT NULL,
-  PRIMARY KEY (`news_category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+  `news_category_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `news_category`
@@ -696,8 +696,8 @@ INSERT INTO `news_category` (`news_category_id`, `news_category_name`, `news_cat
 -- Table structure for table `order`
 --
 
-CREATE TABLE IF NOT EXISTS `order` (
-  `order_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order` (
+  `order_id` int(11) NOT NULL,
   `order_fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `order_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `order_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -708,9 +708,8 @@ CREATE TABLE IF NOT EXISTS `order` (
   `order_fee` int(11) NOT NULL,
   `order_date` datetime NOT NULL,
   `order_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `order_district` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+  `order_district` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `order`
@@ -744,17 +743,16 @@ INSERT INTO `order` (`order_id`, `order_fullname`, `order_email`, `order_address
 -- Table structure for table `order_detail`
 --
 
-CREATE TABLE IF NOT EXISTS `order_detail` (
-  `order_detail_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `order_detail` (
+  `order_detail_id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `product_price` int(11) NOT NULL,
   `quality` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `product_picture` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `product_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`order_detail_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+  `product_code` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `order_detail`
@@ -788,13 +786,12 @@ INSERT INTO `order_detail` (`order_detail_id`, `order_id`, `product_name`, `prod
 -- Table structure for table `page`
 --
 
-CREATE TABLE IF NOT EXISTS `page` (
-  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `page` (
+  `page_id` int(11) NOT NULL,
   `page_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `page_content` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `page_status` int(11) NOT NULL,
-  PRIMARY KEY (`page_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+  `page_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -802,8 +799,8 @@ CREATE TABLE IF NOT EXISTS `page` (
 -- Table structure for table `product`
 --
 
-CREATE TABLE IF NOT EXISTS `product` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product` (
+  `product_id` int(11) NOT NULL,
   `product_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `product_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `product_price` int(11) DEFAULT NULL,
@@ -813,9 +810,8 @@ CREATE TABLE IF NOT EXISTS `product` (
   `product_category_id` int(11) DEFAULT NULL,
   `product_price_old` int(11) DEFAULT NULL,
   `product_type_new` int(1) NOT NULL,
-  `product_type_sale` int(1) NOT NULL,
-  PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+  `product_type_sale` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product`
@@ -849,13 +845,12 @@ INSERT INTO `product` (`product_id`, `product_name`, `product_code`, `product_pr
 -- Table structure for table `product_category`
 --
 
-CREATE TABLE IF NOT EXISTS `product_category` (
-  `product_category_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `product_category` (
+  `product_category_id` int(11) NOT NULL,
   `product_category_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `product_category_parent` int(11) NOT NULL,
-  `product_category_status` int(11) NOT NULL,
-  PRIMARY KEY (`product_category_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+  `product_category_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `product_category`
@@ -876,17 +871,16 @@ INSERT INTO `product_category` (`product_category_id`, `product_category_name`, 
 -- Table structure for table `template`
 --
 
-CREATE TABLE IF NOT EXISTS `template` (
-  `template_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `template` (
+  `template_id` int(11) NOT NULL,
   `template_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `template_content` text COLLATE utf8_unicode_ci NOT NULL,
   `template_picture` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `template_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `template_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `group_template_id` int(11) NOT NULL,
-  `template_status` int(1) NOT NULL,
-  PRIMARY KEY (`template_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
+  `template_status` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `template`
@@ -894,13 +888,13 @@ CREATE TABLE IF NOT EXISTS `template` (
 
 INSERT INTO `template` (`template_id`, `template_name`, `template_content`, `template_picture`, `template_url`, `template_type`, `group_template_id`, `template_status`) VALUES
 (10, 'Logo', '', 'template_1499951114_l.png', '', '', 6, 1),
-(11, 'Nội dung footer', '<p style="text-align: center;"><strong>C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</strong><br /> Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM<br /> Điện thoại: (08) 6274 0626 - 0909 849 626<br /> Email: <a href="mailto:quocvinhbp2@yahoo.com">quocvinh_bp2@yahoo.com</a><br />Website: gachbetongtuchen.vn</p>', '', '', '', 8, 1),
+(11, 'Nội dung footer', '<p style=\"text-align: center;\"><strong>C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</strong><br /> Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM<br /> Điện thoại: (08) 6274 0626 - 0909 849 626<br /> Email: <a href=\"mailto:quocvinhbp2@yahoo.com\">quocvinh_bp2@yahoo.com</a><br />Website: gachbetongtuchen.vn</p>', '', '', '', 8, 1),
 (12, 'Banner 1', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260735_banner1.jpg', '', '', 7, 1),
 (13, 'Banner 2', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260916_banner2.png', '', '', 7, 1),
 (14, 'Banner 3', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260926_banner3.jpg', '', '', 7, 1),
 (15, 'Banner 4', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260937_banner4.jpg', '', '', 7, 1),
-(16, 'Thông tin liên hệ', '<p><strong>C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</strong></p>\r\n<p>Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</p>\r\n<p>Điện thoại: (08) 6274 0626 - 0909 849 626</p>\r\n<p>Email: <a href="mailto:quocvinhbp2@yahoo.com">quocvinh_bp2@yahoo.com</a></p>\r\n<p>Website: gachbetongtuchen.vn</p>', '', '', '', 9, 1),
-(17, 'Banner top', '<p style="text-align: center;">&nbsp;</p>\r\n<p style="text-align: center;"><span style="font-size: 18pt;"><strong><span style="color: #ff0000;">C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</span></strong></span></p>\r\n<p style="text-align: center;"><strong><span style="font-size: 14pt; color: #0000ff;">Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</span></strong></p>\r\n<p style="text-align: center;"><strong><span style="font-size: 14pt; color: #0000ff;">Điện thoại: (08) 6274 0626 - 0909 849 626</span></strong></p>', '', '', '', 6, 1);
+(16, 'Thông tin liên hệ', '<p><strong>C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</strong></p>\r\n<p>Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</p>\r\n<p>Điện thoại: (08) 6274 0626 - 0909 849 626</p>\r\n<p>Email: <a href=\"mailto:quocvinhbp2@yahoo.com\">quocvinh_bp2@yahoo.com</a></p>\r\n<p>Website: gachbetongtuchen.vn</p>', '', '', '', 9, 1),
+(17, 'Banner top', '<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\"><strong><span style=\"color: #ff0000;\">C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</span></strong></span></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</span></strong></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Điện thoại: (08) 6274 0626 - 0909 849 626</span></strong></p>', '', '', '', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -908,15 +902,14 @@ INSERT INTO `template` (`template_id`, `template_name`, `template_content`, `tem
 -- Table structure for table `website`
 --
 
-CREATE TABLE IF NOT EXISTS `website` (
-  `website_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `website` (
+  `website_id` int(11) NOT NULL,
   `website_title` text COLLATE utf8_unicode_ci NOT NULL,
   `website_description` text COLLATE utf8_unicode_ci NOT NULL,
   `website_keyword` text COLLATE utf8_unicode_ci NOT NULL,
   `website_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `website_icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`website_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+  `website_icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `website`
@@ -924,6 +917,247 @@ CREATE TABLE IF NOT EXISTS `website` (
 
 INSERT INTO `website` (`website_id`, `website_title`, `website_description`, `website_keyword`, `website_name`, `website_icon`) VALUES
 (1, 'Gạch bê tông', 'Gạch bê tông', 'Gạch bê tông', 'Gạch bê tông', 'favico_1495428489_17438229_191890364645222_7140066770898911232_n.jpg');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `acl`
+--
+ALTER TABLE `acl`
+  ADD PRIMARY KEY (`acl_id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `build`
+--
+ALTER TABLE `build`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
+-- Indexes for table `email_customer`
+--
+ALTER TABLE `email_customer`
+  ADD PRIMARY KEY (`email_customer_id`),
+  ADD UNIQUE KEY `email_customer_name` (`email_customer_name`);
+
+--
+-- Indexes for table `group_acl`
+--
+ALTER TABLE `group_acl`
+  ADD PRIMARY KEY (`group_acl_id`);
+
+--
+-- Indexes for table `group_admin`
+--
+ALTER TABLE `group_admin`
+  ADD PRIMARY KEY (`group_admin_id`);
+
+--
+-- Indexes for table `group_menu`
+--
+ALTER TABLE `group_menu`
+  ADD PRIMARY KEY (`group_menu_id`);
+
+--
+-- Indexes for table `group_navigation`
+--
+ALTER TABLE `group_navigation`
+  ADD PRIMARY KEY (`group_navigation_id`);
+
+--
+-- Indexes for table `group_template`
+--
+ALTER TABLE `group_template`
+  ADD PRIMARY KEY (`group_template_id`);
+
+--
+-- Indexes for table `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Indexes for table `navigation`
+--
+ALTER TABLE `navigation`
+  ADD PRIMARY KEY (`navigation_id`);
+
+--
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`news_id`);
+
+--
+-- Indexes for table `news_category`
+--
+ALTER TABLE `news_category`
+  ADD PRIMARY KEY (`news_category_id`);
+
+--
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`order_detail_id`);
+
+--
+-- Indexes for table `page`
+--
+ALTER TABLE `page`
+  ADD PRIMARY KEY (`page_id`);
+
+--
+-- Indexes for table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`product_category_id`);
+
+--
+-- Indexes for table `template`
+--
+ALTER TABLE `template`
+  ADD PRIMARY KEY (`template_id`);
+
+--
+-- Indexes for table `website`
+--
+ALTER TABLE `website`
+  ADD PRIMARY KEY (`website_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `acl`
+--
+ALTER TABLE `acl`
+  MODIFY `acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `build`
+--
+ALTER TABLE `build`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+--
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `email_customer`
+--
+ALTER TABLE `email_customer`
+  MODIFY `email_customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `group_acl`
+--
+ALTER TABLE `group_acl`
+  MODIFY `group_acl_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+--
+-- AUTO_INCREMENT for table `group_admin`
+--
+ALTER TABLE `group_admin`
+  MODIFY `group_admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `group_menu`
+--
+ALTER TABLE `group_menu`
+  MODIFY `group_menu_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `group_navigation`
+--
+ALTER TABLE `group_navigation`
+  MODIFY `group_navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `group_template`
+--
+ALTER TABLE `group_template`
+  MODIFY `group_template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `navigation`
+--
+ALTER TABLE `navigation`
+  MODIFY `navigation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `news_category`
+--
+ALTER TABLE `news_category`
+  MODIFY `news_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `page`
+--
+ALTER TABLE `page`
+  MODIFY `page_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `product_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `template`
+--
+ALTER TABLE `template`
+  MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `website`
+--
+ALTER TABLE `website`
+  MODIFY `website_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

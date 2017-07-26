@@ -50,6 +50,15 @@ class News {
         return $result;
     }
 
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM news ORDER BY news_id DESC';
+        $statement = $this->tableGateway->getAdapter()->query($sql);
+        $result = $statement->execute();
+
+        return $result;
+    }
+
     public function save($data, $id = null)
     {
         if ($id == null) {

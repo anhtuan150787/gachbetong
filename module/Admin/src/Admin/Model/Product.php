@@ -51,6 +51,15 @@ class Product {
         return $result;
     }
 
+    public function getAll()
+    {
+        $sql = 'SELECT * FROM product ORDER BY product_id DESC';
+        $statement = $this->tableGateway->getAdapter()->query($sql);
+        $result = $statement->execute();
+
+        return $result;
+    }
+
     public function save($data, $id = null)
     {
         if ($id == null) {

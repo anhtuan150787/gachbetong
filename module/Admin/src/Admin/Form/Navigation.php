@@ -38,7 +38,8 @@ class Navigation extends Form {
             'type' => 'Text',
             'attributes' => [
                 'class' => 'form-control input-xlarge',
-                'placeholder' => 'Liên kết ngoài'
+                'placeholder' => 'Liên kết ngoài',
+                'style' => 'width: 98%',
             ],
             'options' => [
                 'label' => 'Liên kết đến',

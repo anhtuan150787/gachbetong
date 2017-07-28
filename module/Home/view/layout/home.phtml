@@ -11,12 +11,15 @@
 
     <?php
     echo $this->headLink()
+        ->prependStylesheet($this->basePath('frontend/css/owl.theme.css'))
+        ->prependStylesheet($this->basePath('frontend/css/owl.carousel.css'))
         ->prependStylesheet($this->basePath('frontend/js/jquery-validation/css/style.css'))
         ->prependStylesheet($this->basePath('frontend/css/style.css'))
         ->prependStylesheet($this->basePath('frontend/css/bootstrap.css'));
     ?>
 
     <?php echo $this->headScript()
+        ->prependFile($this->basePath('frontend/js/owl.carousel.js'))
         ->prependFile($this->basePath('frontend/js/jquery.elevatezoom.js'))
         ->prependFile($this->basePath('frontend/js/jquery-validation/dist/jquery.validate.js'))
         ->prependFile($this->basePath('frontend/js/bootstrap.min.js'))
@@ -164,6 +167,25 @@
 
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12" style="background: #ebebeb; border-left: 1px solid #ddd; border-right: 1px solid #ddd">
+            <div class="container" style="width: 98%;">
+            <div id="owl-demo1">
+
+                <?php foreach($template as $k => $v) {?>
+                    <?php if ($v['group_template_id'] == 10) {?>
+                <div class="item">
+                    <div class="dt_frm">
+                        <a href="<?php echo $v['template_url'];?>" target="_blank">
+                            <img src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/templates/' . $this->escapeHtml($v['template_picture']); ?>&w=193&h=193" style="max-width:200px; max-height:169px; border:1px solid #d1d1d1" alt="Cofico"/></a>
+                    </div>
+                </div>
+                        <?php }?>
+                <?php }?>
+
+                </div>
+        </div>
+    </div>
 </div>
 <div class="col-md-12 end-box ">
     <div class="container">
@@ -171,6 +193,25 @@
     </div>
 </div>
 
+<script>
 
+    $(document).ready(function(){
+        $("#owl-demo1").owlCarousel({
+            items : 5, //10 items above 1000px browser width
+            itemsDesktop : [1000,5], //5 items between 1000px and 901px
+            itemsDesktopSmall : [900,5], // betweem 900px and 601px
+            itemsTablet: [600,3], //2 items between 600 and 0
+            itemsMobile : [400,2], // itemsMobile disabled - inherit from itemsTablet option
+            autoPlay: true,
+            scrollPerPage : 1,
+            slideSpeed: 300,
+            navigationText:   ["",""],
+            navigation : true,
+            slideSpeed : 300,
+            paginationSpeed : 400,
+        });
+    })
+
+</script>
 </body>
 </html>

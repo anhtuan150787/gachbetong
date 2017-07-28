@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2017 at 03:42 PM
+-- Generation Time: Jul 28, 2017 at 05:26 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -554,7 +554,8 @@ INSERT INTO `group_template` (`group_template_id`, `group_template_name`, `group
 (6, 'Header', 1),
 (7, 'Banner slide', 1),
 (8, 'Footer', 1),
-(9, 'Liên hê', 1);
+(9, 'Liên hê', 1),
+(10, 'Đối tác', 1);
 
 -- --------------------------------------------------------
 
@@ -894,7 +895,13 @@ INSERT INTO `template` (`template_id`, `template_name`, `template_content`, `tem
 (14, 'Banner 3', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260926_banner3.jpg', '', '', 7, 1),
 (15, 'Banner 4', '<p>Bề mặt b&oacute;ng đẹp, nổi khối, v&acirc;n c&oacute; chiều s&acirc;u. Mẫu m&atilde; đa dạng, tinh tế về kiểu d&aacute;ng : rẻ quạt, mai r&ugrave;a, cữ thập.... Ph&ugrave; hợp với xu hướng thiết kế hiện đại với mức gi&aacute; hợp l&yacute;. Gạch To&agrave;n Ph&aacute;t lu&ocirc;n th&acirc;n thiện với mọi c&ocirc;ng tr&igrave;nh</p>', 'news_1499260937_banner4.jpg', '', '', 7, 1),
 (16, 'Thông tin liên hệ', '<p><strong>C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</strong></p>\r\n<p>Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</p>\r\n<p>Điện thoại: (08) 6274 0626 - 0909 849 626</p>\r\n<p>Email: <a href=\"mailto:quocvinhbp2@yahoo.com\">quocvinh_bp2@yahoo.com</a></p>\r\n<p>Website: gachbetongtuchen.vn</p>', '', '', '', 9, 1),
-(17, 'Banner top', '<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\"><strong><span style=\"color: #ff0000;\">C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</span></strong></span></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</span></strong></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Điện thoại: (08) 6274 0626 - 0909 849 626</span></strong></p>', '', '', '', 6, 1);
+(17, 'Banner top', '<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\"><span style=\"font-size: 18pt;\"><strong><span style=\"color: #ff0000;\">C&Ocirc;NG TY TNHH MTV SX TM XD VĨNH PH&Aacute;T</span></strong></span></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Địa chỉ: 151/54 Li&ecirc;n khu 4-5, P. B&igrave;nh Hưng H&ograve;a B, Quận B&igrave;nh T&acirc;n, HCM</span></strong></p>\r\n<p style=\"text-align: center;\"><strong><span style=\"font-size: 14pt; color: #0000ff;\">Điện thoại: (08) 6274 0626 - 0909 849 626</span></strong></p>', '', '', '', 6, 1),
+(18, 'Đối tác 1', '', 'news_1501159844_051596957147.jpg', '', '', 10, 1),
+(19, 'Đối tác 2', '', 'news_1501159858_179178048876.jpg', '', '', 10, 1),
+(20, 'Đối tác 3', '', 'news_1501159871_506136020878.jpg', '', '', 10, 1),
+(21, 'Đối tác 4', '', 'news_1501159884_578039752736.jpg', '', '', 10, 1),
+(22, 'Đối tác 5', '', 'news_1501159896_928469204574.jpg', '', '', 10, 1),
+(23, 'Đối tác 6', '', 'news_1501212362_899675432459.png', '', '', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -1102,7 +1109,7 @@ ALTER TABLE `group_navigation`
 -- AUTO_INCREMENT for table `group_template`
 --
 ALTER TABLE `group_template`
-  MODIFY `group_template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `group_template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `menu`
 --
@@ -1152,7 +1159,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `template`
 --
 ALTER TABLE `template`
-  MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `template_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `website`
 --

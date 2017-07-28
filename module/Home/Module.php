@@ -190,7 +190,7 @@ class Module
 //                $viewModel->newsNew = $result;
 
                 //Load template
-                $statement = $dbAdapter->query('SELECT * FROM template');
+                $statement = $dbAdapter->query('SELECT * FROM template WHERE template_status = 1');
                 $template = $statement->execute();
                 $templateData = [];
                 foreach($template as $v) {

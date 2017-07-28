@@ -12,8 +12,8 @@ return array(
             'ssl'      => 'ssl',
         ),
     ),
-    'from' => 'anhtuan150787@gmail.com',
-    'to_second' => 'anhtuan150787@gmail.com',
+    'from' => 'anhtuan150787.4@gmail.com',
+    'to_second' => 'quocvinh_bp2@yahoo.com',
     'from_name' => 'Gachbetong',
 
     //'from' => 'anhtuan150787@gmail.com',

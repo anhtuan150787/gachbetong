@@ -65,3 +65,13 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .media {padding: 10px 0px; border-bottom: 1px solid #DDD; margin-top: 0}
 
 .pagination > li > a, .pagination > li > span {border: none;}
+
+#owl-demo1 div.owl-item {display: inline-table;}
+
+.owl-carousel .owl-item {
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.owl-theme .owl-controls .owl-buttons div.owl-next {right: -35px !important;}
+.owl-theme .owl-controls .owl-buttons div.owl-prev {left: -35px !important;}

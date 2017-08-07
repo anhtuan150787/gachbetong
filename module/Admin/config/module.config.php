@@ -24,6 +24,17 @@ return array(
                 ],
                 'may_terminate' => true,
                 'child_routes' => array(
+					'index' => array(
+                        'type' => 'literal',
+                        'options' => array(
+                            'route' => '/index',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Admin\Controller',
+                                'controller' => 'Admin\Controller\Index',
+                                'action' => 'index',
+                            ),
+                        ),
+                    ),
                     'login' => array(
                         'type' => 'literal',
                         'options' => array(

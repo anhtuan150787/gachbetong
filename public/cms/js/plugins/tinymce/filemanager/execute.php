@@ -5,11 +5,11 @@ extract($config, EXTR_OVERWRITE);
 
 include 'include/utils.php';
 
-if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
-{
-	response('forbiden', 403)->send();
-	exit;
-}
+//if ($_SESSION['RF']["verify"] != "RESPONSIVEfilemanager")
+//{
+//	response('forbiden', 403)->send();
+//	exit;
+//}
 
 $thumb_pos  = strpos($_POST['path_thumb'], $thumbs_base_path);
 

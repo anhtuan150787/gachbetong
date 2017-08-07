@@ -3,8 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="<?php echo $this->basePath('pictures/websites/' . $this->escapeHtml($website['website_icon'])); ?>" rel="stylesheet" type="text/css">
-
+    <link rel="shortcut icon" href="<?php echo $this->basePath('pictures/websites/' . $this->escapeHtml($website['website_icon'])); ?>">
     <title><?php echo $this->escapeHtml($website['website_title']); ?></title>
     <meta name="description" content="<?php echo $this->escapeHtml($website['website_description']); ?>"/>
     <meta name="keywords" content="<?php echo $this->escapeHtml($website['website_keyword']); ?>"/>
@@ -146,12 +145,12 @@
                     foreach ($navigationLefts as $vv) {
                         if ($vv['navigation_parent'] == $v['navigation_id']) {
                             $sub = true;
-                            $s .= '<a href="' . (($vv['navigation_url_select'] == '') ? $vv['navigation_url'] : ($this->serverUrl() . '/' . $this->escapeHtml($vv['navigation_url_select']))) .'" class="list-group-item">' . $this->escapeHtml($vv['navigation_name']) .'</a>';
+                            $s .= '<a href="' . (($vv['navigation_url_select'] == '') ? $vv['navigation_url'] : ($this->serverUrl() . '/' . $this->escapeHtml($vv['navigation_url_select']))) .'#main-page" class="list-group-item"><span class="glyphicon glyphicon-expand"></span> &nbsp;' . $this->escapeHtml($vv['navigation_name']) .'</a>';
                         }
                     }
                     ?>
             <div class="list-group">
-                <a href="#" class="list-group-item active">
+                <a href="<?php echo $this->url('home');?>" class="list-group-item active">
                     <?php echo $this->escapeHtml($v['navigation_name']);?>
                 </a>
                     <?php if ($sub == true) { echo $s; };?>
@@ -161,7 +160,7 @@
 
 
         </div>
-        <div class="col-md-9" style="padding: 0">
+        <div class="col-md-9" style="padding: 0" id="main-page">
 
         <?php echo $this->content;?>
 
@@ -187,7 +186,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-12 end-box ">
+<div class="col-md-12 end-box">
     <div class="container">
         <?php echo $template[11]['template_content']; ?>
     </div>

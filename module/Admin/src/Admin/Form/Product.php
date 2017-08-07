@@ -186,7 +186,7 @@ class Product extends Form {
                 [
                     'name' => 'Zend\Validator\File\Size',
                     'options' => [
-                        'max' => '2MB' //1MB
+                        'max' => '20MB' //1MB
                     ],
                 ],
                 [

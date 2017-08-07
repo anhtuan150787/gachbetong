@@ -70,7 +70,7 @@ class LoginController extends AbstractActionController
 
                     $authService->setStorage($storage)->setAdapter($authAdapter);
 
-                    $this->redirect()->toRoute('admin');
+                    $this->redirect()->toRoute('admin/index');
                 } else {
                     $message_error = 'Email hoặc mật khẩu không đúng';
                 }

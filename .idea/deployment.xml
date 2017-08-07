@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="myproject" />
+  <component name="PublishConfigData" autoUpload="Always" serverName="anhtuan150787.name.vn">
+    <serverData>
+      <paths name="anhtuan150787.name.vn">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/domains/anhtuan150787.name.vn/public_html" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
 </project>

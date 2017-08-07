@@ -10,32 +10,22 @@
             </div>
             <div class="box-content nopadding">
                 <form action="#" method="POST" class="form-horizontal form-column">
-                    <div class="span6">
-                        <div class="control-group">
-                            <label for="textfield" class="control-label">Tên sản phẩm</label>
-
-                            <div class="controls">
-                                <input type="text" name="name" id="name" class="input-xlarge"
-                                       value="<?php echo $search['name']; ?>">
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="span6">
-                        <div class="control-group">
-                            <label for="textfield" class="control-label">Danh mục</label>
-
-                            <div class="controls">
-                                <select name="category" class="input-xlarge">
+                    <table class="table" cellpadding="5" cellspacing="5">
+                        <tr>
+                            <td width="15%" style="text-align: right">Tên sản phẩm</td>
+                            <td width="35%"><input type="text" name="name" id="name" class="input-xlarge"
+                                       value="<?php echo $search['name']; ?>"></td>
+                            <td width="15%" style="text-align: right">Danh mục</td>
+                            <td width="35%"><select name="category" class="input-xlarge">
                                     <option value="">Tất cả</option>
                                     <?php foreach ($productCategory as $v) { ?>
                                         <option <?php echo ($v['product_category_id'] == $search['category']) ? 'selected="selected"' : ''; ?>
                                             value="<?php echo $v['product_category_id']; ?>"><?php echo $v['product_category_name']; ?></option>
                                     <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                                </select></td>
+                        </tr>
+                    </table>
+
                     <div class="span12">
                         <div class="form-actions text-right" style="margin-top: 0; margin-bottom: 0; padding-top: 0">
                             <button type="submit" class="btn btn-primary">Tìm</button>
@@ -61,7 +51,7 @@
                         <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Danh mục</th>
-                        <th>Giá</th>
+<!--                        <th>Giá</th>-->
                         <th>Sản phẩm mới</th>
                         <th>Sản phẩm nổi bật</th>
                         <th>Trạng thái</th>
@@ -75,7 +65,7 @@
                             <td width="50px">
                                 <?php
                                 if ($record['product_picture'] != '') {
-                                    echo '<img src="' . $this->basePath('pictures/products/' . $record['product_picture']) . '" class="img-thumbnail" style="width: 50px; height: 50px" />';
+                                    echo '<img src="' . $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $record['product_picture'] .'&w=270&h=270" class="img-thumbnail" style="width: 50px; height: 50px" />';
                                 } else {
                                     echo '<img src="' . $this->basePath('pictures/no-image.gif') . '" class="img-thumbnail" style="width: 50px; height: 50px" />';
                                 }
@@ -83,7 +73,7 @@
                             </td>
                             <td><strong><?php echo $this->escapeHtml($record['product_name']); ?></strong></td>
                             <td><?php echo $this->escapeHtml($record['product_category_name']); ?></td>
-                            <td><?php echo $this->currency($record['product_price']);?></td>
+<!--                            <td>--><?php //echo $this->currency($record['product_price']);?><!--</td>-->
                             <td><i class="<?php echo ($record['product_type_new'] == 1) ? 'icon-check' : 'icon-check-empty';?>"></i></td>
                             <td><i class="<?php echo ($record['product_type_sale'] == 1) ? 'icon-check' : 'icon-check-empty';?>"></i></td>
                             <td><?php echo $status[$record['product_status']]; ?></td>

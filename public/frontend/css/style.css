@@ -75,3 +75,5 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 
 .owl-theme .owl-controls .owl-buttons div.owl-next {right: -35px !important;}
 .owl-theme .owl-controls .owl-buttons div.owl-prev {left: -35px !important;}
+
+.product-item .thumbnail {min-height: 270px}

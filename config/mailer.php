@@ -4,12 +4,13 @@ return array(
     'system' => array(
         'name'              => 'localhost.localdomain',
         'host'              => 'smtp.googlemail.com',
-        'port'              => 465,
+        'port'              => 587,
         'connection_class'  => 'login',
         'connection_config' => array(
             'username' => 'anhtuan150787.4@gmail.com',
             'password' => 'smqboefvodhhdpxx',
-            'ssl'      => 'ssl',
+            //'ssl'      => 'ssl',
+            'ssl'       => 'tls',
         ),
     ),
     'from' => 'anhtuan150787.4@gmail.com',

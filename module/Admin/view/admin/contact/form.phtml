@@ -1,0 +1,55 @@
+<?php echo $this->partial('admin/partial/title', array('moduleTitle' => $title)); ?>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="box box-bordered box-color">
+            <div class="box-title">
+                <h3><i class="icon-edit"></i> Liên hệ của khách hàng</h3>
+            </div>
+            <div class="box-content nopadding">
+                <form method="POST" name="website" action="" class="form-horizontal form-bordered" id="frm" enctype="multipart/form-data" novalidate="novalidate">
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="website_name">Tên</label>
+
+                    <div class="controls">
+                        <?php echo $this->escapeHtml($record['contact_fullname']); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="website_name">Email</label>
+
+                    <div class="controls">
+                        <?php echo $this->escapeHtml($record['contact_email']); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="website_name">Điện thoại</label>
+                    <div class="controls">
+                        <?php echo $this->escapeHtml($record['contact_phone']); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="website_name">Lời nhắn</label>
+                    <div class="controls">
+                        <?php echo $this->escapeHtml($record['contact_content']); ?>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label col-lg-2" for="website_name">Ngày</label>
+                    <div class="controls">
+                        <?php echo $this->functions()->formatDate($record['contact_date']);?>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <input type="button" onclick="location.href='<?php echo $this->url('admin/' . $module);?>'" name="back" id="back" class="btn btn-default" value="Quay lại">
+                </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

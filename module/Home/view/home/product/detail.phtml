@@ -26,8 +26,8 @@
         <div class="panel-body">
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 
-                <img id="img-zoom"  width="100%" style="cursor: pointer" class="img-thumbnail"
-                     src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=270&h=270"
+                <img data-toggle="modal" data-target="#myModal" id="img-zoom"  width="100%" style="cursor: pointer" class="img-thumbnail"
+                     src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=270&h=270&zc=0"
                       data-zoom-image="<?php echo $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>"
                      alt="post image">
 
@@ -57,13 +57,13 @@
     </div>
 </div>
 
-<!--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <img style="width: 100%" src="--><?php //echo $this->basePath() . '/pictures/products/' . $product['product_picture'];?><!--" />-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <img style="width: 100%" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=500&zc=0" />
+        </div>
+    </div>
+</div>
 
 <script>
     $(document).ready(function () {

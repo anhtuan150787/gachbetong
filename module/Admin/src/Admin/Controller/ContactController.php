@@ -35,6 +35,22 @@ class ContactController extends AbstractActionController
         return $view;
     }
 
+    public function editAction()
+    {
+        $view = new ViewModel();
+
+        $model = $this->getServiceLocator()->get('ContactModel');
+        $id = $this->params()->fromQuery('id');
+        $record = $model->fetchRow($id);
+
+        $model->save(array('contact_viewed' => 1), $id);
+
+        $view->setVariables(['record' => $record, 'module' => $this->module]);
+        $view->setTemplate('admin/' . $this->module . '/form.phtml');
+
+        return $view;
+    }
+
     public function deleteAction()
     {
         if ($this->getRequest()->isPost()) {

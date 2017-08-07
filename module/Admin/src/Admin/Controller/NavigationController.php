@@ -103,38 +103,34 @@ class NavigationController extends AbstractActionController
 
         $navigationUrlSelect = [];
 
-        $cache  = $this->getServiceLocator()->get('cache');
-        if (!$cache->checkItem('navigation_url_select_data')) {
-            $navigationUrlSelect = [];
-            $navigationUrlSelectData = array('' => '--- Chọn liên kết đã có ---');
+       //$cache  = $this->getServiceLocator()->get('cache');
 
-            $productCategory = $productCategoryModel->getProductCategoryList();
-            foreach($productCategory as $v) {
-                $navigationUrlSelectData[trim($url('home-product-category', array('name' => $functions->formatTitle($v['product_category_name']), 'id' => $v['product_category_id'])), '/')] = '[Danh mục sản phẩm] - ' . $v['product_category_name'];
-            }
+        $navigationUrlSelect = [];
+        $navigationUrlSelectData = array('' => '--- Chọn liên kết đã có ---');
 
-            $newsCategory = $newsCategoryModel->getNewsCategoryList();
-            foreach($newsCategory as $v) {
-                $navigationUrlSelectData[trim($url('home-news-category', array('name' => $functions->formatTitle($v['news_category_name']), 'id' => $v['news_category_id'])), '/')] = '[Danh mục bài viết] - ' . $v['news_category_name'];
-            }
+        $productCategory = $productCategoryModel->getProductCategoryList();
+        foreach($productCategory as $v) {
+            $navigationUrlSelectData[trim($url('home-product-category', array('name' => $functions->formatTitle($v['product_category_name']), 'id' => $v['product_category_id'])), '/')] = '[Danh mục sản phẩm] - ' . $v['product_category_name'];
+        }
 
-            $page = $pageModel->getAll();
-            foreach($page as $v) {
-                $navigationUrlSelectData[trim($url('home-page', array('name' => $functions->formatTitle($v['page_title']), 'id' => $v['page_id'])), '/')] = '[Trang nội dung] - ' . $v['page_title'];
-            }
+        $newsCategory = $newsCategoryModel->getNewsCategoryList();
+        foreach($newsCategory as $v) {
+            $navigationUrlSelectData[trim($url('home-news-category', array('name' => $functions->formatTitle($v['news_category_name']), 'id' => $v['news_category_id'])), '/')] = '[Danh mục bài viết] - ' . $v['news_category_name'];
+        }
 
-            $news = $newsModel->getAll();
-            foreach($news as $v) {
-                $navigationUrlSelectData[trim($url('home-news-detail', array('name' => $functions->formatTitle($v['news_title']), 'id' => $v['news_id'])), '/')] = '[Tin tức] - ' . $v['news_title'];
-            }
+        $page = $pageModel->getAll();
+        foreach($page as $v) {
+            $navigationUrlSelectData[trim($url('home-page', array('name' => $functions->formatTitle($v['page_title']), 'id' => $v['page_id'])), '/')] = '[Trang nội dung] - ' . $v['page_title'];
+        }
 
-            $products = $productModel->getAll();
-            foreach($products as $v) {
-                $navigationUrlSelectData[trim($url('home-product-detail', array('name' => $functions->formatTitle($v['product_name']), 'id' => $v['product_id'])), '/')] = '[Sản phẩm] - ' . $v['product_name'];
-            }
-            $cache->set('navigation_url_select_data', $navigationUrlSelectData);
-        } else {
-            $navigationUrlSelectData = $cache->get('navigation_url_select_data');
+        $news = $newsModel->getAll();
+        foreach($news as $v) {
+            $navigationUrlSelectData[trim($url('home-news-detail', array('name' => $functions->formatTitle($v['news_title']), 'id' => $v['news_id'])), '/')] = '[Tin tức] - ' . $v['news_title'];
+        }
+
+        $products = $productModel->getAll();
+        foreach($products as $v) {
+            $navigationUrlSelectData[trim($url('home-product-detail', array('name' => $functions->formatTitle($v['product_name']), 'id' => $v['product_id'])), '/')] = '[Sản phẩm] - ' . $v['product_name'];
         }
 
         $groupNavigation = $groupNavigationModel->fetchRow($group_navigation_id);
@@ -203,39 +199,36 @@ class NavigationController extends AbstractActionController
             $optionsNavigation[$v['navigation_id']] = str_repeat('__', $v['navigation_level']) . ' ' . $v['navigation_name'];
         }
 
-        $cache  = $this->getServiceLocator()->get('cache');
-        if (!$cache->checkItem('navigation_url_select_data')) {
-            $navigationUrlSelect = [];
-            $navigationUrlSelectData = array('' => '--- Chọn liên kết đã có ---');
+        //$cache  = $this->getServiceLocator()->get('cache');
 
-            $productCategory = $productCategoryModel->getProductCategoryList();
-            foreach($productCategory as $v) {
-                $navigationUrlSelectData[trim($url('home-product-category', array('name' => $functions->formatTitle($v['product_category_name']), 'id' => $v['product_category_id'])), '/')] = '[Danh mục sản phẩm] - ' . $v['product_category_name'];
-            }
+        $navigationUrlSelect = [];
+        $navigationUrlSelectData = array('' => '--- Chọn liên kết đã có ---');
 
-            $newsCategory = $newsCategoryModel->getNewsCategoryList();
-            foreach($newsCategory as $v) {
-                $navigationUrlSelectData[trim($url('home-news-category', array('name' => $functions->formatTitle($v['news_category_name']), 'id' => $v['news_category_id'])), '/')] = '[Danh mục bài viết] - ' . $v['news_category_name'];
-            }
-
-            $page = $pageModel->getAll();
-            foreach($page as $v) {
-                $navigationUrlSelectData[trim($url('home-page', array('name' => $functions->formatTitle($v['page_title']), 'id' => $v['page_id'])), '/')] = '[Trang nội dung] - ' . $v['page_title'];
-            }
-
-            $news = $newsModel->getAll();
-            foreach($news as $v) {
-                $navigationUrlSelectData[trim($url('home-news-detail', array('name' => $functions->formatTitle($v['news_title']), 'id' => $v['news_id'])), '/')] = '[Tin tức] - ' . $v['news_title'];
-            }
-
-            $products = $productModel->getAll();
-            foreach($products as $v) {
-                $navigationUrlSelectData[trim($url('home-product-detail', array('name' => $functions->formatTitle($v['product_name']), 'id' => $v['product_id'])), '/')] = '[Sản phẩm] - ' . $v['product_name'];
-            }
-            $cache->set('navigation_url_select_data', $navigationUrlSelectData);
-        } else {
-            $navigationUrlSelectData = $cache->get('navigation_url_select_data');
+        $productCategory = $productCategoryModel->getProductCategoryList();
+        foreach($productCategory as $v) {
+            $navigationUrlSelectData[trim($url('home-product-category', array('name' => $functions->formatTitle($v['product_category_name']), 'id' => $v['product_category_id'])), '/')] = '[Danh mục sản phẩm] - ' . $v['product_category_name'];
         }
+
+        $newsCategory = $newsCategoryModel->getNewsCategoryList();
+        foreach($newsCategory as $v) {
+            $navigationUrlSelectData[trim($url('home-news-category', array('name' => $functions->formatTitle($v['news_category_name']), 'id' => $v['news_category_id'])), '/')] = '[Danh mục bài viết] - ' . $v['news_category_name'];
+        }
+
+        $page = $pageModel->getAll();
+        foreach($page as $v) {
+            $navigationUrlSelectData[trim($url('home-page', array('name' => $functions->formatTitle($v['page_title']), 'id' => $v['page_id'])), '/')] = '[Trang nội dung] - ' . $v['page_title'];
+        }
+
+        $news = $newsModel->getAll();
+        foreach($news as $v) {
+            $navigationUrlSelectData[trim($url('home-news-detail', array('name' => $functions->formatTitle($v['news_title']), 'id' => $v['news_id'])), '/')] = '[Tin tức] - ' . $v['news_title'];
+        }
+
+        $products = $productModel->getAll();
+        foreach($products as $v) {
+            $navigationUrlSelectData[trim($url('home-product-detail', array('name' => $functions->formatTitle($v['product_name']), 'id' => $v['product_id'])), '/')] = '[Sản phẩm] - ' . $v['product_name'];
+        }
+
 
         $groupNavigation = $groupNavigationModel->fetchRow($group_navigation_id);
 

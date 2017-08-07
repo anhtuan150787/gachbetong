@@ -33,6 +33,6 @@ class LogoutController extends AbstractActionController
         $cache->clear('permission_menu_' . $user->group_admin_id);
 
 
-        $this->redirect()->toRoute('admin');
+        $this->redirect()->toRoute('admin/index');
     }
 }

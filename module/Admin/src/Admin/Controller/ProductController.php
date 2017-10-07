@@ -90,6 +90,8 @@ class ProductController extends AbstractActionController
 
             if ($form->isValid()) {
 
+                $input = array();
+
                 $pictureNewName = '';
                 if (!empty($pictureInfo) && $pictureInfo['name'] != '') {
                     $uploadService->setPath('public/pictures/products');
@@ -99,7 +101,20 @@ class ProductController extends AbstractActionController
                     $pictureNewName = $uploadService->getNewFile();
                 }
 
-                $input = array();
+                $paramsPicture = [];
+                for ($i = 1; $i <= 3; $i++) {
+                    $pictureNewName = '';
+                    $pictureInfo = $this->params()->fromFiles('product_picture_' . $i);
+                    if (!empty($pictureInfo) && $pictureInfo['name'] != '') {
+                        $uploadService->setPath('public/pictures/products');
+                        $uploadService->setFile($pictureInfo['name']);
+                        $uploadService->setPrefix('product_');
+                        $uploadService->upload();
+                        $pictureNewName = $uploadService->getNewFile();
+                    }
+                    $input['product_picture_' . $i] = $pictureNewName;
+                }
+
                 $input['product_category_id'] = $this->params()->fromPost('product_category_id');
                 $input['product_name'] = $this->params()->fromPost('product_name');
                 $input['product_code'] = $this->params()->fromPost('product_code');
@@ -109,7 +124,9 @@ class ProductController extends AbstractActionController
                 $input['product_type_new'] = $this->params()->fromPost('product_type_new');
                 $input['product_type_sale'] = $this->params()->fromPost('product_type_sale');
                 $input['product_status'] = $this->params()->fromPost('product_status');
+                $input['product_position'] = $this->params()->fromPost('product_position');
                 $input['product_picture'] = $pictureNewName;
+
                 $model->save($input);
 
                 $this->flashMessenger()->addMessage('Thêm thành công.');
@@ -170,6 +187,22 @@ class ProductController extends AbstractActionController
 
                     $input['product_picture'] = $uploadService->getNewFile();
                 }
+
+                for ($i = 1; $i <= 3; $i++) {
+                    $pictureInfo = $this->params()->fromFiles('product_picture_' . $i);
+                    if (!empty($pictureInfo) && $pictureInfo['name'] != '') {
+                        $uploadService->setPath('public/pictures/products');
+                        $uploadService->setFile($pictureInfo['name']);
+                        $uploadService->setPrefix('product_');
+                        $uploadService->upload();
+
+                        unlink('public/pictures/products/' . $record['product_picture_' . $i]);
+
+                        $input['product_picture_' . $i] = $uploadService->getNewFile();;
+                    }
+
+                }
+
                 $input['product_category_id'] = $this->params()->fromPost('product_category_id');
                 $input['product_name'] = $this->params()->fromPost('product_name');
                 $input['product_code'] = $this->params()->fromPost('product_code');
@@ -179,6 +212,7 @@ class ProductController extends AbstractActionController
                 $input['product_type_new'] = $this->params()->fromPost('product_type_new');
                 $input['product_type_sale'] = $this->params()->fromPost('product_type_sale');
                 $input['product_status'] = $this->params()->fromPost('product_status');
+                $input['product_position'] = $this->params()->fromPost('product_position');
                 $model->save($input, $id);
 
                 $this->flashMessenger()->addMessage('Cập nhật thành công.');
@@ -220,6 +254,9 @@ class ProductController extends AbstractActionController
 
                 $model->delete($v);
                 unlink('public/pictures/products/' . $record['product_picture']);
+                unlink('public/pictures/products/' . $record['product_picture_1']);
+                unlink('public/pictures/products/' . $record['product_picture_2']);
+                unlink('public/pictures/products/' . $record['product_picture_3']);
             }
         }
 
@@ -239,6 +276,24 @@ class ProductController extends AbstractActionController
 
         $params                     = array();
         $params['product_picture']  = null;
+        $model->save($params, $id);
+
+        echo json_encode(array('return' => 1));
+
+        return $this->response;
+    }
+
+    public function deletePictureItemAction()
+    {
+        $id     = $this->params()->fromPost('id');
+        $picture     = $this->params()->fromPost('picture');
+        $model  = $this->getServiceLocator()->get('ProductModel');
+        $record = $model->fetchRow($id);
+
+        unlink('public/pictures/products/' . $record['product_picture_' . $picture]);
+
+        $params                     = array();
+        $params['product_picture_' . $picture]  = null;
         $model->save($params, $id);
 
         echo json_encode(array('return' => 1));

@@ -31,6 +31,42 @@
                       data-zoom-image="<?php echo $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>"
                      alt="post image">
 
+                <img id="img_detail_mobile" data-toggle="modal" data-target="#myModal"  width="100%" style="cursor: pointer;" class="img-thumbnail"
+                     src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=270&h=270&zc=0" alt="post image">
+
+                <div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <img style="width: 100%" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=500&zc=0" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top: 5px">
+                    <table cellspacing="4" cellpadding="4" width="100%">
+                        <tr>
+                            <?php for($i=1; $i<=3; $i++) {?>
+                            <td style="padding: 5px">
+                                <?php
+                                if ($product['product_picture_' . $i] != '') {?>
+                                    <img data-toggle="modal" data-target="#myModal_<?php echo $i;?>" width="100%" style="cursor: pointer; width: 60px; height: 60px" class="img-thumbnail"
+                                         src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture_' . $i];?>&w=60&h=60&zc=0" alt="post image">
+                                <?php }?>
+
+                                <div id="myModal_<?php echo $i;?>" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <img style="width: 100%" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture_' . $i];?>&w=500&zc=0" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <?php }?>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" style="padding-left: 15px;">
@@ -57,13 +93,7 @@
     </div>
 </div>
 
-<div id="myModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <img style="width: 100%" src="<?php echo $this->serverUrl() . '/public/thumbs/timthumb.php?src=' . $this->basePath() . '/public/pictures/products/' . $product['product_picture'];?>&w=500&zc=0" />
-        </div>
-    </div>
-</div>
+
 
 <script>
     $(document).ready(function () {

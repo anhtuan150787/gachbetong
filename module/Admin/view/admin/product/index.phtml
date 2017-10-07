@@ -54,6 +54,7 @@
 <!--                        <th>Giá</th>-->
                         <th>Sản phẩm mới</th>
                         <th>Sản phẩm nổi bật</th>
+                        <th>Vị trí</th>
                         <th>Trạng thái</th>
                         <th>Chức năng</th>
                     </tr>
@@ -76,6 +77,7 @@
 <!--                            <td>--><?php //echo $this->currency($record['product_price']);?><!--</td>-->
                             <td><i class="<?php echo ($record['product_type_new'] == 1) ? 'icon-check' : 'icon-check-empty';?>"></i></td>
                             <td><i class="<?php echo ($record['product_type_sale'] == 1) ? 'icon-check' : 'icon-check-empty';?>"></i></td>
+                            <td><?php echo $record['product_position'];?></td>
                             <td><?php echo $status[$record['product_status']]; ?></td>
                             <td>
                                 <a href="<?php echo $this->url('admin/' . $module, array('action' => 'edit'), array('query' => array('id' => $record['product_id']))); ?>">

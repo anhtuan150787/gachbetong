@@ -17,7 +17,7 @@ body { background: url("../img/background.jpg") repeat;  }
 
 .banner {height: 160px;}
 .banner .logo {float:left; top: 0; margin-top: 10px; width: 135px}
-.banner .logo img {width: 130px; height: 135px;}
+/*.banner .logo img {width: 130px; height: 135px;}*/
 
 .navbar-default .navbar-nav > li > a {color: white}
 .navbar-default .navbar-nav > li > a:hover {color: white; background-color: #1b68aa;}
@@ -77,3 +77,16 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .owl-theme .owl-controls .owl-buttons div.owl-prev {left: -35px !important;}
 
 .product-item .thumbnail {min-height: 270px}
+
+.logo-mobile {display: none}
+
+#img_detail_mobile {display: none}
+
+@media all and (max-device-width: 768px){
+    .banner {display: none}
+    .banner-top, .carousel-caption {display: none}
+    .logo-mobile {display: inline}
+    #img_detail_mobile {display: block}
+    #img-zoom {display: none;}
+    .zoomContainer {display: none}
+}

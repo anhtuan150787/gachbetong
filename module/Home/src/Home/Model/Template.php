@@ -16,6 +16,8 @@ class Template {
     public function fetchAll()
     {
         $select = new Select('template');
+        $predicate = new  \Zend\Db\Sql\Where();
+        $select->where($predicate->equalTo('template_status', 1));
         $select->order('template_id DESC');
 
         $paginatorAdapter   = new DbSelect($select, $this->tableGateway->getAdapter());
@@ -26,7 +28,7 @@ class Template {
 
     public function getAll()
     {
-        $sql = 'SELECT * FROM template';
+        $sql = 'SELECT * FROM template WHERE template_status = 1';
         $statement = $this->tableGateway->getAdapter()->query($sql);
         $result = $statement->execute();
 

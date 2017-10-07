@@ -21,7 +21,7 @@ class ContactController extends AbstractActionController
         $model = $this->getServiceLocator()->get('FrontContactModel');
 
         $form = new Contact();
-
+        $message = '';
 
         if ($this->getRequest()->isPost()) {
             $data = $this->params()->fromPost();
@@ -60,8 +60,12 @@ class ContactController extends AbstractActionController
                 $sendMail->setBody($bodyMail);
                 $sendMail->action();
 
-
                 $this->redirect()->toRoute('home-lien-he-success');
+            } else {
+                $message = $form->getMessages();
+                if (isset($message['Captcha'])) {
+                    $message = 'Mã xác thực không chính xác';
+                }
             }
         }
 
@@ -77,6 +81,7 @@ class ContactController extends AbstractActionController
         $view->setVariables([
             'form' => $form,
             'templateData' => $templateData,
+            'message' => $message,
         ]);
 
         return $view;

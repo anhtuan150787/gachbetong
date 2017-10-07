@@ -31,7 +31,9 @@
     <div class="row">
         <div class="banner col-md-12">
             <div class="logo">
-                <img src="<?php echo $this->basePath() . '/public/pictures/templates/' . $template[10]['template_picture']; ?>"/>
+                <a href="<?php echo $this->url('home');?>">
+                <img class="img-responsive" src="<?php echo $this->basePath() . '/public/pictures/templates/' . $template[10]['template_picture']; ?>"/>
+                </a>
             </div>
             <div class="banner-top">
                 <?php echo $template[17]['template_content'];?>
@@ -42,6 +44,9 @@
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
+                        <a href="<?php echo $this->url('home');?>">
+                        <img class="img-responsive logo-mobile" style="width: 50px; height: 50px; float: left" src="<?php echo $this->basePath() . '/public/pictures/templates/' . $template[10]['template_picture']; ?>"/>
+                        </a>
                         <button type="button" class="navbar-toggle" data-toggle="collapse"
                                 data-target="#bs-example-navbar-collapse-1">
                             <span class="sr-only">Toggle navigation</span>
@@ -91,13 +96,13 @@
 
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Indicators -->
-                <ol class="carousel-indicators">
-                    <?php $sttt = 0; foreach($template as $v) {?>
-                        <?php if ($v['group_template_id'] == 7) {?>
-                    <li data-target="#carousel-example-generic" data-slide-to="<?php echo $sttt;?>" class="<?php echo ($sttt == 0) ? 'active' : '';?>"></li>
-                            <?php $sttt++; }?>
-                    <?php }?>
-                </ol>
+<!--                <ol class="carousel-indicators">-->
+<!--                    --><?php //$sttt = 0; foreach($template as $v) {?>
+<!--                        --><?php //if ($v['group_template_id'] == 7) {?>
+<!--                    <li data-target="#carousel-example-generic" data-slide-to="--><?php //echo $sttt;?><!--" class="--><?php //echo ($sttt == 0) ? 'active' : '';?><!--"></li>-->
+<!--                            --><?php //$sttt++; }?>
+<!--                    --><?php //}?>
+<!--                </ol>-->
 
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">

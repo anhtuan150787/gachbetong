@@ -23,6 +23,9 @@ class Product {
 
         $where = $predicate->isNotNull('product_id');
 
+        $where->and;
+        $select->where($predicate->equalTo('product.product_status', 1));
+
         if (isset($search['name'])) {
             $where->and;
             $select->where($predicate->like('product_name', '%' . $search['name'] . '%'));
@@ -34,7 +37,7 @@ class Product {
 
         $select->where($where);
 
-        $select->order('product_id DESC');
+        $select->order('product_position ASC, product_id DESC');
 
         $paginatorAdapter   = new DbSelect($select, $this->tableGateway->getAdapter());
         $result             = new Paginator($paginatorAdapter);
@@ -50,7 +53,7 @@ class Product {
     }
 
     public function getProductHot() {
-        $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_sale = 1 ORDER BY product_id DESC LIMIT 8';
+        $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_sale = 1 ORDER BY product_position ASC, product_id DESC LIMIT 8';
         $statement = $this->tableGateway->getAdapter()->query($sql);
         $result = $statement->execute();
 
@@ -59,7 +62,7 @@ class Product {
 
     public function getProductNew()
     {
-        $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_new = 1 ORDER BY product_id DESC LIMIT 8';
+        $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_type_new = 1 ORDER BY product_position ASC, product_id DESC LIMIT 8';
         $statement = $this->tableGateway->getAdapter()->query($sql);
         $result = $statement->execute();
 
@@ -93,6 +96,8 @@ class Product {
             $select->where($predicate->equalTo('product.product_type_sale', 1));
         }
 
+        $select->where($predicate->equalTo('product.product_status', 1));
+
         if (!empty($search) && isset($search['sort_search']) && $search['sort_search'] != '') {
             switch($search['sort_search']) {
                 case 'new':
@@ -106,7 +111,7 @@ class Product {
                     break;
             }
         } else {
-            $select->order('product_id DESC');
+            $select->order('product_position ASC, product_id DESC');
         }
 
         $select->group('product.product_id');
@@ -161,7 +166,7 @@ class Product {
         foreach($result as $k => $v) {
             $data[$v['product_category_id']]['product_category_name'] = $v['product_category_name'];
 
-            $sql = 'SELECT * FROM product WHERE product_category_id =' . $v['product_category_id'] . ' ORDER BY product_id DESC LIMIT 6';
+            $sql = 'SELECT * FROM product WHERE product_status = 1 AND product_category_id =' . $v['product_category_id'] . ' ORDER BY product_position ASC, product_id DESC LIMIT 6';
             $statement = $this->tableGateway->getAdapter()->query($sql);
             $resultProduct = $statement->execute();
             foreach($resultProduct as $kk => $vv) {
@@ -174,7 +179,7 @@ class Product {
 
     public function getProductOther($productCategoryId, $productId)
     {
-        $sql = 'SELECT * FROM product WHERE product_category_id = ' . $productCategoryId  . ' AND product_id <> '. $productId . ' AND product_status = 1 ORDER BY product_id DESC LIMIT 8';
+        $sql = 'SELECT * FROM product WHERE product_category_id = ' . $productCategoryId  . ' AND product_id <> '. $productId . ' AND product_status = 1 ORDER BY product_position ASC, product_id DESC LIMIT 8';
         $statement = $this->tableGateway->getAdapter()->query($sql);
         $result = $statement->execute();
 

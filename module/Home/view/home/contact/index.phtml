@@ -38,7 +38,10 @@
 
                 <div class="form-group captcha">
                     <?php echo $this->formRow($form->get('Captcha'));?>
-                    <?php echo $this->formElementerrors($form->get('Captcha'), ['class' => 'error-message']); ?>
+<!--                    --><?php //echo $this->formElementerrors($form->get('Captcha'), ['class' => 'error-message']); ?>
+                    <?php if ($message != '') {?>
+                    <label class="error"><?php echo $message;?></label>
+                    <?php }?>
                 </div>
 
 

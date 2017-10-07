@@ -43,7 +43,7 @@ class UploadFile extends Http
 
     public function setNewFile()
     {
-        $this->fileNew = $this->prefix . time() . '_' . $this->file;
+        $this->fileNew = $this->prefix . microtime(TRUE) . '_' . $this->file;
     }
 
     public function getNewFile()

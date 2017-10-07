@@ -22,6 +22,18 @@ class Product extends Form {
         ]);
 
         $this->add([
+            'name' => 'product_position',
+            'type' => 'Text',
+            'attributes' => [
+                'class' => 'form-control',
+            ],
+            'options' => [
+                'label' => 'Vị trí',
+                'label_attributes' => ['class' => 'control-label col-lg-2'],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'product_price_old',
             'type' => 'Text',
             'attributes' => [

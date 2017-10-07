@@ -74,16 +74,9 @@ class ContactController extends AbstractActionController
 
     public function exportAction()
     {
-        $view = new ViewModel();
-
         $model = $this->getServiceLocator()->get('ContactModel');
 
         $records = $model->getAll();
-
-        header("Content-type: application/vnd.ms-excel; name='excel'");
-        header("Content-Disposition: attachment; filename=contact.xls");
-        header("Pragma: no-cache");
-        header("Expires: 0");
 
         $str = '<table border="1">
                     <tr>
@@ -103,6 +96,11 @@ class ContactController extends AbstractActionController
         }
 
         $str .= '</tbody></table>';
+
+        header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+        header("Content-Disposition: attachment; filename=contact.xls");
+        header("Pragma: no-cache");
+        header("Expires: 0");
 
         echo $str;
 
